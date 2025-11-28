@@ -10,40 +10,31 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as d3 from 'd3';
+import { LineChartDataPoint } from '../../../../models/chart-data/line-chart-data.model';
 import {
-  ChartConfig,
-  DataPoint,
-  DEFAULT_CONFIG,
+  ChartDimensions,
+  ChartMargins,
+  DEFAULT_CHART_DIMENSIONS,
   DEFAULT_MARGINS,
-} from '../../models/chart-data.model';
+} from '../../../../models/chart-utilities/chart-dimensions.model';
 
 @Component({
   selector: 'phoebe-line-chart',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <div #chartContainer class="phoebe-line-chart-container">
-      <svg #chart></svg>
-    </div>
-  `,
-  styles: [
-    `
-      .phoebe-line-chart-container {
-        width: 100%;
-        height: 100%;
-      }
-      svg {
-        display: block;
-      }
-    `,
-  ],
+  templateUrl: './line-chart.component.html',
+  styleUrls: ['./line-chart.component.scss'],
 })
 export class LineChartComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('chart', { static: true }) chartElement!: ElementRef<SVGSVGElement>;
   @ViewChild('chartContainer', { static: true }) containerElement!: ElementRef<HTMLDivElement>;
 
-  @Input() data: DataPoint[] = [];
-  @Input() config: ChartConfig = DEFAULT_CONFIG;
+  @Input() data: LineChartDataPoint[] = [];
+  @Input() dimensions: ChartDimensions = DEFAULT_CHART_DIMENSIONS;
+  @Input() xAxisLabel?: string;
+  @Input() yAxisLabel?: string;
+  @Input() showGrid = true;
+  @Input() animate = true;
   @Input() lineColor = '#3b82f6';
   @Input() strokeWidth = 2;
 
@@ -56,7 +47,7 @@ export class LineChartComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ((changes['data'] || changes['config']) && this.svg) {
+    if ((changes['data'] || changes['dimensions']) && this.svg) {
       this.updateChart();
     }
   }
@@ -84,9 +75,9 @@ export class LineChartComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     const containerRect = this.containerElement.nativeElement.getBoundingClientRect();
-    const width = this.config.width || containerRect.width || 600;
-    const height = this.config.height || containerRect.height || 400;
-    const margins = this.config.margins || DEFAULT_MARGINS;
+    const width = this.dimensions.width || containerRect.width || 600;
+    const height = this.dimensions.height || containerRect.height || 400;
+    const margins = this.dimensions.margins || DEFAULT_MARGINS;
 
     const innerWidth = width - margins.left - margins.right;
     const innerHeight = height - margins.top - margins.bottom;
@@ -114,7 +105,7 @@ export class LineChartComponent implements OnInit, OnChanges, OnDestroy {
       .range([innerHeight, 0]);
 
     // Add grid if enabled
-    if (this.config.showGrid) {
+    if (this.showGrid) {
       this.addGrid(g, xScale, yScale, innerWidth, innerHeight);
     }
 
@@ -122,28 +113,28 @@ export class LineChartComponent implements OnInit, OnChanges, OnDestroy {
     this.addAxes(g, xScale, yScale, innerHeight);
 
     // Add axis labels
-    if (this.config.xAxisLabel) {
+    if (this.xAxisLabel) {
       g.append('text')
         .attr('class', 'x-axis-label')
         .attr('x', innerWidth / 2)
         .attr('y', innerHeight + margins.bottom - 5)
         .attr('text-anchor', 'middle')
-        .text(this.config.xAxisLabel);
+        .text(this.xAxisLabel);
     }
 
-    if (this.config.yAxisLabel) {
+    if (this.yAxisLabel) {
       g.append('text')
         .attr('class', 'y-axis-label')
         .attr('transform', 'rotate(-90)')
         .attr('x', -innerHeight / 2)
         .attr('y', -margins.left + 15)
         .attr('text-anchor', 'middle')
-        .text(this.config.yAxisLabel);
+        .text(this.yAxisLabel);
     }
 
     // Create line generator
     const line = d3
-      .line<DataPoint>()
+      .line<LineChartDataPoint>()
       .x((d) => xScale(d.x as number))
       .y((d) => yScale(d.y))
       .curve(d3.curveMonotoneX);
@@ -159,7 +150,7 @@ export class LineChartComponent implements OnInit, OnChanges, OnDestroy {
       .attr('d', line);
 
     // Animate line drawing
-    if (this.config.animate) {
+    if (this.animate) {
       const totalLength = (path.node() as SVGPathElement).getTotalLength();
       path
         .attr('stroke-dasharray', `${totalLength} ${totalLength}`)
@@ -182,7 +173,7 @@ export class LineChartComponent implements OnInit, OnChanges, OnDestroy {
       .attr('fill', this.lineColor)
       .attr('opacity', 0)
       .transition()
-      .delay(this.config.animate ? 1000 : 0)
+      .delay(this.animate ? 1000 : 0)
       .duration(300)
       .attr('opacity', 1);
   }

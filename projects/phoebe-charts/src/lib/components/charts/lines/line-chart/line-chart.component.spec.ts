@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LineChartComponent } from './line-chart.component';
-import { DataPoint } from '../../models/chart-data.model';
+import { LineChartDataPoint } from '../../../../models/chart-data/line-chart-data.model';
 
 describe('LineChartComponent', () => {
   let component: LineChartComponent;
   let fixture: ComponentFixture<LineChartComponent>;
 
-  const mockData: DataPoint[] = [
+  const mockData: LineChartDataPoint[] = [
     { x: 0, y: 10 },
     { x: 1, y: 20 },
     { x: 2, y: 15 },

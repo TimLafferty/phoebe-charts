@@ -14,9 +14,13 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "moduleResolution": "bundler",
+    "baseUrl": "./",
     "paths": {
-      "phoebe-charts": [
-        "./dist/phoebe-charts"
+      "@timalexlafferty/phoebe-charts": [
+        "dist/phoebe-charts"
+      ],
+      "@timalexlafferty/phoebe-charts/*": [
+        "dist/phoebe-charts/*"
       ]
     },
     "importHelpers": true,

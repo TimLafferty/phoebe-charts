@@ -2,15 +2,21 @@
   <h1>{{ title }}</h1>
 
   <section class="chart-section">
-    <h2>Line Chart</h2>
-    <div class="chart-wrapper">
+    <phoebe-chart-container
+      chartTitle="Sample Line Chart"
+      chartSubtitle="Interactive data visualization demo"
+      chartFooter="Click button to randomize data">
       <phoebe-line-chart
         [data]="sampleData"
-        [config]="chartConfig"
+        [dimensions]="chartDimensions"
+        xAxisLabel="Time"
+        yAxisLabel="Value"
+        [showGrid]="true"
+        [animate]="true"
         lineColor="#3b82f6"
         [strokeWidth]="2">
       </phoebe-line-chart>
-    </div>
+    </phoebe-chart-container>
     <button (click)="randomizeData()">Randomize Data</button>
   </section>
 </div>

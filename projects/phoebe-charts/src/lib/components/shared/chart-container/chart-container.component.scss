@@ -1,0 +1,44 @@
+.phoebe-chart-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.chart-header {
+  padding: 1rem 1rem 0.5rem;
+}
+
+.chart-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  line-height: 1.25;
+}
+
+.chart-subtitle {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.chart-content {
+  flex: 1;
+  min-height: 0;
+  padding: 0.5rem 1rem;
+}
+
+.chart-footer {
+  padding: 0.5rem 1rem 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.chart-footer-text {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+

@@ -1,0 +1,21 @@
+<div class="phoebe-chart-container">
+  @if (title) {
+    <div class="chart-header">
+      <h2 class="chart-title">{{ title }}</h2>
+      @if (subtitle) {
+        <p class="chart-subtitle">{{ subtitle }}</p>
+      }
+    </div>
+  }
+
+  <div class="chart-content">
+    <ng-content></ng-content>
+  </div>
+
+  @if (footer) {
+    <div class="chart-footer">
+      <p class="chart-footer-text">{{ footer }}</p>
+    </div>
+  }
+</div>
+

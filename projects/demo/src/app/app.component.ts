@@ -1,18 +1,23 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LineChartComponent, DataPoint, ChartConfig } from 'phoebe-charts';
+import {
+  LineChartComponent,
+  ChartContainerComponent,
+  LineChartDataPoint,
+  ChartDimensions,
+} from '@timalexlafferty/phoebe-charts';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, LineChartComponent],
+  imports: [CommonModule, LineChartComponent, ChartContainerComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'Phoebe Charts Demo';
 
-  sampleData: DataPoint[] = [
+  sampleData: LineChartDataPoint[] = [
     { x: 0, y: 30 },
     { x: 1, y: 45 },
     { x: 2, y: 35 },
@@ -25,13 +30,9 @@ export class AppComponent {
     { x: 9, y: 100 },
   ];
 
-  chartConfig: ChartConfig = {
+  chartDimensions: ChartDimensions = {
     width: 800,
     height: 400,
-    xAxisLabel: 'Time',
-    yAxisLabel: 'Value',
-    showGrid: true,
-    animate: true,
   };
 
   randomizeData(): void {

@@ -2,7 +2,13 @@
   "permissions": {
     "allow": [
       "Bash(ng generate:*)",
-      "Bash(npm install)"
+      "Bash(npm install)",
+      "Bash(gh repo create:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(ng build:*)",
+      "Bash(npm publish:*)"
     ],
     "deny": [],
     "ask": []
