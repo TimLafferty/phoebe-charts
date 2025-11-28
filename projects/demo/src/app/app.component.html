@@ -1,0 +1,16 @@
+<div class="demo-container">
+  <h1>{{ title }}</h1>
+
+  <section class="chart-section">
+    <h2>Line Chart</h2>
+    <div class="chart-wrapper">
+      <phoebe-line-chart
+        [data]="sampleData"
+        [config]="chartConfig"
+        lineColor="#3b82f6"
+        [strokeWidth]="2">
+      </phoebe-line-chart>
+    </div>
+    <button (click)="randomizeData()">Randomize Data</button>
+  </section>
+</div>

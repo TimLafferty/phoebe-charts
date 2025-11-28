@@ -1,0 +1,42 @@
+.demo-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  h1 {
+    color: #1f2937;
+    margin-bottom: 2rem;
+  }
+}
+
+.chart-section {
+  margin-bottom: 3rem;
+
+  h2 {
+    color: #374151;
+    margin-bottom: 1rem;
+  }
+}
+
+.chart-wrapper {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+button {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+
+  &:hover {
+    background: #2563eb;
+  }
+}

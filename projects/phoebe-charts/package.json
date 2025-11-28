@@ -1,0 +1,28 @@
+{
+  "name": "phoebe-charts",
+  "version": "0.0.1",
+  "description": "Angular charting library built on D3.js for data visualizations",
+  "keywords": [
+    "angular",
+    "charts",
+    "d3",
+    "visualization",
+    "data-visualization",
+    "line-chart",
+    "bar-chart"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/phoebe-charts.git"
+  },
+  "peerDependencies": {
+    "@angular/common": "^17.0.0",
+    "@angular/core": "^17.0.0",
+    "d3": "^7.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}
