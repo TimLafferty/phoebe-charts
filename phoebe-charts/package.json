@@ -1,6 +1,6 @@
 {
   "name": "@timalexlafferty/phoebe-charts",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "Angular charting library built on D3.js for data visualizations",
   "keywords": [
     "angular",
