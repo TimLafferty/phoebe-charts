@@ -1,0 +1,16 @@
+@use "variables" as *;
+
+.tick {
+  line {
+    stroke: $gray-300;
+  }
+  text {
+    fill: $gray-400;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-thin;
+    font-family: $font-family-base;
+  }
+  path {
+    stroke: $gray-300;
+  }
+}

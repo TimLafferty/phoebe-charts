@@ -1,0 +1,7 @@
+@use 'lib/styles' as phoebe;
+
+body {
+  font-family: phoebe.$font-family-base;
+  font-size: phoebe.$font-size-base;
+  font-weight: phoebe.$font-weight-normal;
+}

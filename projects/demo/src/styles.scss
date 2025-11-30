@@ -1,1 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+// Import Bootstrap with @use (avoids variable conflicts)
+@use 'bootstrap/scss/bootstrap';
+
+// Import Phoebe Charts styles
+@use '../../../phoebe-charts/src/lib/styles/index' as *;

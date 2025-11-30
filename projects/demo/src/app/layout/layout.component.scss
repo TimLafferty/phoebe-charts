@@ -1,0 +1,164 @@
+@use '../../../../../phoebe-charts/src/lib/styles/variables' as *;
+
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  background: $bg-secondary;
+}
+
+// Sidebar
+.sidebar {
+  width: $sidebar-width;
+  background: $sidebar-bg;
+  color: $text-light;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  padding: $spacing-lg $spacing-md;
+  border-bottom: 1px solid $sidebar-border;
+
+  .brand {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: $font-size-lg;
+    font-weight: 600;
+    color: $text-light;
+  }
+}
+
+// Navigation
+.nav-list {
+  flex: 1;
+  padding: $spacing-sm 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-group {
+  &.expanded .nav-chevron {
+    transform: rotate(90deg);
+  }
+}
+
+.nav-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  background: transparent;
+  border: none;
+  color: $text-muted-light;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: left;
+  cursor: pointer;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $text-light;
+  }
+}
+
+.nav-chevron {
+  transition: transform $transition-fast;
+}
+
+.nav-group-items {
+  padding-bottom: $spacing-xs;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-sm $spacing-md;
+  padding-left: $spacing-lg;
+  color: $text-muted-light;
+  font-size: $font-size-base;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all $transition-fast;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+
+  &:hover:not(.disabled) {
+    background: $sidebar-hover;
+    color: $text-light;
+  }
+
+  &.active {
+    background: $primary;
+    color: $text-light;
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .nav-label {
+    font-weight: 500;
+  }
+}
+
+// Top-level nav items (no children)
+.nav-list > .nav-item {
+  padding-left: $spacing-md;
+}
+
+// Badges
+.badge {
+  font-size: $font-size-xs;
+  padding: 2px 6px;
+  border-radius: $border-radius-sm;
+  text-transform: uppercase;
+  font-weight: 600;
+
+  &.beta {
+    background: $info;
+    color: $text-light;
+  }
+
+  &.planned {
+    background: $sidebar-hover;
+    color: $text-muted-light;
+  }
+}
+
+// Sidebar Footer
+.sidebar-footer {
+  padding: $spacing-sm 0;
+  border-top: 1px solid $sidebar-border;
+
+  .nav-item {
+    padding-left: $spacing-md;
+    gap: $spacing-xs;
+
+    svg {
+      opacity: 0.7;
+    }
+  }
+}
+
+// Main Content
+.main-content {
+  flex: 1;
+  margin-left: $sidebar-width;
+  min-height: 100vh;
+  overflow-x: hidden;
+}

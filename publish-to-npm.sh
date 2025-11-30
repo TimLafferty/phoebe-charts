@@ -35,9 +35,9 @@ fi
 # Check package.json
 echo ""
 echo "2. Checking package configuration..."
-PKG_NAME=$(node -p "require('./projects/phoebe-charts/package.json').name")
-PKG_VERSION=$(node -p "require('./projects/phoebe-charts/package.json').version")
-PKG_REPO=$(node -p "require('./projects/phoebe-charts/package.json').repository.url")
+PKG_NAME=$(node -p "require('./phoebe-charts/package.json').name")
+PKG_VERSION=$(node -p "require('./phoebe-charts/package.json').version")
+PKG_REPO=$(node -p "require('./phoebe-charts/package.json').repository.url")
 
 print_info "Package name: $PKG_NAME"
 print_info "Version: $PKG_VERSION"

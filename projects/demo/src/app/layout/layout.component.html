@@ -1,0 +1,71 @@
+<div class="app-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <a routerLink="/" class="brand">
+        <h1>{{ title }}</h1>
+      </a>
+    </div>
+
+    <nav class="nav-list">
+      @for (item of navItems; track item.label) {
+        @if (item.children) {
+          <!-- Nav Group -->
+          <div class="nav-group" [class.expanded]="isExpanded(item.label)">
+            <button class="nav-group-header" (click)="toggleGroup(item.label)">
+              <span class="nav-label">{{ item.label }}</span>
+              <span class="nav-chevron">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                  <path d="M4.5 2L8.5 6L4.5 10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                </svg>
+              </span>
+            </button>
+            @if (isExpanded(item.label)) {
+              <div class="nav-group-items">
+                @for (child of item.children; track child.path) {
+                  <a
+                    class="nav-item"
+                    [routerLink]="child.path"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    [class.disabled]="child.status === 'planned'">
+                    <span class="nav-label">{{ child.label }}</span>
+                    @if (child.status === 'beta') {
+                      <span class="badge beta">Beta</span>
+                    }
+                    @if (child.status === 'planned') {
+                      <span class="badge planned">Soon</span>
+                    }
+                  </a>
+                }
+              </div>
+            }
+          </div>
+        } @else {
+          <!-- Single Nav Item -->
+          <a
+            class="nav-item"
+            [routerLink]="item.path"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
+            <span class="nav-label">{{ item.label }}</span>
+          </a>
+        }
+      }
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="https://github.com/your-repo/phoebe-charts" target="_blank" class="nav-item">
+        <span class="nav-label">GitHub</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+        </svg>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

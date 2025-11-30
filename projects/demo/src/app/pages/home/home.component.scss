@@ -1,0 +1,163 @@
+@use '../../../../../../phoebe-charts/src/lib/styles/variables' as *;
+
+.page {
+  padding: $spacing-xl;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: $spacing-2xl;
+
+  h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0 0 $spacing-sm 0;
+  }
+
+  .subtitle {
+    font-size: $font-size-md;
+    color: $text-secondary;
+    margin: 0;
+    max-width: 600px;
+  }
+}
+
+.section {
+  margin-bottom: $spacing-2xl;
+}
+
+.section-title {
+  font-size: $font-size-lg;
+  font-weight: 600;
+  color: $text-primary;
+  margin: 0 0 $spacing-md 0;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: $spacing-md;
+}
+
+.chart-card {
+  background: $bg-primary;
+  border-radius: $border-radius;
+  padding: $spacing-lg;
+  box-shadow: $shadow;
+  text-decoration: none;
+  color: inherit;
+  transition: all $transition-normal;
+  border: 1px solid transparent;
+
+  &:hover:not(.disabled) {
+    box-shadow: $shadow-md;
+    border-color: $primary-light;
+    transform: translateY(-2px);
+
+    .card-link {
+      color: $primary;
+    }
+  }
+
+  &.disabled {
+    opacity: 0.7;
+    cursor: default;
+
+    h3 {
+      color: $text-secondary;
+    }
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-sm;
+
+    h3 {
+      font-size: $font-size-md;
+      font-weight: 600;
+      color: $text-primary;
+      margin: 0;
+    }
+  }
+
+  p {
+    font-size: $font-size-base;
+    color: $text-secondary;
+    margin: 0 0 $spacing-md 0;
+    line-height: 1.5;
+  }
+
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-size: $font-size-base;
+    font-weight: 500;
+    color: $text-secondary;
+    transition: color $transition-fast;
+
+    svg {
+      transition: transform $transition-fast;
+    }
+  }
+
+  &:hover .card-link svg {
+    transform: translateX(4px);
+  }
+}
+
+.badge {
+  font-size: $font-size-xs;
+  padding: 3px 8px;
+  border-radius: $border-radius-sm;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+
+  &.stable {
+    background: rgba($success, 0.1);
+    color: $success;
+  }
+
+  &.beta {
+    background: rgba($info, 0.1);
+    color: $info;
+  }
+
+  &.planned {
+    background: $slate-200;
+    color: $text-muted;
+  }
+}
+
+.code-card {
+  background: $slate-900;
+  border-radius: $border-radius;
+  overflow: hidden;
+  margin-bottom: $spacing-md;
+
+  .code-header {
+    padding: $spacing-sm $spacing-md;
+    background: $slate-800;
+    color: $text-muted-light;
+    font-size: $font-size-sm;
+    font-weight: 500;
+  }
+
+  pre {
+    margin: 0;
+    padding: $spacing-md;
+    overflow-x: auto;
+
+    code {
+      color: $text-light;
+      font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: $font-size-base;
+      line-height: 1.6;
+    }
+  }
+}

@@ -17,10 +17,10 @@
     "baseUrl": "./",
     "paths": {
       "@timalexlafferty/phoebe-charts": [
-        "dist/phoebe-charts"
+        "phoebe-charts/src/public-api.ts"
       ],
       "@timalexlafferty/phoebe-charts/*": [
-        "dist/phoebe-charts/*"
+        "phoebe-charts/src/*"
       ]
     },
     "importHelpers": true,

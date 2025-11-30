@@ -1,0 +1,93 @@
+@use '../../../../../../../phoebe-charts/src/lib/styles/variables' as *;
+
+.page {
+  padding: $spacing-xl;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: $spacing-xl;
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-xs;
+  }
+
+  h1 {
+    font-size: $font-size-2xl;
+    font-weight: 600;
+    color: $text-primary;
+    margin: 0;
+  }
+
+  p {
+    font-size: $font-size-base;
+    color: $text-secondary;
+    margin: 0;
+  }
+}
+
+.badge {
+  font-size: $font-size-xs;
+  padding: 3px 8px;
+  border-radius: $border-radius-sm;
+  text-transform: uppercase;
+  font-weight: 600;
+
+  &.planned {
+    background: $slate-200;
+    color: $text-muted;
+  }
+}
+
+.placeholder-card {
+  background: $bg-primary;
+  border-radius: $border-radius-lg;
+  padding: $spacing-2xl;
+  box-shadow: $shadow;
+  text-align: center;
+
+  .placeholder-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: $slate-100;
+    color: $text-muted;
+    margin-bottom: $spacing-lg;
+  }
+
+  h2 {
+    font-size: $font-size-xl;
+    font-weight: 600;
+    color: $text-primary;
+    margin: 0 0 $spacing-sm 0;
+  }
+
+  p {
+    font-size: $font-size-base;
+    color: $text-secondary;
+    margin: 0 0 $spacing-lg 0;
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: $spacing-sm $spacing-lg;
+  font-size: $font-size-base;
+  font-weight: 500;
+  color: white;
+  background: $primary;
+  border-radius: $border-radius-sm;
+  text-decoration: none;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: $primary-hover;
+  }
+}

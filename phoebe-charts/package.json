@@ -1,0 +1,30 @@
+{
+  "name": "@timalexlafferty/phoebe-charts",
+  "version": "0.0.6",
+  "description": "Angular charting library built on D3.js for data visualizations",
+  "keywords": [
+    "angular",
+    "charts",
+    "d3",
+    "visualization",
+    "data-visualization",
+    "line-chart",
+    "bar-chart",
+    "heatmap",
+    "correlation-matrix"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/timlafferty/phoebe-charts.git"
+  },
+  "peerDependencies": {
+    "@angular/common": ">=17.0.0 <20.0.0",
+    "@angular/core": ">=17.0.0 <20.0.0",
+    "d3": "^7.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

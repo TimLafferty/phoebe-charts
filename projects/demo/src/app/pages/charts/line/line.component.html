@@ -1,0 +1,103 @@
+<div class="page">
+  <header class="page-header">
+    <div class="header-content">
+      <h1>Line Chart</h1>
+      <span class="badge stable">Stable</span>
+    </div>
+    <p>Time series and trend visualization with smooth curves and animations.</p>
+  </header>
+
+  <div class="content-grid">
+    <!-- Chart Area -->
+    <div class="chart-section">
+      <div class="chart-card">
+        <phoebe-chart-container
+          chartTitle="Interactive Line Chart"
+          chartSubtitle="Sample data visualization">
+          <phoebe-line-chart
+            [data]="chartData"
+            [dimensions]="chartDimensions"
+            xAxisLabel="Time"
+            yAxisLabel="Value"
+            [showGrid]="showGrid"
+            [animate]="animate"
+            [lineColor]="lineColor"
+            [strokeWidth]="strokeWidth">
+          </phoebe-line-chart>
+        </phoebe-chart-container>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="actions-card">
+        <div class="btn-group">
+          <button class="btn primary" (click)="randomizeData()">Randomize</button>
+          <button class="btn outline" (click)="loadTrendingData()">Trending</button>
+          <button class="btn outline" (click)="loadSeasonalData()">Seasonal</button>
+          <button class="btn outline" (click)="loadVolatileData()">Volatile</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls Panel -->
+    <aside class="controls-section">
+      <div class="controls-card">
+        <h3>Configuration</h3>
+
+        <!-- Line Color -->
+        <div class="control-group">
+          <label>Line Color</label>
+          <select [(ngModel)]="lineColor">
+            @for (color of colorOptions; track color.value) {
+              <option [value]="color.value">{{ color.name }}</option>
+            }
+          </select>
+        </div>
+
+        <!-- Stroke Width -->
+        <div class="control-group">
+          <label>Stroke Width: {{ strokeWidth }}px</label>
+          <input type="range" min="1" max="5" step="0.5" [(ngModel)]="strokeWidth">
+        </div>
+
+        <!-- Toggles -->
+        <div class="control-group">
+          <label>Display Options</label>
+          <div class="toggle-row">
+            <input type="checkbox" id="showGrid" [(ngModel)]="showGrid">
+            <label for="showGrid">Show Grid</label>
+          </div>
+          <div class="toggle-row">
+            <input type="checkbox" id="animate" [(ngModel)]="animate">
+            <label for="animate">Animate</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Info -->
+      <div class="info-card">
+        <h3>Data Info</h3>
+        <ul>
+          <li><strong>Points:</strong> {{ chartData.length }}</li>
+          <li><strong>Min:</strong> {{ chartData | json }}</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Code Example -->
+  <section class="code-section">
+    <h2>Usage Example</h2>
+    <div class="code-card">
+      <pre><code>&lt;phoebe-line-chart
+  [data]="chartData"
+  [dimensions]="&#123; width: 700, height: 400 &#125;"
+  xAxisLabel="Time"
+  yAxisLabel="Value"
+  [showGrid]="true"
+  [animate]="true"
+  lineColor="#3b82f6"
+  [strokeWidth]="2"&gt;
+&lt;/phoebe-line-chart&gt;</code></pre>
+    </div>
+  </section>
+</div>

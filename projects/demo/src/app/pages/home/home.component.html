@@ -1,0 +1,71 @@
+<div class="page">
+  <header class="page-header">
+    <h1>Phoebe Charts</h1>
+    <p class="subtitle">
+      A modern Angular charting library built with D3.js. Create beautiful, interactive data visualizations with ease.
+    </p>
+  </header>
+
+  <!-- Available Charts -->
+  <section class="section">
+    <h2 class="section-title">Available Components</h2>
+    <div class="card-grid">
+      @for (chart of availableCharts; track chart.route) {
+        <a [routerLink]="chart.route" class="chart-card">
+          <div class="card-header">
+            <h3>{{ chart.title }}</h3>
+            @if (chart.status === 'beta') {
+              <span class="badge beta">Beta</span>
+            } @else if (chart.status === 'stable') {
+              <span class="badge stable">Stable</span>
+            }
+          </div>
+          <p>{{ chart.description }}</p>
+          <span class="card-link">
+            View Demo
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </span>
+        </a>
+      }
+    </div>
+  </section>
+
+  <!-- Coming Soon -->
+  <section class="section">
+    <h2 class="section-title">Coming Soon</h2>
+    <div class="card-grid">
+      @for (chart of plannedCharts; track chart.route) {
+        <div class="chart-card disabled">
+          <div class="card-header">
+            <h3>{{ chart.title }}</h3>
+            <span class="badge planned">Planned</span>
+          </div>
+          <p>{{ chart.description }}</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Getting Started -->
+  <section class="section">
+    <h2 class="section-title">Getting Started</h2>
+    <div class="code-card">
+      <div class="code-header">Install the library</div>
+      <pre><code>npm install &#64;timalexlafferty/phoebe-charts</code></pre>
+    </div>
+    <div class="code-card">
+      <div class="code-header">Import a component</div>
+      <pre><code>import &#123; LineChartComponent &#125; from '&#64;timalexlafferty/phoebe-charts';
+
+&#64;Component(&#123;
+  imports: [LineChartComponent],
+  template: `
+    &lt;phoebe-line-chart [data]="chartData"&gt;&lt;/phoebe-line-chart&gt;
+  `
+&#125;)
+export class MyComponent &#123; &#125;</code></pre>
+    </div>
+  </section>
+</div>

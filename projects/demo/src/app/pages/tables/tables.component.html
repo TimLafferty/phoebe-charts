@@ -1,0 +1,125 @@
+<div class="page">
+  <header class="page-header">
+    <div class="header-content">
+      <h1>Heatmap</h1>
+      <span class="badge beta">Beta</span>
+    </div>
+    <p>Matrix visualization with color gradients for correlation and density data.</p>
+  </header>
+
+  <div class="content-grid">
+    <!-- Chart Area -->
+    <div class="chart-section">
+      <div class="chart-card">
+        <phoebe-chart-container
+          chartTitle="Interactive Heatmap"
+          chartSubtitle="Click cells to select, hover for details">
+          <phoebe-heatmap
+            [data]="heatmapData">
+          </phoebe-heatmap>
+        </phoebe-chart-container>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="actions-card">
+        <div class="btn-group">
+          <button class="btn primary" (click)="randomizeData()">Randomize</button>
+          <button class="btn outline" (click)="loadActivityData()">Activity</button>
+          <button class="btn outline" (click)="loadCorrelationMatrix()">Correlation</button>
+          <button class="btn outline" (click)="loadTemperatureData()">Temperature</button>
+          <button class="btn outline" (click)="resetToDefaults()">Reset</button>
+        </div>
+      </div>
+
+      <!-- Selected Cell Info -->
+      @if (selectedCell) {
+        <div class="selected-info">
+          <strong>Selected:</strong> {{ selectedCell.row }} x {{ selectedCell.column }} = {{ selectedCell.value }}
+        </div>
+      }
+    </div>
+
+    <!-- Controls Panel -->
+    <aside class="controls-section">
+      <div class="controls-card">
+        <h3>Configuration</h3>
+
+        <!-- Color Scheme -->
+        <!-- <div class="control-group">
+          <label>Color Scheme</label>
+          <select [(ngModel)]="colorScheme">
+            @for (scheme of colorSchemeOptions; track scheme.value) {
+              <option [value]="scheme.value">{{ scheme.name }}</option>
+            }
+          </select>
+        </div> -->
+
+        <!-- Value Format -->
+        <!-- <div class="control-group">
+          <label>Value Format</label>
+          <select [(ngModel)]="valueFormat">
+            <option value=".0f">Integer (.0f)</option>
+            <option value=".1f">1 Decimal (.1f)</option>
+            <option value=".2f">2 Decimals (.2f)</option>
+            <option value=".1%">Percent (.1%)</option>
+          </select>
+        </div> -->
+
+        <!-- Border Width -->
+        <!-- <div class="control-group">
+          <label>Border Width: {{ cellBorderWidth }}px</label>
+          <input type="range" min="0" max="4" step="1" [(ngModel)]="cellBorderWidth">
+        </div> -->
+
+        <!-- Toggles -->
+        <div class="control-group">
+          <label>Display Options</label>
+          <div class="toggle-row">
+            <input type="checkbox" id="showValues" [(ngModel)]="showValues">
+            <label for="showValues">Show Values</label>
+          </div>
+          <div class="toggle-row">
+            <input type="checkbox" id="showTooltip" [(ngModel)]="showTooltip">
+            <label for="showTooltip">Show Tooltip</label>
+          </div>
+          <div class="toggle-row">
+            <input type="checkbox" id="showLegend" [(ngModel)]="showLegend">
+            <label for="showLegend">Show Legend</label>
+          </div>
+          <div class="toggle-row">
+            <input type="checkbox" id="animate" [(ngModel)]="animate">
+            <label for="animate">Animate</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Info -->
+      <div class="info-card">
+        <h3>Data Info</h3>
+        <ul>
+          <li><strong>Rows:</strong> {{ heatmapData.rows.length }}</li>
+          <li><strong>Columns:</strong> {{ heatmapData.columns.length }}</li>
+          <li><strong>Total Cells:</strong> {{ heatmapData.cells.length }}</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Code Example -->
+  <section class="code-section">
+    <h2>Usage Example</h2>
+    <div class="code-card">
+      <pre><code>&lt;phoebe-heatmap
+  [data]="heatmapData"
+  [dimensions]="&#123; width: 700, height: 450 &#125;"
+  colorScheme="blues"
+  [showValues]="true"
+  [showTooltip]="true"
+  [showLegend]="true"
+  [animate]="true"
+  valueFormat=".1f"
+  (cellClick)="onCellClick($event)"&gt;
+&lt;/phoebe-heatmap&gt;</code></pre>
+    </div>
+  </section>
+</div>
