@@ -1,0 +1,199 @@
+@use '../../../styles/variables' as *;
+
+.goal-tracker {
+  background: $white;
+  border-radius: $border-radius;
+  padding: $spacing-lg;
+  box-shadow: $shadow;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-md;
+  }
+
+  &__title {
+    font-size: $font-size-base;
+    font-weight: 600;
+    color: $text-primary;
+    margin: 0;
+  }
+
+  &__status {
+    font-size: $font-size-xs;
+    font-weight: 600;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    &--achieved {
+      background: rgba($success, 0.1);
+      color: $success;
+    }
+
+    &--on-track {
+      background: rgba($success, 0.1);
+      color: $success;
+    }
+
+    &--at-risk {
+      background: rgba($warning, 0.1);
+      color: $warning;
+    }
+
+    &--behind {
+      background: rgba($danger, 0.1);
+      color: $danger;
+    }
+  }
+
+  &__progress-section {
+    margin-bottom: $spacing-md;
+  }
+
+  &__values {
+    display: flex;
+    align-items: baseline;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__current {
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    color: $text-primary;
+  }
+
+  &__separator {
+    font-size: $font-size-lg;
+    color: $text-muted;
+  }
+
+  &__goal {
+    font-size: $font-size-lg;
+    font-weight: 500;
+    color: $text-secondary;
+  }
+
+  &__unit {
+    font-size: $font-size-sm;
+    font-weight: 400;
+    color: $text-muted;
+  }
+
+  &__bar-container {
+    position: relative;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__bar {
+    height: 12px;
+    background: $gray-200;
+    border-radius: $border-radius-sm;
+    overflow: hidden;
+  }
+
+  &__fill {
+    height: 100%;
+    border-radius: $border-radius-sm;
+    transition: width 0.3s ease;
+
+    &--achieved {
+      background: linear-gradient(90deg, $success, lighten($success, 10%));
+    }
+
+    &--on-track {
+      background: linear-gradient(90deg, $success, lighten($success, 10%));
+    }
+
+    &--at-risk {
+      background: linear-gradient(90deg, $warning, lighten($warning, 10%));
+    }
+
+    &--behind {
+      background: linear-gradient(90deg, $danger, lighten($danger, 10%));
+    }
+  }
+
+  &__milestones {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 12px;
+    pointer-events: none;
+  }
+
+  &__milestone {
+    position: absolute;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-marker {
+      width: 4px;
+      height: 16px;
+      background: $gray-400;
+      border-radius: 2px;
+      margin-top: -2px;
+    }
+
+    &-label {
+      font-size: $font-size-xs;
+      color: $text-muted;
+      margin-top: $spacing-xs;
+      white-space: nowrap;
+    }
+
+    &--reached {
+      .goal-tracker__milestone-marker {
+        background: $success;
+      }
+
+      .goal-tracker__milestone-label {
+        color: $success;
+        font-weight: 500;
+      }
+    }
+  }
+
+  &__percentage {
+    font-size: $font-size-sm;
+    color: $text-muted;
+    text-align: right;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: $spacing-md;
+    border-top: 1px solid $border-color;
+  }
+
+  &__remaining {
+    font-size: $font-size-sm;
+
+    &-value {
+      font-weight: 600;
+      color: $text-primary;
+    }
+
+    &-label {
+      color: $text-muted;
+    }
+  }
+
+  &__dates {
+    display: flex;
+    gap: $spacing-md;
+  }
+
+  &__date {
+    font-size: $font-size-xs;
+    color: $text-muted;
+  }
+}

@@ -46,7 +46,16 @@ export class KpiComponentGalleryComponent {
       previousPeriodEnd: '10.30',
       negativeIsBetter: false, description: 'Total revenue for the current month'
     },
-    { metric: 'Active Users', timeframe: 'Year-to-Date', currentPeriodValue: 6432, currentPeriodDisplay: 'Nov. 2025 ', previousPeriodValue: 7500, previousPeriodDisplay: 'Year', negativeIsBetter: false, description: 'Number of active users' },
+    {
+      metric: 'OPS+',
+      timeframe: 'Season',
+      currentPeriodValue: .893,
+      currentPeriodDisplay: '2025',
+      previousPeriodValue: .987,
+      previousPeriodDisplay: '2024',
+      negativeIsBetter: false,
+      description: 'OPS+ for the current season'
+    },
   ];
 
   // // Demo data for StatCard
