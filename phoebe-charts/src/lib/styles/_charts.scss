@@ -1,16 +1,122 @@
-@use "variables" as *;
+// =============================================================================
+// Charts
+// Phoebe Charts - Chart Component Styles
+// =============================================================================
+
+@use 'colors' as *;
+@use 'typography' as *;
+@use 'spacing' as *;
+@use 'layout' as *;
+
+// -----------------------------------------------------------------------------
+// Axis Styles
+// Applied to D3 axis elements
+// -----------------------------------------------------------------------------
 
 .tick {
   line {
     stroke: $gray-300;
   }
+
   text {
     fill: $gray-400;
     font-size: $font-size-sm;
     font-weight: $font-weight-thin;
     font-family: $font-family-base;
   }
+
   path {
     stroke: $gray-300;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Grid Lines
+// -----------------------------------------------------------------------------
+
+.grid {
+  line {
+    stroke: $gray-200;
+    stroke-dasharray: 2, 2;
+  }
+
+  path {
+    stroke: none;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Tooltip
+// -----------------------------------------------------------------------------
+
+.phoebe-tooltip {
+  position: absolute;
+  padding: $spacing-sm $spacing-md;
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  box-shadow: $shadow-md;
+  font-size: $font-size-sm;
+  pointer-events: none;
+  z-index: $z-index-tooltip;
+
+  .tooltip-title {
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    margin-bottom: $spacing-xs;
+  }
+
+  .tooltip-value {
+    color: $text-secondary;
+  }
+}
+
+// Dark theme tooltip
+.phoebe-dark .phoebe-tooltip {
+  background: $gray-800;
+  border-color: $gray-700;
+
+  .tooltip-title {
+    color: $gray-100;
+  }
+
+  .tooltip-value {
+    color: $gray-300;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Legend
+// -----------------------------------------------------------------------------
+
+.phoebe-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+  font-size: $font-size-sm;
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &.disabled {
+      opacity: 0.4;
+    }
+  }
+
+  .legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: $border-radius-sm;
+  }
+
+  .legend-label {
+    color: $text-secondary;
   }
 }

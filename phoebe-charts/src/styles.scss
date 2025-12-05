@@ -1,7 +1,21 @@
+// =============================================================================
+// Phoebe Charts - Application Styles
+// =============================================================================
+
 @use 'lib/styles' as phoebe;
 
+@use 'lib/styles/kpi_cards' as kpi_cards;
+
+.border-bottom {
+  border-bottom: 1px solid phoebe.$border-color;
+}
+
+// Apply base styles
 body {
   font-family: phoebe.$font-family-base;
   font-size: phoebe.$font-size-base;
   font-weight: phoebe.$font-weight-normal;
+  line-height: phoebe.$line-height-normal;
+  color: phoebe.$text-primary;
+  background-color: phoebe.$bg-primary;
 }

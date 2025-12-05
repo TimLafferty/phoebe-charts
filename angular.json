@@ -60,7 +60,17 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/demo/src/favicon.ico",
-              "projects/demo/src/assets"
+              "projects/demo/src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/@awesome.me/kit-c055dde1d8/icons/css",
+                "output": "/fontawesome/css"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/@awesome.me/kit-c055dde1d8/icons/webfonts",
+                "output": "/fontawesome/webfonts"
+              }
             ],
             "styles": [
               "projects/demo/src/styles.scss"
@@ -77,8 +87,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "50kb",
+                  "maximumError": "100kb"
                 }
               ],
               "outputHashing": "all"

@@ -1,0 +1,54 @@
+<div class="page">
+  <header class="page-header">
+    <div class="header-content">
+      <h1>KPI Cards</h1>
+      <span class="badge beta">Beta</span>
+    </div>
+    <p>Key Performance Indicator cards for displaying metrics, stats, and data summaries.</p>
+  </header>
+
+  <!-- KPI Basic Comparison Section -->
+  <section class="component-section">
+    <h2>KPI Basic Comparison</h2>
+    <p class="section-description">Simple metric display with value, label, and optional subtitle.</p>
+    <div class="card-grid">
+      @for (card of kpiBasicComparisonCards; track card.metric) {
+        <phoebe-kpi-basic-comparison
+          [props]="card">
+        </phoebe-kpi-basic-comparison>
+      }
+    </div>
+  </section>
+
+  <!-- Stat Cards Section -->
+  <!-- <section class="component-section">
+    <h2>Stat Card</h2>
+    <p class="section-description">Statistics with comparison indicators showing trends.</p>
+    <div class="card-grid">
+      @for (card of statCards; track card.label) {
+        <phoebe-stat-card
+          [label]="card.label"
+          [value]="card.value"
+          [change]="card.change"
+          [trend]="card.trend">
+        </phoebe-stat-card>
+      }
+    </div>
+  </section> -->
+
+  <!-- Progress Cards Section -->
+  <!-- <section class="component-section">
+    <h2>Progress Card</h2>
+    <p class="section-description">Visualize progress toward goals with a progress bar.</p>
+    <div class="card-grid">
+      @for (card of progressCards; track card.label) {
+        <phoebe-progress-card
+          [label]="card.label"
+          [current]="card.current"
+          [target]="card.target"
+          [unit]="card.unit">
+        </phoebe-progress-card>
+      }
+    </div>
+  </section> -->
+</div>

@@ -1,0 +1,134 @@
+@use '../../../../../../phoebe-charts/src/lib/styles/variables' as *;
+
+.page {
+  padding: $spacing-xl;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: $spacing-xl;
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-xs;
+  }
+
+  h1 {
+    font-size: $font-size-2xl;
+    font-weight: 600;
+    color: $text-primary;
+    margin: 0;
+  }
+
+  p {
+    font-size: $font-size-base;
+    color: $text-secondary;
+    margin: 0;
+  }
+}
+
+.badge {
+  font-size: $font-size-xs;
+  padding: 3px 8px;
+  border-radius: $border-radius-sm;
+  text-transform: uppercase;
+  font-weight: 600;
+
+  &.planned {
+    background: rgba($warning, 0.1);
+    color: $warning;
+  }
+
+  &.beta {
+    background: rgba($info, 0.1);
+    color: $info;
+  }
+}
+
+.component-section {
+  margin-bottom: $spacing-2xl;
+
+  h2 {
+    font-size: $font-size-xl;
+    font-weight: 600;
+    color: $text-primary;
+    margin: 0 0 $spacing-xs 0;
+  }
+
+  .section-description {
+    font-size: $font-size-base;
+    color: $text-secondary;
+    margin: 0 0 $spacing-lg 0;
+  }
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: $spacing-lg;
+}
+
+.content-grid {
+  display: grid;
+  gap: $spacing-lg;
+  margin-bottom: $spacing-xl;
+}
+
+.placeholder-section {
+  display: flex;
+  justify-content: center;
+}
+
+.placeholder-card {
+  background: $bg-primary;
+  border-radius: $border-radius;
+  padding: $spacing-2xl;
+  box-shadow: $shadow;
+  text-align: center;
+  max-width: 600px;
+
+  .placeholder-icon {
+    color: $text-muted;
+    margin-bottom: $spacing-lg;
+  }
+
+  h2 {
+    font-size: $font-size-xl;
+    font-weight: 600;
+    color: $text-primary;
+    margin: 0 0 $spacing-sm 0;
+  }
+
+  > p {
+    font-size: $font-size-base;
+    color: $text-secondary;
+    margin: 0 0 $spacing-lg 0;
+  }
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+
+  li {
+    padding: $spacing-sm 0;
+    font-size: $font-size-base;
+    color: $text-secondary;
+    border-bottom: 1px solid $border-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &::before {
+      content: '→';
+      margin-right: $spacing-sm;
+      color: $primary;
+    }
+  }
+}

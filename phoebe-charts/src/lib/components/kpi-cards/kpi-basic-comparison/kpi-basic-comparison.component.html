@@ -1,0 +1,38 @@
+<div class="m-1 rounded-1 shadow-sm overflow-hidden" style="max-width: 350px;">
+  <div class="kpi-card__header">
+    <div class="d-flex flex-column">
+      <div class="kpi-card__timeframe">{{ props.timeframe }}</div>
+      <div class="kpi-card__metric">{{ props.metric }}</div>
+    </div>
+    <div class="kpi-card__period">{{ props.currentPeriodDisplay }}</div>
+  </div>
+  <div class="kpi-card__body w-100 d-flex justify-content-between align-items-center px-4 py-2 bg-white">
+    <div class="w-75 border-end py-2 ">
+      <div class="text-center fw-extrabold display-5 fw-bold">
+        {{ props.currentPeriodValue | KpiBan }}
+      </div>
+      <div class="fw-light text-muted small px-2 py-1 text-center" style="font-size: 0.7rem;" *ngIf="props.description">
+        Prev. {{ props.previousPeriodDisplay }}: <strong class="fw-bold">{{ props.previousPeriodValue | KpiBan
+          }}</strong>
+      </div>
+    </div>
+    <div class="w-25 ms-3">
+      <div class="text-center">
+        <ng-container *ngIf="hasChange; else noChangeBlock">
+          <div class="d-flex flex-column align-items-center">
+            <i class="fa-duotone fa-regular fa-6x" [class.fa-caret-large-up]="isPositiveChange"
+              [class.fa-caret-large-down]="!isPositiveChange" [class.change-indicator--favorable]="isFavorableChange"
+              [class.change-indicator--unfavorable]="!isFavorableChange">
+            </i>
+            <span class="mb-3" style="line-height: 0; font-size: 0.8rem;" [class.text-success]="isFavorableChange"
+              [class.text-danger]="!isFavorableChange">
+              <ng-container *ngIf="percentageChange > 0">+</ng-container>
+              {{ percentageChange | number : '1.1-1' }}%
+            </span>
+          </div>
+        </ng-container>
+        <ng-template #noChangeBlock>&mdash;</ng-template>
+      </div>
+    </div>
+  </div>
+</div>

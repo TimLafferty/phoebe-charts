@@ -1,0 +1,19 @@
+<div class="stat-card">
+  <div class="stat-card__label">{{ label }}</div>
+  <div class="stat-card__value">{{ value }}</div>
+  @if (change !== undefined) {
+    <div class="stat-card__change" [class]="'stat-card__change--' + trend">
+      <span class="stat-card__trend-icon">
+        @switch (trend) {
+          @case ('up') { &#9650; }
+          @case ('down') { &#9660; }
+          @default { &#9644; }
+        }
+      </span>
+      <span class="stat-card__change-value">{{ change }}</span>
+      @if (comparisonLabel) {
+        <span class="stat-card__comparison">{{ comparisonLabel }}</span>
+      }
+    </div>
+  }
+</div>

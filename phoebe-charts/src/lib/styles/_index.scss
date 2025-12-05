@@ -1,2 +1,36 @@
-@forward "variables";
-@forward "charts";
+// =============================================================================
+// Phoebe Charts - Styles Entry Point
+// =============================================================================
+//
+// Usage in consuming applications:
+//
+//   // Import all variables (SCSS only, no CSS output)
+//   @use 'phoebe-charts/styles' as phoebe;
+//
+//   .my-class {
+//     color: phoebe.$primary;
+//     font-size: phoebe.$font-size-base;
+//   }
+//
+//   // Or import everything into global namespace
+//   @use 'phoebe-charts/styles' as *;
+//
+//   .my-class {
+//     color: $primary;
+//   }
+//
+//   // For theming with CSS custom properties, include the theme:
+//   @use 'phoebe-charts/styles/theme';
+//
+// =============================================================================
+
+// Forward all variables for consuming applications
+@forward 'variables';
+
+// Forward chart-specific styles
+@forward 'charts';
+@forward 'kpi_cards';
+
+// Note: Theme (_theme.scss) is NOT auto-included because it generates CSS.
+// Consumers should explicitly import it if they want CSS custom properties:
+//   @use 'phoebe-charts/styles/theme';

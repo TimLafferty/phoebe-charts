@@ -8,3 +8,6 @@ export * from './lib/models/chart-utilities/index';
 
 // Components
 export * from './lib/components/index';
+
+// Pipes
+export * from './lib/pipes/index';

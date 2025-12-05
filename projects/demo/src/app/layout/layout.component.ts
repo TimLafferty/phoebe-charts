@@ -45,9 +45,17 @@ export class LayoutComponent {
         { label: 'Heatmap', path: '/tables/heatmap', status: 'beta' },
       ],
     },
+    {
+      label: 'KPI Cards',
+      path: '/kpi-cards',
+      icon: 'card',
+      children: [
+        { label: 'Gallery', path: '/kpi-cards', status: 'beta' },
+      ],
+    },
   ];
 
-  expandedGroups = new Set<string>(['Charts', 'Tables']);
+  expandedGroups = new Set<string>(['Charts', 'Tables', 'KPI Cards']);
 
   toggleGroup(label: string): void {
     if (this.expandedGroups.has(label)) {

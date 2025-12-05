@@ -49,6 +49,13 @@ export const routes: Routes = [
             (m) => m.TablesComponent
           ),
       },
+      {
+        path: 'kpi-cards',
+        loadComponent: () =>
+          import('./pages/kpi-cards/kpi-component-gallery.component').then(
+            (m) => m.KpiComponentGalleryComponent
+          ),
+      },
     ],
   },
 ];

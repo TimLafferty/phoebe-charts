@@ -1,0 +1,51 @@
+@use "../../../styles/variables" as *;
+
+$color-success: #198754;
+$color-danger: #dc3545;
+
+.kpi-card__header {
+  background-color: $bg-light;
+  width: 100%;
+  border-bottom: 1px solid $border-color;
+  box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kpi-card__metric {
+  font-size: $font-size-md;
+  font-weight: $font-weight-extrabold;
+  color: $text-primary;
+  letter-spacing: $letter-spacing-widest;
+  text-transform: uppercase;
+}
+
+.kpi-card__timeframe {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-light;
+  color: $text-muted-light;
+  text-transform: lowercase;
+}
+
+.kpi-card__period {
+  font-size: $font-size-base;
+  font-weight: $font-weight-light;
+  color: $text-muted-light;
+}
+
+.change-indicator--favorable {
+  --fa-primary-color: #{$color-success};
+  --fa-secondary-color: #{$color-success};
+  --fa-secondary-opacity: 0.4;
+}
+
+.change-indicator--unfavorable {
+  --fa-primary-color: #{$color-danger};
+  --fa-secondary-color: #{$color-danger};
+  --fa-secondary-opacity: 0.4;
+}

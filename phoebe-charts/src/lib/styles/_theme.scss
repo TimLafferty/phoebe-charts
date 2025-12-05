@@ -1,0 +1,112 @@
+// =============================================================================
+// Theme
+// Phoebe Charts - CSS Custom Properties for Runtime Theming
+// =============================================================================
+
+@use 'colors' as *;
+@use 'typography' as *;
+@use 'spacing' as *;
+@use 'layout' as *;
+
+// -----------------------------------------------------------------------------
+// CSS Custom Properties Root
+// These enable runtime theme switching without recompilation
+// -----------------------------------------------------------------------------
+
+:root {
+  // Brand colors
+  --phoebe-primary: #{$primary};
+  --phoebe-primary-hover: #{$primary-hover};
+  --phoebe-primary-light: #{$primary-light};
+  --phoebe-secondary: #{$secondary};
+  --phoebe-accent: #{$accent};
+
+  // Semantic colors
+  --phoebe-success: #{$success};
+  --phoebe-info: #{$info};
+  --phoebe-warning: #{$warning};
+  --phoebe-danger: #{$danger};
+
+  // Background colors
+  --phoebe-bg-primary: #{$bg-primary};
+  --phoebe-bg-secondary: #{$bg-secondary};
+  --phoebe-bg-tertiary: #{$bg-tertiary};
+
+  // Text colors
+  --phoebe-text-primary: #{$text-primary};
+  --phoebe-text-secondary: #{$text-secondary};
+  --phoebe-text-muted: #{$text-muted};
+
+  // Border
+  --phoebe-border-color: #{$border-color};
+  --phoebe-border-radius: #{$border-radius};
+  --phoebe-border-radius-sm: #{$border-radius-sm};
+  --phoebe-border-radius-lg: #{$border-radius-lg};
+
+  // Shadows
+  --phoebe-shadow-sm: #{$shadow-sm};
+  --phoebe-shadow: #{$shadow};
+  --phoebe-shadow-md: #{$shadow-md};
+  --phoebe-shadow-lg: #{$shadow-lg};
+
+  // Typography
+  --phoebe-font-family: #{$font-family-base};
+  --phoebe-font-size-base: #{$font-size-base};
+
+  // Spacing
+  --phoebe-spacing-xs: #{$spacing-xs};
+  --phoebe-spacing-sm: #{$spacing-sm};
+  --phoebe-spacing-md: #{$spacing-md};
+  --phoebe-spacing-lg: #{$spacing-lg};
+  --phoebe-spacing-xl: #{$spacing-xl};
+
+  // Transitions
+  --phoebe-transition-fast: #{$transition-fast};
+  --phoebe-transition-normal: #{$transition-normal};
+  --phoebe-transition-slow: #{$transition-slow};
+
+  // Chart-specific
+  --phoebe-chart-axis-color: #{$gray-300};
+  --phoebe-chart-text-color: #{$gray-400};
+  --phoebe-chart-grid-color: #{$gray-200};
+}
+
+// -----------------------------------------------------------------------------
+// Dark Theme
+// Apply with class="phoebe-dark" on a parent element
+// -----------------------------------------------------------------------------
+
+.phoebe-dark {
+  --phoebe-bg-primary: #{$gray-900};
+  --phoebe-bg-secondary: #{$gray-800};
+  --phoebe-bg-tertiary: #{$gray-700};
+
+  --phoebe-text-primary: #{$gray-100};
+  --phoebe-text-secondary: #{$gray-300};
+  --phoebe-text-muted: #{$gray-400};
+
+  --phoebe-border-color: #{$gray-700};
+
+  --phoebe-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --phoebe-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --phoebe-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --phoebe-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4), 0 4px 6px rgba(0, 0, 0, 0.3);
+
+  --phoebe-chart-axis-color: #{$gray-600};
+  --phoebe-chart-text-color: #{$gray-400};
+  --phoebe-chart-grid-color: #{$gray-700};
+}
+
+// -----------------------------------------------------------------------------
+// Utility Mixins for Theme-aware Components
+// -----------------------------------------------------------------------------
+
+// Use CSS custom properties in your components
+// Example: background-color: var(--phoebe-bg-primary);
+
+@mixin theme-transition {
+  transition: background-color $transition-normal,
+              color $transition-normal,
+              border-color $transition-normal,
+              box-shadow $transition-normal;
+}

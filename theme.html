@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color System Swatches</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* ============== PLUG IN YOUR COLOR SYSTEM HERE ============== */
+      /* Primary color and variants */
+      /* Primary color and variants - Cobalt Blue */
+      --primary: #1d4ed8;
+      /* Cobalt foundation */
+      --primary-light: #3b82f6;
+      --primary-lighter: #60a5fa;
+      --primary-lightest: #dbeafe;
+      --primary-dark: #1e40af;
+      --primary-darker: #1e3a8a;
+      --primary-darkest: #172554;
+
+      /* Secondary color and variants - Rust Orange */
+      --secondary: #b45309;
+      /* Warm rust - earthy, action */
+      --secondary-light: #d97706;
+      --secondary-lighter: #f59e0b;
+      --secondary-lightest: #fef3c7;
+      --secondary-dark: #92400e;
+      --secondary-darker: #78350f;
+      --secondary-darkest: #5c2309;
+
+      /* Accent color and variants - Plum Purple */
+      --accent: #6d28d9;
+      /* Deep plum - creativity, luxury */
+      --accent-light: #8b5cf6;
+      --accent-lighter: #a78bfa;
+      --accent-lightest: #ddd6fe;
+      --accent-dark: #5b21b6;
+      --accent-darker: #4c1d95;
+      --accent-darkest: #3c1361;
+
+      /* Gray scale */
+      --gray-100: #ffffff;
+      --gray-200: #f8fafc;
+      --gray-300: #f1f5f9;
+      --gray-400: #e2e8f0;
+      --gray-500: #cbd5e1;
+      --gray-600: #94a3b8;
+      --gray-700: #64748b;
+      --gray-800: #475569;
+      --gray-900: #334155;
+      /* =========================================================== */
+
+      /* Layout variables */
+      --border-radius: 10px;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.15);
+      --transition: all 0.25s ease;
+      --spacing-sm: 0.75rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 3rem;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+      color: var(--gray-900);
+      background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-200) 100%);
+      padding: var(--spacing-lg);
+      min-height: 100vh;
+    }
+
+    @supports (font-variation-settings: normal) {
+      body {
+        font-family: 'Inter var', system-ui, sans-serif;
+      }
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: var(--spacing-lg);
+      padding: var(--spacing-lg);
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-md);
+      border-bottom: 4px solid var(--primary);
+    }
+
+    h1 {
+      font-size: 2.75rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      color: var(--gray-600);
+      max-width: 800px;
+      margin: 0 auto 1rem;
+      font-weight: 400;
+    }
+
+    .instruction {
+      font-size: 0.95rem;
+      color: var(--gray-500);
+      background: var(--gray-100);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      display: inline-block;
+      border-left: 4px solid var(--accent);
+    }
+
+    .color-systems {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .color-system {
+      background: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+    }
+
+    .color-system:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .system-header {
+      padding: var(--spacing-md);
+      color: white;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .system-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .system-count {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+
+    .primary-system .system-header {
+      background: var(--primary);
+    }
+
+    .secondary-system .system-header {
+      background: var(--secondary);
+      color: var(--gray-900);
+    }
+
+    .accent-system .system-header {
+      background: var(--accent);
+    }
+
+    .grayscale-system .system-header {
+      background: var(--gray-900);
+    }
+
+    .color-variants {
+      padding: var(--spacing-sm);
+    }
+
+    .color-variant {
+      display: flex;
+      align-items: center;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+      transition: var(--transition);
+      cursor: pointer;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+
+    .color-variant:hover {
+      transform: translateX(4px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .color-chip {
+      width: 70px;
+      height: 70px;
+      border-radius: 8px;
+      margin-right: 1rem;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .color-chip::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%);
+      border-radius: 8px;
+    }
+
+    .color-info {
+      flex: 1;
+    }
+
+    .color-name {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: var(--gray-900);
+    }
+
+    .color-value {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: var(--gray-600);
+    }
+
+    .color-weight {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      font-weight: 600;
+    }
+
+    .ui-preview {
+      background: white;
+      border-radius: var(--border-radius);
+      padding: var(--spacing-lg);
+      box-shadow: var(--shadow-md);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .preview-title {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary-dark);
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--gray-200);
+      font-weight: 600;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-md);
+    }
+
+    .preview-card {
+      padding: var(--spacing-md);
+      border-radius: var(--border-radius);
+      border: 1px solid var(--gray-200);
+      transition: var(--transition);
+    }
+
+    .preview-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .card-title {
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--gray-800);
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .btn {
+      padding: 0.625rem 1.25rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.9rem;
+      font-family: inherit;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .copy-notification {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary-dark);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+      pointer-events: none;
+      box-shadow: var(--shadow-md);
+      font-weight: 500;
+    }
+
+    .copy-notification.show {
+      opacity: 1;
+    }
+
+    .css-code {
+      background: var(--gray-900);
+      color: var(--gray-200);
+      border-radius: var(--border-radius);
+      padding: var(--spacing-md);
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      box-shadow: var(--shadow-md);
+    }
+
+    .code-title {
+      color: var(--accent-light);
+      margin-bottom: 1rem;
+      font-family: inherit;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .css-comment {
+      color: var(--gray-500);
+    }
+
+    .css-property {
+      color: var(--accent-light);
+    }
+
+    .css-value {
+      color: var(--secondary-light);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: var(--spacing-md);
+      }
+
+      .color-systems {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .preview-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Animation for copied color */
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .color-variant.copied {
+      animation: pulse 0.3s ease;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Color System Swatches</h1>
+      <p class="subtitle">A complete color system with primary, secondary, accent, and grayscale variants</p>
+      <div class="instruction">Click any color swatch to copy the hex value to clipboard</div>
+    </header>
+
+    <div class="color-systems">
+      <!-- Primary Color System -->
+      <div class="color-system primary-system">
+        <div class="system-header">
+          <div class="system-title">Primary System</div>
+          <div class="system-count">7 variants</div>
+        </div>
+        <div class="color-variants">
+          <div class="color-variant" data-color="var(--primary-darkest)" data-name="Primary Darkest">
+            <div class="color-chip" style="background-color: var(--primary-darkest);"></div>
+            <div class="color-info">
+              <div class="color-name">Primary Darkest</div>
+              <div class="color-value">var(--primary-darkest)</div>
+            </div>
+            <div class="color-weight">900</div>
+          </div>
+          <div class="color-variant" data-color="var(--primary-darker)" data-name="Primary Darker">
+            <div class="color-chip" style="background-color: var(--primary-darker);"></div>
+            <div class="color-info">
+              <div class="color-name">Primary Darker</div>
+              <div class="color-value">var(--primary-darker)</div>
+            </div>
+            <div class="color-weight">800</div>
+          </div>
+          <div class="color-variant" data-color="var(--primary-dark)" data-name="Primary Dark">
+            <div class="color-chip" style="background-color: var(--primary-dark);"></div>
+            <div class="color-info">
+              <div class="color-name">Primary Dark</div>
+              <div class="color-value">var(--primary-dark)</div>
+            </div>
+            <div class="color-weight">700</div>
+          </div>
+          <div class="color-variant" data-color="var(--primary)" data-name="Primary">
+            <div class="color-chip" style="background-color: var(--primary);"></div>
+            <div class="color-info">
+              <div class="color-name">Primary (Base)</div>
+              <div class="color-value">var(--primary)</div>
+            </div>
+            <div class="color-weight">500</div>
+          </div>
+          <div class="color-variant" data-color="var(--primary-light)" data-name="Primary Light">
+            <div class="color-chip" style="background-color: var(--primary-light);"></div>
+            <div class="color-info">
+              <div class="color-name">Primary Light</div>
+              <div class="color-value">var(--primary-light)</div>
+            </div>
+            <div class="color-weight">400</div>
+          </div>
+          <div class="color-variant" data-color="var(--primary-lighter)" data-name="Primary Lighter">
+            <div class="color-chip" style="background-color: var(--primary-lighter);"></div>
+            <div class="color-info">
+              <div class="color-name">Primary Lighter</div>
+              <div class="color-value">var(--primary-lighter)</div>
+            </div>
+            <div class="color-weight">300</div>
+          </div>
+          <div class="color-variant" data-color="var(--primary-lightest)" data-name="Primary Lightest">
+            <div class="color-chip" style="background-color: var(--primary-lightest);"></div>
+            <div class="color-info">
+              <div class="color-name">Primary Lightest</div>
+              <div class="color-value">var(--primary-lightest)</div>
+            </div>
+            <div class="color-weight">200</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Secondary Color System -->
+      <div class="color-system secondary-system">
+        <div class="system-header">
+          <div class="system-title">Secondary System</div>
+          <div class="system-count">7 variants</div>
+        </div>
+        <div class="color-variants">
+          <div class="color-variant" data-color="var(--secondary-darkest)" data-name="Secondary Darkest">
+            <div class="color-chip" style="background-color: var(--secondary-darkest);"></div>
+            <div class="color-info">
+              <div class="color-name">Secondary Darkest</div>
+              <div class="color-value">var(--secondary-darkest)</div>
+            </div>
+            <div class="color-weight">900</div>
+          </div>
+          <div class="color-variant" data-color="var(--secondary-darker)" data-name="Secondary Darker">
+            <div class="color-chip" style="background-color: var(--secondary-darker);"></div>
+            <div class="color-info">
+              <div class="color-name">Secondary Darker</div>
+              <div class="color-value">var(--secondary-darker)</div>
+            </div>
+            <div class="color-weight">800</div>
+          </div>
+          <div class="color-variant" data-color="var(--secondary-dark)" data-name="Secondary Dark">
+            <div class="color-chip" style="background-color: var(--secondary-dark);"></div>
+            <div class="color-info">
+              <div class="color-name">Secondary Dark</div>
+              <div class="color-value">var(--secondary-dark)</div>
+            </div>
+            <div class="color-weight">700</div>
+          </div>
+          <div class="color-variant" data-color="var(--secondary)" data-name="Secondary">
+            <div class="color-chip" style="background-color: var(--secondary);"></div>
+            <div class="color-info">
+              <div class="color-name">Secondary (Base)</div>
+              <div class="color-value">var(--secondary)</div>
+            </div>
+            <div class="color-weight">500</div>
+          </div>
+          <div class="color-variant" data-color="var(--secondary-light)" data-name="Secondary Light">
+            <div class="color-chip" style="background-color: var(--secondary-light);"></div>
+            <div class="color-info">
+              <div class="color-name">Secondary Light</div>
+              <div class="color-value">var(--secondary-light)</div>
+            </div>
+            <div class="color-weight">400</div>
+          </div>
+          <div class="color-variant" data-color="var(--secondary-lighter)" data-name="Secondary Lighter">
+            <div class="color-chip" style="background-color: var(--secondary-lighter);"></div>
+            <div class="color-info">
+              <div class="color-name">Secondary Lighter</div>
+              <div class="color-value">var(--secondary-lighter)</div>
+            </div>
+            <div class="color-weight">300</div>
+          </div>
+          <div class="color-variant" data-color="var(--secondary-lightest)" data-name="Secondary Lightest">
+            <div class="color-chip" style="background-color: var(--secondary-lightest);"></div>
+            <div class="color-info">
+              <div class="color-name">Secondary Lightest</div>
+              <div class="color-value">var(--secondary-lightest)</div>
+            </div>
+            <div class="color-weight">200</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accent Color System -->
+      <div class="color-system accent-system">
+        <div class="system-header">
+          <div class="system-title">Accent System</div>
+          <div class="system-count">7 variants</div>
+        </div>
+        <div class="color-variants">
+          <div class="color-variant" data-color="var(--accent-darkest)" data-name="Accent Darkest">
+            <div class="color-chip" style="background-color: var(--accent-darkest);"></div>
+            <div class="color-info">
+              <div class="color-name">Accent Darkest</div>
+              <div class="color-value">var(--accent-darkest)</div>
+            </div>
+            <div class="color-weight">900</div>
+          </div>
+          <div class="color-variant" data-color="var(--accent-darker)" data-name="Accent Darker">
+            <div class="color-chip" style="background-color: var(--accent-darker);"></div>
+            <div class="color-info">
+              <div class="color-name">Accent Darker</div>
+              <div class="color-value">var(--accent-darker)</div>
+            </div>
+            <div class="color-weight">800</div>
+          </div>
+          <div class="color-variant" data-color="var(--accent-dark)" data-name="Accent Dark">
+            <div class="color-chip" style="background-color: var(--accent-dark);"></div>
+            <div class="color-info">
+              <div class="color-name">Accent Dark</div>
+              <div class="color-value">var(--accent-dark)</div>
+            </div>
+            <div class="color-weight">700</div>
+          </div>
+          <div class="color-variant" data-color="var(--accent)" data-name="Accent">
+            <div class="color-chip" style="background-color: var(--accent);"></div>
+            <div class="color-info">
+              <div class="color-name">Accent (Base)</div>
+              <div class="color-value">var(--accent)</div>
+            </div>
+            <div class="color-weight">500</div>
+          </div>
+          <div class="color-variant" data-color="var(--accent-light)" data-name="Accent Light">
+            <div class="color-chip" style="background-color: var(--accent-light);"></div>
+            <div class="color-info">
+              <div class="color-name">Accent Light</div>
+              <div class="color-value">var(--accent-light)</div>
+            </div>
+            <div class="color-weight">400</div>
+          </div>
+          <div class="color-variant" data-color="var(--accent-lighter)" data-name="Accent Lighter">
+            <div class="color-chip" style="background-color: var(--accent-lighter);"></div>
+            <div class="color-info">
+              <div class="color-name">Accent Lighter</div>
+              <div class="color-value">var(--accent-lighter)</div>
+            </div>
+            <div class="color-weight">300</div>
+          </div>
+          <div class="color-variant" data-color="var(--accent-lightest)" data-name="Accent Lightest">
+            <div class="color-chip" style="background-color: var(--accent-lightest);"></div>
+            <div class="color-info">
+              <div class="color-name">Accent Lightest</div>
+              <div class="color-value">var(--accent-lightest)</div>
+            </div>
+            <div class="color-weight">200</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grayscale System -->
+      <div class="color-system grayscale-system">
+        <div class="system-header">
+          <div class="system-title">Grayscale System</div>
+          <div class="system-count">9 variants</div>
+        </div>
+        <div class="color-variants">
+          <div class="color-variant" data-color="var(--gray-100)" data-name="Gray 100">
+            <div class="color-chip" style="background-color: var(--gray-100);"></div>
+            <div class="color-info">
+              <div class="color-name">Gray 100</div>
+              <div class="color-value">var(--gray-100)</div>
+            </div>
+            <div class="color-weight">100</div>
+          </div>
+          <div class="color-variant" data-color="var(--gray-200)" data-name="Gray 200">
+            <div class="color-chip" style="background-color: var(--gray-200);"></div>
+            <div class="color-info">
+              <div class="color-name">Gray 200</div>
+              <div class="color-value">var(--gray-200)</div>
+            </div>
+            <div class="color-weight">200</div>
+          </div>
+          <div class="color-variant" data-color="var(--gray-300)" data-name="Gray 300">
+            <div class="color-chip" style="background-color: var(--gray-300);"></div>
+            <div class="color-info">
+              <div class="color-name">Gray 300</div>
+              <div class="color-value">var(--gray-300)</div>
+            </div>
+            <div class="color-weight">300</div>
+          </div>
+          <div class="color-variant" data-color="var(--gray-400)" data-name="Gray 400">
+            <div class="color-chip" style="background-color: var(--gray-400);"></div>
+            <div class="color-info">
+              <div class="color-name">Gray 400</div>
+              <div class="color-value">var(--gray-400)</div>
+            </div>
+            <div class="color-weight">400</div>
+          </div>
+          <div class="color-variant" data-color="var(--gray-500)" data-name="Gray 500">
+            <div class="color-chip" style="background-color: var(--gray-500);"></div>
+            <div class="color-info">
+              <div class="color-name">Gray 500</div>
+              <div class="color-value">var(--gray-500)</div>
+            </div>
+            <div class="color-weight">500</div>
+          </div>
+          <div class="color-variant" data-color="var(--gray-600)" data-name="Gray 600">
+            <div class="color-chip" style="background-color: var(--gray-600);"></div>
+            <div class="color-info">
+              <div class="color-name">Gray 600</div>
+              <div class="color-value">var(--gray-600)</div>
+            </div>
+            <div class="color-weight">600</div>
+          </div>
+          <div class="color-variant" data-color="var(--gray-700)" data-name="Gray 700">
+            <div class="color-chip" style="background-color: var(--gray-700);"></div>
+            <div class="color-info">
+              <div class="color-name">Gray 700</div>
+              <div class="color-value">var(--gray-700)</div>
+            </div>
+            <div class="color-weight">700</div>
+          </div>
+          <div class="color-variant" data-color="var(--gray-800)" data-name="Gray 800">
+            <div class="color-chip" style="background-color: var(--gray-800);"></div>
+            <div class="color-info">
+              <div class="color-name">Gray 800</div>
+              <div class="color-value">var(--gray-800)</div>
+            </div>
+            <div class="color-weight">800</div>
+          </div>
+          <div class="color-variant" data-color="var(--gray-900)" data-name="Gray 900">
+            <div class="color-chip" style="background-color: var(--gray-900);"></div>
+            <div class="color-info">
+              <div class="color-name">Gray 900</div>
+              <div class="color-value">var(--gray-900)</div>
+            </div>
+            <div class="color-weight">900</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-preview">
+      <h2 class="preview-title">UI Components Preview</h2>
+      <div class="preview-grid">
+        <div class="preview-card">
+          <div class="card-title">Primary Buttons</div>
+          <div class="button-group">
+            <button class="btn" style="background-color: var(--primary-dark); color: white;">Dark</button>
+            <button class="btn" style="background-color: var(--primary); color: white;">Base</button>
+            <button class="btn" style="background-color: var(--primary-light); color: white;">Light</button>
+          </div>
+        </div>
+
+        <div class="preview-card">
+          <div class="card-title">Secondary Buttons</div>
+          <div class="button-group">
+            <button class="btn" style="background-color: var(--secondary-dark); color: var(--gray-900);">Dark</button>
+            <button class="btn" style="background-color: var(--secondary); color: var(--gray-900);">Base</button>
+            <button class="btn" style="background-color: var(--secondary-light); color: var(--gray-900);">Light</button>
+          </div>
+        </div>
+
+        <div class="preview-card">
+          <div class="card-title">Accent Buttons</div>
+          <div class="button-group">
+            <button class="btn" style="background-color: var(--accent-dark); color: white;">Dark</button>
+            <button class="btn" style="background-color: var(--accent); color: white;">Base</button>
+            <button class="btn" style="background-color: var(--accent-light); color: white;">Light</button>
+          </div>
+        </div>
+
+        <div class="preview-card">
+          <div class="card-title">Gray Buttons</div>
+          <div class="button-group">
+            <button class="btn" style="background-color: var(--gray-700); color: white;">Dark</button>
+            <button class="btn" style="background-color: var(--gray-500); color: white;">Base</button>
+            <button class="btn" style="background-color: var(--gray-300); color: var(--gray-900);">Light</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="css-code">
+      <div class="code-title">Your CSS Color System</div>
+      <span class="css-comment">// Primary color and variants</span>
+      <span class="css-property">--primary</span>: <span class="css-value">#3a3b9f</span>;
+      <span class="css-property">--primary-light</span>: <span class="css-value">#5a5bbf</span>;
+      <span class="css-property">--primary-lighter</span>: <span class="css-value">#7a7bcf</span>;
+      <span class="css-property">--primary-lightest</span>: <span class="css-value">#9a9bdf</span>;
+      <span class="css-property">--primary-dark</span>: <span class="css-value">#2a2b7f</span>;
+      <span class="css-property">--primary-darker</span>: <span class="css-value">#1a1b5f</span>;
+      <span class="css-property">--primary-darkest</span>: <span class="css-value">#0a0b3f</span>;
+
+      <span class="css-comment">// Secondary color and variants</span>
+      <span class="css-property">--secondary</span>: <span class="css-value">#ff9a76</span>;
+      <span class="css-property">--secondary-light</span>: <span class="css-value">#ffb496</span>;
+      <span class="css-property">--secondary-lighter</span>: <span class="css-value">#ffceb6</span>;
+      <span class="css-property">--secondary-lightest</span>: <span class="css-value">#ffe8d6</span>;
+      <span class="css-property">--secondary-dark</span>: <span class="css-value">#df7a56</span>;
+      <span class="css-property">--secondary-darker</span>: <span class="css-value">#bf5a36</span>;
+      <span class="css-property">--secondary-darkest</span>: <span class="css-value">#9f3a16</span>;
+
+      <span class="css-comment">// Accent color and variants</span>
+      <span class="css-property">--accent</span>: <span class="css-value">#5da9e9</span>;
+      <span class="css-property">--accent-light</span>: <span class="css-value">#7dbced</span>;
+      <span class="css-property">--accent-lighter</span>: <span class="css-value">#9dcff1</span>;
+      <span class="css-property">--accent-lightest</span>: <span class="css-value">#bde2f5</span>;
+      <span class="css-property">--accent-dark</span>: <span class="css-value">#3d89c9</span>;
+      <span class="css-property">--accent-darker</span>: <span class="css-value">#2d69a9</span>;
+      <span class="css-property">--accent-darkest</span>: <span class="css-value">#1d4989</span>;
+
+      <span class="css-comment">// Gray scale (interpolated between neutrals)</span>
+      <span class="css-property">--gray-100</span>: <span class="css-value">#f5f9f9</span>;
+      <span class="css-property">--gray-200</span>: <span class="css-value">#dbe3e5</span>;
+      <span class="css-property">--gray-300</span>: <span class="css-value">#c1cdd1</span>;
+      <span class="css-property">--gray-400</span>: <span class="css-value">#a7b7bd</span>;
+      <span class="css-property">--gray-500</span>: <span class="css-value">#8da1a9</span>;
+      <span class="css-property">--gray-600</span>: <span class="css-value">#738b95</span>;
+      <span class="css-property">--gray-700</span>: <span class="css-value">#597581</span>;
+      <span class="css-property">--gray-800</span>: <span class="css-value">#3f5f6d</span>;
+      <span class="css-property">--gray-900</span>: <span class="css-value">#2c3e50</span>;
+    </div>
+  </div>
+
+  <div class="copy-notification" id="copyNotification">Color copied to clipboard!</div>
+
+  <script>
+    // Function to get computed color value from CSS variable
+    function getComputedColor(cssVariable) {
+      const varName = cssVariable.replace('var(', '').replace(')', '').trim();
+      return getComputedStyle(document.documentElement)
+        .getPropertyValue(varName).trim();
+    }
+
+    // Copy color to clipboard when swatch is clicked
+    document.querySelectorAll('.color-variant').forEach(variant => {
+      variant.addEventListener('click', async function () {
+        const cssVariable = this.getAttribute('data-color');
+        const colorName = this.getAttribute('data-name');
+        const hexColor = getComputedColor(cssVariable);
+        const notification = document.getElementById('copyNotification');
+
+        // Add visual feedback
+        this.classList.add('copied');
+        setTimeout(() => this.classList.remove('copied'), 300);
+
+        try {
+          // Copy to clipboard
+          await navigator.clipboard.writeText(hexColor);
+
+          // Show notification with the color
+          notification.textContent = `✓ Copied ${colorName}: ${hexColor}`;
+          notification.style.backgroundColor = hexColor;
+
+          // Adjust text color for contrast
+          const rgb = hexColor.replace('#', '');
+          const r = parseInt(rgb.substr(0, 2), 16);
+          const g = parseInt(rgb.substr(2, 2), 16);
+          const b = parseInt(rgb.substr(4, 2), 16);
+          const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+          notification.style.color = brightness > 128 ? 'var(--gray-900)' : 'white';
+
+          notification.classList.add('show');
+
+          // Hide notification after 2 seconds
+          setTimeout(() => {
+            notification.classList.remove('show');
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy color: ', err);
+          notification.textContent = 'Failed to copy color';
+          notification.style.backgroundColor = 'var(--danger)';
+          notification.classList.add('show');
+
+          setTimeout(() => {
+            notification.classList.remove('show');
+          }, 2000);
+        }
+      });
+    });
+
+    // Add hover effect to buttons
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('mouseenter', function () {
+        this.style.filter = 'brightness(1.1)';
+      });
+
+      btn.addEventListener('mouseleave', function () {
+        this.style.filter = 'brightness(1)';
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,5 +1,7 @@
 // Import Bootstrap with @use (avoids variable conflicts)
-@use 'bootstrap/scss/bootstrap';
+@use "bootstrap/scss/bootstrap";
+
+// Font Awesome is loaded via angular.json styles array
 
 // Import Phoebe Charts styles
-@use '../../../phoebe-charts/src/lib/styles/index' as *;
+@use "../../../phoebe-charts/src/lib/styles/index" as *;
