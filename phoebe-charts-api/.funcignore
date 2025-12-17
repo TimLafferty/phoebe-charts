@@ -1,0 +1,6 @@
+*
+!dist/**
+!host.json
+!package.json
+!package-lock.json
+

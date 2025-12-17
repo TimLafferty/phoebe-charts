@@ -1,0 +1,27 @@
+{
+  "name": "phoebe-charts-api",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Azure Functions API for rendering Phoebe charts to SVG",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "tsc -p tsconfig.json -w",
+    "start": "npm run build && func start"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.7.2",
+    "d3": "^7.9.0",
+    "jsdom": "^26.0.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/d3": "^7.4.3",
+    "@types/jsdom": "^21.1.7",
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.2"
+  }
+}
