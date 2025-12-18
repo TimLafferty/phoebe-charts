@@ -13,9 +13,29 @@ function extentOrDefault(values: number[]): [number, number] {
 
 export function renderHeatmapSvg(request: HeatmapRequest): string {
   const options = request.options ?? {};
-  const width = options.width ?? 800;
-  const height = options.height ?? 500;
-  const margins = options.margins ?? { ...DEFAULT_MARGINS, bottom: 80, left: 80, right: 20 };
+  const dimensions = options.dimensions ?? {};
+
+  const hasExplicitWidth = options.width != null || dimensions.width != null;
+  const hasExplicitHeight = options.height != null || dimensions.height != null;
+
+  let width = options.width ?? dimensions.width ?? 800;
+  let height = options.height ?? dimensions.height ?? Math.round(width * 0.75);
+
+  if (dimensions.minWidth != null) width = Math.max(width, dimensions.minWidth);
+  if (dimensions.maxWidth != null) width = Math.min(width, dimensions.maxWidth);
+  if (dimensions.minHeight != null) height = Math.max(height, dimensions.minHeight);
+  if (dimensions.maxHeight != null) height = Math.min(height, dimensions.maxHeight);
+
+  if (dimensions.maintainAspectRatio && dimensions.aspectRatio != null) {
+    if (hasExplicitWidth && !hasExplicitHeight) {
+      height = Math.round(width / dimensions.aspectRatio);
+    } else if (!hasExplicitWidth && hasExplicitHeight) {
+      width = Math.round(height * dimensions.aspectRatio);
+    }
+  }
+
+  const margins = options.margins ?? dimensions.margins ?? DEFAULT_MARGINS;
+  const padding = options.padding ?? dimensions.padding ?? { top: 20, right: 20, bottom: 25, left: 40 };
 
   return renderToSvgString({
     width,
@@ -33,17 +53,22 @@ export function renderHeatmapSvg(request: HeatmapRequest): string {
         .append('g')
         .attr('transform', `translate(${margins.left},${margins.top})`);
 
+      const xRangeStart = padding.left;
+      const xRangeEnd = Math.max(xRangeStart + 1, innerWidth - padding.right);
+      const yRangeStart = padding.top;
+      const yRangeEnd = Math.max(yRangeStart + 1, innerHeight - padding.bottom);
+
       const xScale = d3
         .scaleBand<string>()
         .domain(request.data.columns)
-        .range([0, innerWidth])
-        .padding(options.cellPadding ?? 0.05);
+        .range([xRangeStart, xRangeEnd])
+        .padding(options.cellPadding);
 
       const yScale = d3
         .scaleBand<string>()
         .domain(request.data.rows)
-        .range([0, innerHeight])
-        .padding(options.cellPadding ?? 0.05);
+        .range([yRangeStart, yRangeEnd])
+        .padding(options.cellPadding);
 
       const numericValues = request.data.cells
         .map((c) => c.value)
@@ -66,15 +91,15 @@ export function renderHeatmapSvg(request: HeatmapRequest): string {
         .attr('height', yScale.bandwidth())
         .attr('rx', 2)
         .attr('ry', 2)
-        .attr('fill', (d) => (d.value === null ? options.nullColor ?? '#cbd5e1' : color(d.value)));
+        .attr('fill', (d) => (d.value === null ? options.nullColor : color(d.value)));
 
       const xAxis = d3.axisBottom(xScale).tickSize(0).tickPadding(6);
       const yAxis = d3.axisLeft(yScale).tickSize(0).tickPadding(6);
 
-      const gx = g.append('g').attr('class', 'x-axis').attr('transform', `translate(0,${innerHeight})`).call(xAxis);
+      const gx = g.append('g').attr('class', 'x-axis').attr('transform', `translate(0,${yRangeEnd})`).call(xAxis);
       gx.select('.domain').remove();
 
-      if (options.rotateXLabels ?? true) {
+      if (options.rotateXLabels) {
         gx.selectAll('text')
           .attr('text-anchor', 'end')
           .attr('transform', 'rotate(-35)')
@@ -82,9 +107,8 @@ export function renderHeatmapSvg(request: HeatmapRequest): string {
           .attr('dy', '0.2em');
       }
 
-      const gy = g.append('g').attr('class', 'y-axis').call(yAxis);
+      const gy = g.append('g').attr('class', 'y-axis').attr('transform', `translate(${xRangeStart},0)`).call(yAxis);
       gy.select('.domain').remove();
     },
   });
 }
-

@@ -37,8 +37,27 @@ export function renderKpiGoalTrackerSvg(request: KpiGoalTrackerRequest): string 
     draw: (svg) => {
       svg.selectAll('*').remove();
       svg.attr('role', 'img');
+      svg.attr('aria-label', data.title?.trim() ? data.title : 'KPI goal tracker');
       svg.style('font-family', options.fontFamily);
       svg.style('font-size', `${options.fontSize}px`);
+
+      if (data.title?.trim()) {
+        svg.append('title').text(data.title);
+      }
+
+      const unitSuffix = data.unit ? ` ${data.unit}` : '';
+      const descriptionParts = [
+        `Current: ${data.currentValue}${unitSuffix}`,
+        `Goal: ${data.goalValue}${unitSuffix}`,
+        data.paceValue != null ? `${data.paceLabel}: ${data.paceValue}${unitSuffix}` : null,
+        data.benchmarkValue != null ? `${data.benchmarkLabel}: ${data.benchmarkValue}${unitSuffix}` : null,
+        data.startDate ? `Start: ${data.startDate}` : null,
+        data.endDate ? `End: ${data.endDate}` : null,
+      ].filter((part): part is string => Boolean(part));
+
+      if (descriptionParts.length) {
+        svg.append('desc').text(descriptionParts.join(', '));
+      }
 
       const defs = svg.append('defs');
 
@@ -205,4 +224,3 @@ export function renderKpiGoalTrackerSvg(request: KpiGoalTrackerRequest): string 
     },
   });
 }
-

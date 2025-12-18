@@ -2,10 +2,17 @@ import { z } from 'zod';
 import { widthSchema } from '../shared/validation';
 
 export const kpiGoalTrackerDataSchema = z.object({
+  // Angular parity
+  title: z.string().max(200).default(''),
   currentValue: z.number().finite().min(0).max(1_000_000_000_000),
   goalValue: z.number().finite().min(0).max(1_000_000_000_000),
   paceValue: z.number().finite().min(0).max(1_000_000_000_000).optional(),
+  paceLabel: z.string().max(100).default('Pace'),
   benchmarkValue: z.number().finite().min(0).max(1_000_000_000_000).optional(),
+  benchmarkLabel: z.string().max(100).default('Prev. Period'),
+  unit: z.string().max(50).optional(),
+  startDate: z.string().max(50).optional(),
+  endDate: z.string().max(50).optional(),
 });
 
 export const kpiGoalTrackerOptionsSchema = z
@@ -27,4 +34,3 @@ export const kpiGoalTrackerRequestSchema = z.object({
 });
 
 export type KpiGoalTrackerRequest = z.infer<typeof kpiGoalTrackerRequestSchema>;
-

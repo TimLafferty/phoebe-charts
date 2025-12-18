@@ -32,6 +32,10 @@ npm start
 
 ## Requests
 
+Notes:
+- `line.svg` and `heatmap.svg` accept Angular-style `options.dimensions` (ChartDimensions). If you also send `options.width`/`height`/`margins`, those override `dimensions`.
+- `kpi-goal-tracker.svg` accepts the full set of Angular inputs under `data`, but the renderer currently draws only the SVG progress bar; text fields are included in SVG accessibility metadata (`<title>`/`<desc>`).
+
 ### Line chart
 
 `POST /api/charts/line.svg`
@@ -40,11 +44,15 @@ npm start
 {
   "data": [{ "x": 0, "y": 30 }, { "x": 1, "y": 45 }],
   "options": {
-    "width": 800,
-    "height": 400,
+    "dimensions": {
+      "width": 800,
+      "height": 400,
+      "margins": { "top": 20, "right": 30, "bottom": 40, "left": 50 }
+    },
     "xAxisLabel": "X",
     "yAxisLabel": "Y",
     "showGrid": true,
+    "animate": true,
     "lineColor": "#3b82f6",
     "strokeWidth": 2
   }
@@ -65,7 +73,11 @@ npm start
       { "row": "A", "column": "Y", "value": 0.8 }
     ]
   },
-  "options": { "width": 800, "height": 500 }
+  "options": {
+    "dimensions": { "width": 800, "height": 600 },
+    "padding": { "top": 20, "right": 20, "bottom": 25, "left": 40 },
+    "cellPadding": 0.025
+  }
 }
 ```
 
@@ -75,7 +87,14 @@ npm start
 
 ```json
 {
-  "data": { "currentValue": 62, "goalValue": 100, "paceValue": 110 },
+  "data": {
+    "title": "Goal Tracker",
+    "currentValue": 62,
+    "goalValue": 100,
+    "paceValue": 110,
+    "paceLabel": "Pace",
+    "unit": "%"
+  },
   "options": { "width": 600, "theme": "light", "color": "#1a5f9c" }
 }
 ```

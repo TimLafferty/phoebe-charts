@@ -12,3 +12,27 @@ export const marginsSchema = z
   })
   .default({});
 
+export const paddingSchema = z
+  .object({
+    top: z.number().int().min(0).max(1000).default(0),
+    right: z.number().int().min(0).max(1000).default(0),
+    bottom: z.number().int().min(0).max(1000).default(0),
+    left: z.number().int().min(0).max(1000).default(0),
+  })
+  .default({});
+
+export const chartDimensionsSchema = z
+  .object({
+    width: widthSchema.optional(),
+    height: heightSchema.optional(),
+    minWidth: z.number().int().min(0).max(4000).optional(),
+    minHeight: z.number().int().min(0).max(4000).optional(),
+    maxWidth: z.number().int().min(0).max(4000).optional(),
+    maxHeight: z.number().int().min(0).max(4000).optional(),
+    aspectRatio: z.number().positive().max(100).optional(),
+    margins: marginsSchema.optional(),
+    padding: paddingSchema.optional(),
+    responsive: z.boolean().optional(),
+    maintainAspectRatio: z.boolean().optional(),
+  })
+  .default({});

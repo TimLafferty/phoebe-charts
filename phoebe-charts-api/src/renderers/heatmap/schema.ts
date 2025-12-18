@@ -1,16 +1,5 @@
 import { z } from 'zod';
-
-const heatmapWidthSchema = z.number().int().min(50).max(4000).default(800);
-const heatmapHeightSchema = z.number().int().min(50).max(4000).default(500);
-
-const heatmapMarginsSchema = z
-  .object({
-    top: z.number().int().min(0).max(1000).default(20),
-    right: z.number().int().min(0).max(1000).default(20),
-    bottom: z.number().int().min(0).max(1000).default(80),
-    left: z.number().int().min(0).max(1000).default(80),
-  })
-  .default({});
+import { chartDimensionsSchema, heightSchema, marginsSchema, paddingSchema, widthSchema } from '../shared/validation';
 
 export const heatmapCellSchema = z.object({
   row: z.string().min(1).max(200),
@@ -26,16 +15,21 @@ export const heatmapDataSchema = z.object({
 
 export const heatmapOptionsSchema = z
   .object({
-    width: heatmapWidthSchema,
-    height: heatmapHeightSchema,
-    margins: heatmapMarginsSchema,
-    cellPadding: z.number().min(0).max(0.5).default(0.05),
-    nullColor: z.string().max(50).default('#cbd5e1'),
+    // Angular parity
+    dimensions: chartDimensionsSchema.optional(),
+
+    // API overrides / extras
+    width: widthSchema.optional(),
+    height: heightSchema.optional(),
+    margins: marginsSchema.optional(),
+    padding: paddingSchema.optional(),
+    cellPadding: z.number().min(0).max(0.5).default(0.025),
+    nullColor: z.string().max(50).default('#ccc'),
     minColor: z.string().max(50).default('#1A5F9C'),
     maxColor: z.string().max(50).default('#FF6B6B'),
     fontFamily: z.string().max(200).default('system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif'),
     fontSize: z.number().min(6).max(32).default(12),
-    rotateXLabels: z.boolean().default(true),
+    rotateXLabels: z.boolean().default(false),
   })
   .default({});
 

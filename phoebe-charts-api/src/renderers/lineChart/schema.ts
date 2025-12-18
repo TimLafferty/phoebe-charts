@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { heightSchema, marginsSchema, widthSchema } from '../shared/validation';
+import { chartDimensionsSchema, heightSchema, marginsSchema, widthSchema } from '../shared/validation';
 
 export const lineChartPointSchema = z.object({
   x: z.number(),
@@ -8,14 +8,19 @@ export const lineChartPointSchema = z.object({
 
 export const lineChartOptionsSchema = z
   .object({
-    width: widthSchema,
-    height: heightSchema,
-    margins: marginsSchema,
+    // Angular parity
+    dimensions: chartDimensionsSchema.optional(),
     xAxisLabel: z.string().max(200).optional(),
     yAxisLabel: z.string().max(200).optional(),
     showGrid: z.boolean().default(true),
+    animate: z.boolean().default(true),
     lineColor: z.string().max(50).default('#3b82f6'),
     strokeWidth: z.number().min(0.5).max(20).default(2),
+
+    // API overrides / extras
+    width: widthSchema.optional(),
+    height: heightSchema.optional(),
+    margins: marginsSchema.optional(),
     showPoints: z.boolean().default(true),
     pointRadius: z.number().min(0.5).max(20).default(4),
     fontFamily: z.string().max(200).default('system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif'),

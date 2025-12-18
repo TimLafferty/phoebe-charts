@@ -8,11 +8,43 @@ function padIfCollapsed([min, max]: [number, number]): [number, number] {
   return [min, max];
 }
 
+function polylineLength(
+  data: Array<{ x: number; y: number }>,
+  xScale: d3.ScaleLinear<number, number>,
+  yScale: d3.ScaleLinear<number, number>
+): number {
+  let length = 0;
+  for (let index = 1; index < data.length; index += 1) {
+    const previous = data[index - 1];
+    const current = data[index];
+    length += Math.hypot(xScale(current.x) - xScale(previous.x), yScale(current.y) - yScale(previous.y));
+  }
+  return Math.max(1, length);
+}
+
 export function renderLineChartSvg(request: LineChartRequest): string {
   const options = request.options ?? {};
-  const width = options.width ?? 600;
-  const height = options.height ?? 400;
-  const margins = options.margins ?? DEFAULT_MARGINS;
+  const dimensions = options.dimensions ?? {};
+  const hasExplicitWidth = options.width != null || dimensions.width != null;
+  const hasExplicitHeight = options.height != null || dimensions.height != null;
+
+  let width = options.width ?? dimensions.width ?? 600;
+  let height = options.height ?? dimensions.height ?? 400;
+
+  if (dimensions.minWidth != null) width = Math.max(width, dimensions.minWidth);
+  if (dimensions.maxWidth != null) width = Math.min(width, dimensions.maxWidth);
+  if (dimensions.minHeight != null) height = Math.max(height, dimensions.minHeight);
+  if (dimensions.maxHeight != null) height = Math.min(height, dimensions.maxHeight);
+
+  if (dimensions.maintainAspectRatio && dimensions.aspectRatio != null) {
+    if (hasExplicitWidth && !hasExplicitHeight) {
+      height = Math.round(width / dimensions.aspectRatio);
+    } else if (!hasExplicitWidth && hasExplicitHeight) {
+      width = Math.round(height * dimensions.aspectRatio);
+    }
+  }
+
+  const margins = options.margins ?? dimensions.margins ?? DEFAULT_MARGINS;
 
   return renderToSvgString({
     width,
@@ -20,8 +52,8 @@ export function renderLineChartSvg(request: LineChartRequest): string {
     draw: (svg) => {
       svg.selectAll('*').remove();
       svg.attr('role', 'img');
-      svg.style('font-family', options.fontFamily ?? 'system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif');
-      svg.style('font-size', `${options.fontSize ?? 12}px`);
+      svg.style('font-family', options.fontFamily);
+      svg.style('font-size', `${options.fontSize}px`);
 
       const innerWidth = Math.max(1, width - margins.left - margins.right);
       const innerHeight = Math.max(1, height - margins.top - margins.bottom);
@@ -86,13 +118,25 @@ export function renderLineChartSvg(request: LineChartRequest): string {
         .y((d) => yScale(d.y))
         .curve(d3.curveMonotoneX);
 
-      g.append('path')
+      const path = g
+        .append('path')
         .datum(request.data)
         .attr('class', 'line')
         .attr('fill', 'none')
-        .attr('stroke', options.lineColor ?? '#3b82f6')
-        .attr('stroke-width', options.strokeWidth ?? 2)
+        .attr('stroke', options.lineColor)
+        .attr('stroke-width', options.strokeWidth)
         .attr('d', line);
+
+      if (options.animate) {
+        const totalLength = polylineLength(request.data, xScale, yScale);
+
+        svg.append('style').text(`
+@keyframes phoebe-line-draw { to { stroke-dashoffset: 0; } }
+@keyframes phoebe-line-dots { to { opacity: 1; } }
+.line { stroke-dasharray: ${totalLength} ${totalLength}; stroke-dashoffset: ${totalLength}; animation: phoebe-line-draw 1000ms linear forwards; }
+.dot { opacity: 0; animation: phoebe-line-dots 300ms ease forwards; animation-delay: 1000ms; }
+        `);
+      }
 
       if (options.showPoints ?? true) {
         g.selectAll('.dot')
@@ -102,10 +146,9 @@ export function renderLineChartSvg(request: LineChartRequest): string {
           .attr('class', 'dot')
           .attr('cx', (d) => xScale(d.x))
           .attr('cy', (d) => yScale(d.y))
-          .attr('r', options.pointRadius ?? 4)
-          .attr('fill', options.lineColor ?? '#3b82f6');
+          .attr('r', options.pointRadius)
+          .attr('fill', options.lineColor);
       }
     },
   });
 }
-
