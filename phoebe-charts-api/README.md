@@ -6,6 +6,7 @@ HTTP API for rendering Phoebe charts on-demand and returning an SVG image.
 
 - `POST /api/charts/line.svg` → renders a line chart SVG
 - `POST /api/charts/heatmap.svg` → renders a heatmap SVG
+- `POST /api/charts/kpi-goal-tracker.svg` → renders a KPI goal tracker SVG
 - `GET /api/healthz` → health check
 
 All endpoints return `image/svg+xml` (except `healthz` which returns JSON).
@@ -65,5 +66,16 @@ npm start
     ]
   },
   "options": { "width": 800, "height": 500 }
+}
+```
+
+### KPI goal tracker
+
+`POST /api/charts/kpi-goal-tracker.svg`
+
+```json
+{
+  "data": { "currentValue": 62, "goalValue": 100, "paceValue": 110 },
+  "options": { "width": 600, "theme": "light", "color": "#1a5f9c" }
 }
 ```
