@@ -1,56 +1,62 @@
 @use '../../../styles/variables' as *;
+@use '../../../styles/kpi_cards' as kpi;
 
 .stat-card {
-  background: $bg-primary;
-  border-radius: $border-radius;
-  padding: $spacing-lg;
-  box-shadow: $shadow;
+  @include kpi.kpi-card-base;
+  @include kpi.kpi-card-content-no-accent;
+
+  &--dark {
+    @include kpi.kpi-card-dark-theme;
+
+    .stat-card__label {
+      @include kpi.kpi-card-dark-text-muted;
+    }
+
+    .stat-card__value {
+      @include kpi.kpi-card-dark-text-primary;
+    }
+
+    .stat-card__comparison {
+      @include kpi.kpi-card-dark-text-muted;
+    }
+  }
 
   &__label {
-    font-size: $font-size-sm;
-    font-weight: 500;
+    @include kpi.kpi-card-metric;
     color: $text-secondary;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
     margin-bottom: $spacing-sm;
   }
 
   &__value {
-    font-size: $font-size-3xl;
-    font-weight: 700;
-    color: $text-primary;
-    line-height: 1.2;
+    @include kpi.kpi-card-value-large;
     margin-bottom: $spacing-sm;
   }
 
   &__change {
-    display: flex;
-    align-items: center;
-    gap: $spacing-xs;
-    font-size: $font-size-sm;
+    @include kpi.kpi-card-trend;
 
     &--up {
-      color: $success;
+      @include kpi.kpi-card-trend-up;
     }
 
     &--down {
-      color: $danger;
+      @include kpi.kpi-card-trend-down;
     }
 
     &--neutral {
-      color: $text-muted;
+      @include kpi.kpi-card-trend-neutral;
     }
   }
 
   &__trend-icon {
-    font-size: $font-size-xs;
+    @include kpi.kpi-card-trend-icon;
   }
 
   &__change-value {
-    font-weight: 600;
+    @include kpi.kpi-card-trend-value;
   }
 
   &__comparison {
-    color: $text-muted;
+    @include kpi.kpi-card-comparison;
   }
 }

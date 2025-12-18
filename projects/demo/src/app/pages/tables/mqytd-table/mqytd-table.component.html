@@ -1,0 +1,149 @@
+<div class="page">
+  <header class="page-header">
+    <div class="header-content">
+      <h1>MQYTD Table Template</h1>
+      <span class="badge beta">Beta</span>
+    </div>
+    <p>Period-to-date comparison table displaying Month-to-Date, Quarter-to-Date, and Year-to-Date metrics with YoY comparisons.</p>
+  </header>
+
+  <div class="content-grid">
+    <!-- Table Area -->
+    <div class="chart-section">
+      <div class="chart-card">
+        <phoebe-mqytd-table-template
+          [groups]="benchmarkGroups"
+          [footerDates]="footerDates"
+          [neutralThreshold]="neutralThreshold"
+          [deltaLabel]="deltaLabel"
+          [currentLabel]="currentLabel"
+          [previousLabel]="previousLabel"
+          footerSummary="Data through {{ anchorDate }}">
+        </phoebe-mqytd-table-template>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="actions-card">
+        <div class="btn-group">
+          <button class="btn primary" (click)="loadSampleData()">Full Sample</button>
+          <button class="btn outline" (click)="loadMinimalData()">Minimal</button>
+          <button class="btn outline" (click)="loadDeclineData()">Declining</button>
+          <button class="btn outline" (click)="toggleComparisonType()">
+            Mode: {{ comparisonType === 'fiscal' ? 'Fiscal' : 'Comparative' }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls Panel -->
+    <aside class="controls-section">
+      <div class="controls-card">
+        <h3>Configuration</h3>
+
+        <!-- Comparison Type -->
+        <div class="control-group">
+          <label>Comparison Mode</label>
+          <select [(ngModel)]="comparisonType" (ngModelChange)="generateFooterDates()">
+            <option value="fiscal">Fiscal (Same dates, prior year)</option>
+            <option value="comparative">Comparative (Week-position match)</option>
+          </select>
+          <p class="hint">Fiscal: Dec 1-15 vs Dec 1-15 PY<br>Comparative: Matches week position</p>
+        </div>
+
+        <!-- Neutral Threshold -->
+        <div class="control-group">
+          <label>Neutral Threshold: {{ neutralThreshold }}%</label>
+          <input type="range" min="0" max="10" step="0.5" [(ngModel)]="neutralThreshold">
+          <p class="hint">Changes below this threshold show as neutral (gray)</p>
+        </div>
+
+        <!-- Labels -->
+        <div class="control-group">
+          <label>Delta Label</label>
+          <input type="text" [(ngModel)]="deltaLabel" placeholder="Delta %">
+        </div>
+
+        <div class="control-group">
+          <label>Current Label</label>
+          <input type="text" [(ngModel)]="currentLabel" placeholder="Current">
+        </div>
+
+        <div class="control-group">
+          <label>Previous Label</label>
+          <input type="text" [(ngModel)]="previousLabel" placeholder="Previous">
+        </div>
+      </div>
+
+      <!-- Data Info -->
+      <div class="info-card">
+        <h3>Data Info</h3>
+        <ul>
+          <li><strong>Groups:</strong> {{ totalGroups }}</li>
+          <li><strong>Total Rows:</strong> {{ totalRows }}</li>
+          <li><strong>Anchor Date:</strong> {{ anchorDate }}</li>
+          <li><strong>Comparison:</strong> {{ comparisonType }}</li>
+          <li><strong>Fiscal Start:</strong> Month {{ fiscalStartMonth }}</li>
+        </ul>
+      </div>
+
+      <!-- Differences from MQY -->
+      <div class="info-card">
+        <h3>Key Differences from MQY</h3>
+        <ul>
+          <li><strong>Data:</strong> 3 values per row (MTD, QTD, YTD)</li>
+          <li><strong>Header:</strong> 2 rows (period + subheaders)</li>
+          <li><strong>Columns:</strong> 7 total (metric + 6 data)</li>
+          <li><strong>Modes:</strong> Fiscal vs Comparative</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Code Example -->
+  <section class="code-section">
+    <h2>Usage Example</h2>
+    <div class="code-card">
+      <pre><code>&lt;phoebe-mqytd-table-template
+  [groups]="benchmarkGroups"
+  [footerDates]="footerDates"
+  [neutralThreshold]="2"
+  deltaLabel="Delta %"
+  currentLabel="Current"
+  previousLabel="Previous"
+  footerSummary="Data through Dec 15, 2024"&gt;
+&lt;/phoebe-mqytd-table-template&gt;
+
+// Component usage:
+import &#123; MqytdTableTemplateComponent, MqytdTableTemplateService &#125; from 'phoebe-charts';
+
+export class MyComponent &#123;
+  private service = inject(MqytdTableTemplateService);
+
+  groups = this.service.createGroups([
+    &#123;
+      id: 'revenue',
+      label: 'Revenue Metrics',
+      icon: 'fa-solid fa-dollar-sign',
+      rows: [
+        &#123;
+          id: 'sales',
+          label: 'Total Sales',
+          mtd: 150000, mtdPrevious: 140000, mtdPercentage: 7.14,
+          qtd: 450000, qtdPrevious: 420000, qtdPercentage: 7.14,
+          ytd: 1800000, ytdPrevious: 1650000, ytdPercentage: 9.09,
+          isMonetary: true
+        &#125;
+      ]
+    &#125;
+  ]);
+
+  // Generate footer dates with comparison mode
+  footerDates = this.service.createFooterDates(
+    this.service.getCurrentMTDRange('2024-12-15'),
+    this.service.getPreviousMTDRange('2024-12-15', 'fiscal'),
+    // ... QTD and YTD ranges
+  );
+&#125;</code></pre>
+    </div>
+  </section>
+</div>

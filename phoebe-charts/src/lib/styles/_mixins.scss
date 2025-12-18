@@ -1,0 +1,19 @@
+// Mixin to generate full color scales
+@mixin generate-color-scales($color-map) {
+  :root {
+    @each $name, $value in $color-map {
+      // Light scale
+      --#{$name}-lightest: #{mix(white, $value, 75%)};
+      --#{$name}-lighter: #{mix(white, $value, 50%)};
+      --#{$name}-light: #{mix(white, $value, 25%)};
+
+      // Base
+      --#{$name}: #{$value};
+
+      // Dark scale
+      --#{$name}-dark: #{mix(black, $value, 75%)};
+      --#{$name}-darker: #{mix(black, $value, 50%)};
+      --#{$name}-darkest: #{mix(black, $value, 25%)};
+    }
+  }
+}

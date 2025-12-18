@@ -9,85 +9,87 @@
 @import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Momo+Trust+Display&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Special+Elite&family=Stack+Sans+Headline:wght@200..700&family=Stack+Sans+Text:wght@200..700&display=swap");
 
 // -----------------------------------------------------------------------------
-// Font Utility Classes
+// Individual Font Family Variables
 // -----------------------------------------------------------------------------
-
-// Momo Trust Display Regular
-.momo-trust-display {
-  font-family: "Momo Trust Display", sans-serif;
-}
-
-// Google Sans Flex
-.google-sans-flex {
-  font-family: "Google Sans Flex", sans-serif;
-  font-optical-sizing: auto;
-}
-
-// Stack Sans Text
-.stack-sans-text {
-  font-family: "Stack Sans Text", sans-serif;
-  font-optical-sizing: auto;
-}
-
-// Montserrat
-.montserrat {
-  font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
-}
-
-// Inter
-.inter {
-  font-family: "Inter", sans-serif;
-  font-optical-sizing: auto;
-}
-
-.stack-sans-headline {
-  font-family: "Stack Sans Headline", sans-serif;
-  font-optical-sizing: auto;
-}
-
-// Alfa Slab One Regular
-.alfa-slab-one {
-  font-family: "Alfa Slab One", serif;
-}
-
-// Special Elite Regular
-.special-elite {
-  font-family: "Special Elite", system-ui;
-}
-
-// Roboto Condensed
-.roboto-condensed {
-  font-family: "Roboto Condensed", sans-serif;
-  font-optical-sizing: auto;
-}
-
+$font-family-inter: "Inter", sans-serif;
+$font-family-montserrat: "Montserrat", sans-serif;
 $font-family-momo-trust-display: "Momo Trust Display", sans-serif;
 $font-family-google-sans-flex: "Google Sans Flex", sans-serif;
 $font-family-stack-sans-text: "Stack Sans Text", sans-serif;
-$font-family-montserrat: "Montserrat", sans-serif;
-$font-family-inter: "Inter", sans-serif;
 $font-family-stack-sans-headline: "Stack Sans Headline", sans-serif;
 $font-family-alfa-slab-one: "Alfa Slab One", serif;
 $font-family-special-elite: "Special Elite", system-ui;
 $font-family-roboto-condensed: "Roboto Condensed", sans-serif;
 
-
 // -----------------------------------------------------------------------------
-// Font Families
+// Theme Font Families (derived from individual fonts)
 // -----------------------------------------------------------------------------
-
 $font-family-base: $font-family-inter;
 $font-family-headers: $font-family-montserrat;
 $font-family-display: $font-family-momo-trust-display;
 
-
-$font-family-base: "Inter", sans-serif;
+// -----------------------------------------------------------------------------
+// System & Mono Fonts
+// -----------------------------------------------------------------------------
 $font-family-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 $font-family-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
 // Legacy alias
-$font-family: $font-family-system;
+$font-family: $font-family-base;
+
+// -----------------------------------------------------------------------------
+// Font Utility Classes
+// -----------------------------------------------------------------------------
+
+// Momo Trust Display Regular
+.momo-trust-display {
+  font-family: $font-family-momo-trust-display;
+}
+
+// Google Sans Flex
+.google-sans-flex {
+  font-family: $font-family-google-sans-flex;
+  font-optical-sizing: auto;
+}
+
+// Stack Sans Text
+.stack-sans-text {
+  font-family: $font-family-stack-sans-text;
+  font-optical-sizing: auto;
+}
+
+// Montserrat
+.montserrat {
+  font-family: $font-family-montserrat;
+  font-optical-sizing: auto;
+}
+
+// Inter
+.inter {
+  font-family: $font-family-inter;
+  font-optical-sizing: auto;
+}
+
+.stack-sans-headline {
+  font-family: $font-family-stack-sans-headline;
+  font-optical-sizing: auto;
+}
+
+// Alfa Slab One Regular
+.alfa-slab-one {
+  font-family: $font-family-alfa-slab-one;
+}
+
+// Special Elite Regular
+.special-elite {
+  font-family: $font-family-special-elite;
+}
+
+// Roboto Condensed
+.roboto-condensed {
+  font-family: $font-family-roboto-condensed;
+  font-optical-sizing: auto;
+}
 
 // -----------------------------------------------------------------------------
 // Font Sizes

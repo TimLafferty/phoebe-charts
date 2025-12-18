@@ -1,7 +1,34 @@
-// Import Bootstrap with @use (avoids variable conflicts)
-@use "bootstrap/scss/bootstrap";
+// Import Phoebe Charts variables first (for Bootstrap configuration)
+@use "../../../phoebe-charts/src/lib/styles/variables" as phoebe;
 
-// Font Awesome is loaded via angular.json styles array
+// Configure Bootstrap to use Phoebe colors
+@use "bootstrap/scss/bootstrap" with (
+  $primary: phoebe.$primary,
+  $secondary: phoebe.$secondary,
+  $success: phoebe.$success,
+  $info: phoebe.$info,
+  $warning: phoebe.$warning,
+  $danger: phoebe.$danger
+);
 
 // Import Phoebe Charts styles
 @use "../../../phoebe-charts/src/lib/styles/index" as *;
+
+@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Momo+Trust+Display&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Special+Elite&family=Stack+Sans+Headline:wght@200..700&family=Stack+Sans+Text:wght@200..700&display=swap");
+
+body {
+  font-family: $font-family-base;
+}
+
+.form-check {
+  font-family: $font-family-base;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-family-headers;
+}

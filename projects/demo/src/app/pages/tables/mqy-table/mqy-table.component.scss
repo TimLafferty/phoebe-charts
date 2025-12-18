@@ -1,0 +1,143 @@
+// =============================================================================
+// MQY Table Demo Page Styles
+// Uses centralized demo mixins from library
+// =============================================================================
+
+@use '../../../../../../../phoebe-charts/src/lib/styles/variables' as *;
+@use '../../../../../../../phoebe-charts/src/lib/styles/demo' as demo;
+
+.page {
+  @include demo.demo-page;
+  @include demo.demo-page-wide;
+}
+
+.page-header {
+  @include demo.demo-page-header;
+
+  .header-content {
+    @include demo.demo-header-content;
+  }
+
+  h1 {
+    @include demo.demo-page-title;
+  }
+
+  p {
+    @include demo.demo-page-description;
+  }
+}
+
+.badge {
+  @include demo.demo-badge;
+
+  &.beta {
+    @include demo.demo-badge-beta;
+  }
+}
+
+.content-grid {
+  @include demo.demo-content-grid;
+  @include demo.demo-content-grid-sidebar;
+}
+
+.chart-section {
+  @include demo.demo-chart-section;
+}
+
+.chart-card {
+  @include demo.demo-chart-card;
+}
+
+.actions-card {
+  @include demo.demo-actions-card;
+
+  .btn-group {
+    @include demo.demo-btn-group;
+  }
+}
+
+.btn {
+  @include demo.demo-btn;
+
+  &.primary {
+    @include demo.demo-btn-primary;
+  }
+
+  &.outline {
+    @include demo.demo-btn-outline;
+  }
+}
+
+.controls-section {
+  @include demo.demo-controls-section;
+}
+
+.controls-card,
+.info-card {
+  @include demo.demo-controls-card;
+
+  h3 {
+    @include demo.demo-card-title;
+  }
+}
+
+.control-group {
+  @include demo.demo-control-group;
+
+  > label {
+    @include demo.demo-control-label;
+  }
+
+  input[type="text"] {
+    @include demo.demo-control-input;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .hint {
+    @include demo.demo-control-hint;
+  }
+}
+
+.toggle-row {
+  @include demo.demo-toggle-row;
+
+  input[type="checkbox"] {
+    @include demo.demo-toggle-checkbox;
+  }
+
+  label {
+    @include demo.demo-toggle-label;
+  }
+}
+
+.info-card {
+  ul {
+    @include demo.demo-info-list;
+
+    li {
+      @include demo.demo-info-list-item;
+    }
+  }
+}
+
+.code-section {
+  h2 {
+    @include demo.demo-code-section-title;
+  }
+}
+
+.code-card {
+  @include demo.demo-code-card;
+
+  pre {
+    @include demo.demo-code-pre;
+
+    code {
+      @include demo.demo-code-content;
+    }
+  }
+}

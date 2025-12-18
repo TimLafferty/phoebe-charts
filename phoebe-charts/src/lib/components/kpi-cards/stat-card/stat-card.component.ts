@@ -16,4 +16,5 @@ export class StatCardComponent {
   @Input() change?: string | number;
   @Input() trend: TrendDirection = 'neutral';
   @Input() comparisonLabel?: string = 'vs last period';
+  @Input() theme: 'light' | 'dark' = 'light';
 }

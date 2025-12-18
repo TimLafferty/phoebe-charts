@@ -1,134 +1,135 @@
-@use '../../../../../../phoebe-charts/src/lib/styles/variables' as *;
+// =============================================================================
+// KPI Component Gallery - Demo Page Styles
+// Uses centralized demo mixins from library
+// =============================================================================
+
+@use "../../../../../../phoebe-charts/src/lib/styles/variables" as *;
+@use "../../../../../../phoebe-charts/src/lib/styles/demo" as demo;
 
 .page {
-  padding: $spacing-xl;
-  max-width: 1200px;
-  margin: 0 auto;
+  @include demo.demo-page;
 }
 
 .page-header {
-  margin-bottom: $spacing-xl;
+  @include demo.demo-page-header;
 
   .header-content {
-    display: flex;
-    align-items: center;
-    gap: $spacing-sm;
-    margin-bottom: $spacing-xs;
+    @include demo.demo-header-content;
+  }
+
+  .header-controls {
+    @include demo.demo-header-controls;
   }
 
   h1 {
-    font-size: $font-size-2xl;
-    font-weight: 600;
-    color: $text-primary;
-    margin: 0;
+    @include demo.demo-page-title;
   }
 
   p {
-    font-size: $font-size-base;
-    color: $text-secondary;
-    margin: 0;
+    @include demo.demo-page-description;
+  }
+}
+
+.theme-toggle {
+  @include demo.demo-theme-toggle;
+
+  &__label {
+    @include demo.demo-theme-toggle-label;
+  }
+
+  &__btn {
+    @include demo.demo-theme-toggle-btn;
+
+    &:first-of-type {
+      @include demo.demo-theme-toggle-btn-first;
+    }
+
+    &:last-of-type {
+      @include demo.demo-theme-toggle-btn-last;
+    }
+
+    &--active {
+      @include demo.demo-theme-toggle-btn-active;
+    }
   }
 }
 
 .badge {
-  font-size: $font-size-xs;
-  padding: 3px 8px;
-  border-radius: $border-radius-sm;
-  text-transform: uppercase;
-  font-weight: 600;
+  @include demo.demo-badge;
 
   &.planned {
-    background: rgba($warning, 0.1);
-    color: $warning;
+    @include demo.demo-badge-planned;
   }
 
   &.beta {
-    background: rgba($info, 0.1);
-    color: $info;
+    @include demo.demo-badge-beta;
   }
 }
 
 .component-section {
-  margin-bottom: $spacing-2xl;
+  @include demo.demo-component-section;
 
   h2 {
-    font-size: $font-size-xl;
-    font-weight: 600;
-    color: $text-primary;
-    margin: 0 0 $spacing-xs 0;
+    @include demo.demo-section-title;
   }
 
   .section-description {
-    font-size: $font-size-base;
-    color: $text-secondary;
-    margin: 0 0 $spacing-lg 0;
+    @include demo.demo-section-description;
   }
+}
+
+.section-header {
+  @include demo.demo-section-header;
+
+  &__left {
+    @include demo.demo-section-header-left;
+  }
+
+  &__right {
+    @include demo.demo-section-header-right;
+  }
+}
+
+.icon-set-label {
+  @include demo.demo-icon-set-label;
+}
+
+.icon-set-select {
+  @include demo.demo-icon-set-select;
 }
 
 .card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: $spacing-lg;
+  @include demo.demo-card-grid;
 }
 
 .content-grid {
-  display: grid;
-  gap: $spacing-lg;
-  margin-bottom: $spacing-xl;
+  @include demo.demo-content-grid;
 }
 
 .placeholder-section {
-  display: flex;
-  justify-content: center;
+  @include demo.demo-placeholder-section;
 }
 
 .placeholder-card {
-  background: $bg-primary;
-  border-radius: $border-radius;
-  padding: $spacing-2xl;
-  box-shadow: $shadow;
-  text-align: center;
-  max-width: 600px;
+  @include demo.demo-placeholder-card;
 
   .placeholder-icon {
-    color: $text-muted;
-    margin-bottom: $spacing-lg;
+    @include demo.demo-placeholder-icon;
   }
 
   h2 {
-    font-size: $font-size-xl;
-    font-weight: 600;
-    color: $text-primary;
-    margin: 0 0 $spacing-sm 0;
+    @include demo.demo-placeholder-title;
   }
 
   > p {
-    font-size: $font-size-base;
-    color: $text-secondary;
-    margin: 0 0 $spacing-lg 0;
+    @include demo.demo-placeholder-description;
   }
 }
 
 .feature-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  text-align: left;
+  @include demo.demo-feature-list;
 
   li {
-    padding: $spacing-sm 0;
-    font-size: $font-size-base;
-    color: $text-secondary;
-    border-bottom: 1px solid $border-color;
-
-    &:last-child {
-      border-bottom: none;
-    }
-
-    &::before {
-      content: '→';
-      margin-right: $spacing-sm;
-      color: $primary;
-    }
+    @include demo.demo-feature-list-item;
   }
 }

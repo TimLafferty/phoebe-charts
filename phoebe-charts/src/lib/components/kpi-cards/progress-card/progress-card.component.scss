@@ -1,49 +1,58 @@
 @use '../../../styles/variables' as *;
+@use '../../../styles/kpi_cards' as kpi;
 
 .progress-card {
-  background: $bg-primary;
-  border-radius: $border-radius;
-  padding: $spacing-lg;
-  box-shadow: $shadow;
+  @include kpi.kpi-card-base;
+  @include kpi.kpi-card-content-no-accent;
+
+  &--dark {
+    @include kpi.kpi-card-dark-theme;
+
+    .progress-card__label {
+      @include kpi.kpi-card-dark-text-muted;
+    }
+
+    .progress-card__percentage {
+      @include kpi.kpi-card-dark-text-primary;
+    }
+
+    .progress-card__bar {
+      @include kpi.kpi-card-dark-progress-bar;
+    }
+
+    .progress-card__value {
+      @include kpi.kpi-card-dark-text-muted;
+    }
+  }
 
   &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include kpi.kpi-card-header;
+    @include kpi.kpi-card-header-spread;
+    @include kpi.kpi-card-header-center;
     margin-bottom: $spacing-sm;
   }
 
   &__label {
-    font-size: $font-size-sm;
-    font-weight: 500;
+    @include kpi.kpi-card-metric;
     color: $text-secondary;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
   }
 
   &__percentage {
     font-size: $font-size-lg;
-    font-weight: 700;
-    color: $primary;
+    font-weight: $font-weight-bold;
+    color: kpi.$kpi-color-primary;
   }
 
   &__bar {
-    height: 8px;
-    background: $gray-200;
-    border-radius: $border-radius-sm;
-    overflow: hidden;
+    @include kpi.kpi-card-progress-bar;
     margin-bottom: $spacing-sm;
   }
 
   &__fill {
-    height: 100%;
-    background: $primary;
-    border-radius: $border-radius-sm;
-    // transition: width $transition-base;
+    @include kpi.kpi-card-progress-fill;
   }
 
   &__value {
-    font-size: $font-size-sm;
-    color: $text-muted;
+    @include kpi.kpi-card-label;
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "@timalexlafferty/phoebe-charts",
-  "version": "0.0.10",
-  "description": "Angular charting library built on D3.js for data visualizations",
+  "version": "0.0.11",
+  "description": "Angular charting library built on D3.js for data visualizations and KPI dashboards",
   "keywords": [
     "angular",
     "charts",
@@ -9,9 +9,11 @@
     "visualization",
     "data-visualization",
     "line-chart",
-    "bar-chart",
     "heatmap",
-    "correlation-matrix"
+    "kpi",
+    "dashboard",
+    "kpi-cards",
+    "goal-tracker"
   ],
   "license": "MIT",
   "repository": {

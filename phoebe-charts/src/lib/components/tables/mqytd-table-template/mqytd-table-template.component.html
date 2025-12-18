@@ -1,0 +1,154 @@
+<div class="mqytd-table-wrapper">
+  <table class="mqytd-table">
+    <!-- Column Width Definitions: 7 columns -->
+    <colgroup>
+      <col [style.width]="columnWidths.metric" class="col-metric">
+      <!-- For each period: delta column + values column -->
+      <col [style.width]="columnWidths.delta" class="col-delta">
+      <col [style.width]="columnWidths.values" class="col-values">
+      <col [style.width]="columnWidths.delta" class="col-delta">
+      <col [style.width]="columnWidths.values" class="col-values">
+      <col [style.width]="columnWidths.delta" class="col-delta">
+      <col [style.width]="columnWidths.values" class="col-values">
+    </colgroup>
+
+    <!-- TWO-ROW HEADER -->
+    <thead>
+      <!-- Row 1: Period Names (spans 2 columns each) -->
+      <tr class="period-headers">
+        <th rowspan="2" class="th-metric align-middle">Metric</th>
+        <th *ngFor="let period of periodHeaders; trackBy: trackByPeriodId"
+            colspan="2" class="th-period">
+          {{ period.label }}
+        </th>
+      </tr>
+      <!-- Row 2: Subheaders (Delta % | Current/Previous) -->
+      <tr class="period-subheaders">
+        <ng-container *ngFor="let period of periodHeaders">
+          <th class="th-delta">{{ deltaLabel }}</th>
+          <th class="th-values">
+            <div class="values-header">
+              <span class="current-label">{{ currentLabel }}</span>
+              <span class="previous-label">{{ previousLabel }}</span>
+            </div>
+          </th>
+        </ng-container>
+      </tr>
+    </thead>
+
+    <!-- Data Groups -->
+    <tbody *ngFor="let group of groups; trackBy: trackByGroupId">
+      <!-- Group Header -->
+      <tr *ngIf="group.label" class="group-header">
+        <td [attr.colspan]="totalColumns">
+          <i *ngIf="group.icon" [ngClass]="group.icon" class="group-icon"></i>
+          <strong>{{ group.label }}</strong>
+        </td>
+      </tr>
+
+      <!-- Metric Rows -->
+      <tr *ngFor="let row of group.rows; trackBy: trackByRowId"
+          class="metric-row"
+          [attr.title]="row.tooltip || null">
+
+        <!-- Metric Label -->
+        <td class="td-metric">
+          {{ row.label }}
+        </td>
+
+        <!-- MTD Delta Column -->
+        <td class="td-delta">
+          <div class="delta-cell">
+            <i [ngClass]="[getPercentageIcon(row.mtdComparison.percentage),
+                         getPercentageClass(row.mtdComparison.percentage)]"></i>
+            <span class="delta-value" [ngClass]="getPercentageClass(row.mtdComparison.percentage)">
+              {{ formatPercentage(row.mtdComparison.percentage) }}
+            </span>
+          </div>
+        </td>
+
+        <!-- MTD Values Column (Current / Previous) -->
+        <td class="td-values">
+          <div class="current-value">{{ formatValue(row.mtd, row.isMonetary) }}</div>
+          <div class="previous-value">{{ formatValue(row.mtdComparison.value, row.isMonetary) }}</div>
+        </td>
+
+        <!-- QTD Delta Column -->
+        <td class="td-delta">
+          <div class="delta-cell">
+            <i [ngClass]="[getPercentageIcon(row.qtdComparison.percentage),
+                         getPercentageClass(row.qtdComparison.percentage)]"></i>
+            <span class="delta-value" [ngClass]="getPercentageClass(row.qtdComparison.percentage)">
+              {{ formatPercentage(row.qtdComparison.percentage) }}
+            </span>
+          </div>
+        </td>
+
+        <!-- QTD Values Column -->
+        <td class="td-values">
+          <div class="current-value">{{ formatValue(row.qtd, row.isMonetary) }}</div>
+          <div class="previous-value">{{ formatValue(row.qtdComparison.value, row.isMonetary) }}</div>
+        </td>
+
+        <!-- YTD Delta Column -->
+        <td class="td-delta">
+          <div class="delta-cell">
+            <i [ngClass]="[getPercentageIcon(row.ytdComparison.percentage),
+                         getPercentageClass(row.ytdComparison.percentage)]"></i>
+            <span class="delta-value" [ngClass]="getPercentageClass(row.ytdComparison.percentage)">
+              {{ formatPercentage(row.ytdComparison.percentage) }}
+            </span>
+          </div>
+        </td>
+
+        <!-- YTD Values Column -->
+        <td class="td-values">
+          <div class="current-value">{{ formatValue(row.ytd, row.isMonetary) }}</div>
+          <div class="previous-value">{{ formatValue(row.ytdComparison.value, row.isMonetary) }}</div>
+        </td>
+      </tr>
+    </tbody>
+
+    <!-- Footer with Date Ranges -->
+    <tfoot *ngIf="footerDates">
+      <!-- Summary Row -->
+      <tr *ngIf="footerSummary" class="footer-summary">
+        <td [attr.colspan]="totalColumns">
+          <strong>{{ footerSummary }}</strong>
+        </td>
+      </tr>
+
+      <!-- Footer Label Row -->
+      <tr class="period-footers">
+        <td class="footer-label">{{ footerLabel }}</td>
+        <!-- MTD Dates -->
+        <td colspan="2" class="footer-dates">
+          <div class="current-dates">
+            {{ footerDates.mtd.current.start | date:'MMM d' }} - {{ footerDates.mtd.current.end | date:'MMM d, y' }}
+          </div>
+          <div class="previous-dates">
+            vs {{ footerDates.mtd.previous.start | date:'MMM d' }} - {{ footerDates.mtd.previous.end | date:'MMM d, y' }}
+          </div>
+        </td>
+        <!-- QTD Dates -->
+        <td colspan="2" class="footer-dates">
+          <div class="current-dates">
+            {{ footerDates.qtd.current.start | date:'MMM d' }} - {{ footerDates.qtd.current.end | date:'MMM d, y' }}
+          </div>
+          <div class="previous-dates">
+            vs {{ footerDates.qtd.previous.start | date:'MMM d' }} - {{ footerDates.qtd.previous.end | date:'MMM d, y' }}
+          </div>
+        </td>
+        <!-- YTD Dates -->
+        <td colspan="2" class="footer-dates">
+          <div class="current-dates">
+            {{ footerDates.ytd.current.start | date:'MMM d' }} - {{ footerDates.ytd.current.end | date:'MMM d, y' }}
+          </div>
+          <div class="previous-dates">
+            vs {{ footerDates.ytd.previous.start | date:'MMM d' }} - {{ footerDates.ytd.previous.end | date:'MMM d, y' }}
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

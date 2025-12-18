@@ -1,0 +1,573 @@
+@use '../../../../../../phoebe-charts/src/lib/styles/variables' as *;
+
+.page {
+  padding: $spacing-xl;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: $spacing-2xl;
+  gap: $spacing-lg;
+
+  .header-content {
+    flex: 1;
+  }
+
+  h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0 0 $spacing-sm 0;
+  }
+
+  .subtitle {
+    font-size: $font-size-md;
+    color: $text-secondary;
+    margin: 0;
+    max-width: 600px;
+  }
+}
+
+.btn-apply {
+  padding: $spacing-sm $spacing-xl;
+  border: none;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-base;
+  font-weight: 600;
+  color: $white;
+  cursor: pointer;
+  transition: all $transition-fast;
+  white-space: nowrap;
+  min-width: 140px;
+
+  &:hover {
+    filter: brightness(0.9);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &.applied {
+    background-color: $success !important;
+  }
+}
+
+.config-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: $spacing-xl;
+  margin-bottom: $spacing-2xl;
+}
+
+.config-section {
+  background: $white;
+  border-radius: $border-radius;
+  padding: $spacing-lg;
+  box-shadow: $shadow;
+}
+
+.section-title {
+  font-size: $font-size-lg;
+  font-weight: 600;
+  color: $text-primary;
+  margin: 0 0 $spacing-lg 0;
+}
+
+.config-group {
+  margin-bottom: $spacing-lg;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.config-label {
+  display: block;
+  font-size: $font-size-base;
+  font-weight: 600;
+  color: $text-primary;
+  margin-bottom: $spacing-xs;
+}
+
+.config-description {
+  font-size: $font-size-sm;
+  color: $text-muted;
+  margin: 0 0 $spacing-sm 0;
+}
+
+.font-controls {
+  display: flex;
+  gap: $spacing-sm;
+}
+
+.font-select {
+  flex: 1;
+  padding: $spacing-sm $spacing-md;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-base;
+  color: $text-primary;
+  background: $white;
+  cursor: pointer;
+  transition: border-color $transition-fast;
+
+  &:hover {
+    border-color: $border-color-dark;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba($primary, 0.1);
+  }
+}
+
+.weight-select {
+  width: 100px;
+  padding: $spacing-sm $spacing-md;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-base;
+  color: $text-primary;
+  background: $white;
+  cursor: pointer;
+  transition: border-color $transition-fast;
+
+  &:hover {
+    border-color: $border-color-dark;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba($primary, 0.1);
+  }
+}
+
+.uppercase-toggle {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-sm;
+  background: $white;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: $border-color-dark;
+  }
+
+  &:has(input:checked) {
+    border-color: $primary;
+    background: rgba($primary, 0.05);
+
+    .toggle-label {
+      color: $primary;
+    }
+  }
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  .toggle-label {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $text-muted;
+    letter-spacing: 0.05em;
+    user-select: none;
+  }
+}
+
+.font-preview {
+  margin-top: $spacing-sm;
+  padding: $spacing-md;
+  background: $gray-50;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-base;
+  color: $text-primary;
+  line-height: 1.5;
+
+  &.header-preview {
+    font-size: $font-size-xl;
+    font-weight: 600;
+  }
+
+  &.display-preview {
+    font-size: $font-size-3xl;
+    font-weight: 700;
+  }
+}
+
+.color-presets {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-lg;
+  flex-wrap: wrap;
+}
+
+.shade-amount-group {
+  background: $gray-50;
+  padding: $spacing-md;
+  border-radius: $border-radius-sm;
+  margin-bottom: $spacing-lg;
+}
+
+.shade-amount-controls {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.shade-slider {
+  flex: 1;
+  height: 6px;
+  appearance: none;
+  background: $gray-200;
+  border-radius: 3px;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: $primary;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform $transition-fast;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  &::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: $primary;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}
+
+.shade-amount-value {
+  font-size: $font-size-base;
+  font-weight: 600;
+  color: $text-primary;
+  min-width: 45px;
+  text-align: right;
+}
+
+.presets-label {
+  font-size: $font-size-sm;
+  color: $text-muted;
+  font-weight: 500;
+}
+
+.preset-btn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-sm;
+  background: $white;
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: $primary;
+    color: $text-primary;
+  }
+}
+
+.preset-swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+}
+
+.color-input-group {
+  display: flex;
+  gap: $spacing-sm;
+  align-items: center;
+}
+
+.color-picker {
+  width: 48px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  background: none;
+
+  &::-webkit-color-swatch-wrapper {
+    padding: 4px;
+  }
+
+  &::-webkit-color-swatch {
+    border: none;
+    border-radius: 2px;
+  }
+}
+
+.color-text {
+  flex: 1;
+  padding: $spacing-sm $spacing-md;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-base;
+  font-family: $font-family-mono;
+  color: $text-primary;
+
+  &:focus {
+    outline: none;
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba($primary, 0.1);
+  }
+}
+
+.color-shades {
+  display: flex;
+  gap: 2px;
+  margin-top: $spacing-sm;
+  border-radius: $border-radius-sm;
+  overflow: hidden;
+}
+
+.shade {
+  flex: 1;
+  padding: $spacing-md $spacing-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+
+  &.main {
+    flex: 1.5;
+  }
+}
+
+.shade-label {
+  color: $white;
+  font-size: $font-size-xs;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.color-preview {
+  margin-top: $spacing-sm;
+  padding: $spacing-md;
+  border-radius: $border-radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+}
+
+.color-preview-text {
+  color: $white;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.preview-section {
+  margin-bottom: $spacing-2xl;
+}
+
+.preview-card {
+  background: $white;
+  border-radius: $border-radius;
+  padding: $spacing-xl;
+  box-shadow: $shadow;
+}
+
+.preview-header {
+  font-size: $font-size-3xl;
+  font-weight: 700;
+  color: $text-primary;
+  margin-bottom: $spacing-md;
+}
+
+.preview-subheader {
+  font-size: $font-size-lg;
+  font-weight: 600;
+  color: $text-primary;
+  margin: 0 0 $spacing-sm 0;
+}
+
+.preview-body {
+  font-size: $font-size-base;
+  color: $text-secondary;
+  line-height: 1.6;
+  margin: 0 0 $spacing-lg 0;
+}
+
+.preview-buttons {
+  display: flex;
+  gap: $spacing-sm;
+  align-items: center;
+  margin-bottom: $spacing-lg;
+}
+
+.btn-primary {
+  padding: $spacing-sm $spacing-lg;
+  border: none;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-base;
+  font-weight: 500;
+  color: $white;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+}
+
+.btn-secondary {
+  padding: $spacing-sm $spacing-lg;
+  border: none;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-base;
+  font-weight: 500;
+  color: $white;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+}
+
+.btn-outline {
+  padding: $spacing-sm $spacing-lg;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-base;
+  font-weight: 500;
+  color: $text-secondary;
+  background: $white;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: $border-color-dark;
+    color: $text-primary;
+  }
+}
+
+.badge-highlight {
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  color: $white;
+}
+
+.preview-color-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.color-segment {
+  flex: 1;
+}
+
+.actions {
+  display: flex;
+  gap: $spacing-md;
+  justify-content: flex-end;
+}
+
+// Greyscale section
+.greyscale-section {
+  margin-bottom: $spacing-2xl;
+}
+
+.greyscale-swatch {
+  display: flex;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.greyscale-stripe {
+  height: 16px;
+}
+
+.greyscale-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: $spacing-sm;
+  margin-top: $spacing-md;
+}
+
+.greyscale-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.greyscale-swatch-large {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: $border-radius-sm;
+  position: relative;
+  cursor: pointer;
+  transition: transform $transition-fast;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.greyscale-picker {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.greyscale-label {
+  font-size: $font-size-xs;
+  font-weight: 600;
+  color: $text-secondary;
+}
+
+.greyscale-hex {
+  font-size: $font-size-xs;
+  font-family: $font-family-mono;
+  color: $text-muted;
+}
+
+.preview-greyscale-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: $spacing-sm;
+}
+
+.greyscale-segment {
+  flex: 1;
+}

@@ -1,37 +1,44 @@
-<div class="m-1 rounded-1 shadow-sm overflow-hidden" style="max-width: 350px;">
-  <div class="kpi-card__header">
-    <div class="d-flex flex-column">
-      <div class="kpi-card__timeframe">{{ props.timeframe }}</div>
-      <div class="kpi-card__metric">{{ props.metric }}</div>
-    </div>
-    <div class="kpi-card__period">{{ props.timeframe }}</div>
-  </div>
-  <div class="kpi-card__body w-100 d-flex justify-content-between align-items-center px-4 py-2 bg-white">
-    <div class="w-75 border-end py-2 ">
-      <div class="text-center fw-extrabold display-5 fw-bold">
-        {{ props.currentPeriodValue | KpiBan }}
+<div class="kpi-comparison" [class.kpi-comparison--dark]="theme === 'dark'">
+  <div class="kpi-comparison__accent"
+       [style.backgroundColor]="isFavorableChange ? props.colors?.positive : props.colors?.negative"></div>
+  <div class="kpi-comparison__content">
+    <div class="kpi-comparison__header">
+      <div class="kpi-comparison__header-left">
+        <span class="kpi-comparison__timeframe">{{ props.timeframe }}</span>
+        <span class="kpi-comparison__metric">{{ props.metric }}</span>
       </div>
-      <div class="fw-light text-muted small px-2 py-1 text-center" style="font-size: 0.7rem;" *ngIf="props.description">
-        Prev. {{ props.previousPeriodDisplay }}: <strong class="fw-bold">{{ props.previousPeriodValue | KpiBan
-          }}</strong>
-      </div>
+      <span class="kpi-comparison__period">{{ props.currentPeriodDisplay }}</span>
     </div>
-    <div class="w-25 ms-3">
-      <div class="text-center">
+
+    <div class="kpi-comparison__body">
+      <div class="kpi-comparison__value-section">
+        <span class="kpi-comparison__value">
+          {{ props.currentPeriodValue | KpiBan:props.metricType }}
+        </span>
+        <span class="kpi-comparison__previous" *ngIf="props.description">
+          Prev. {{ props.previousPeriodDisplay }}:
+          <strong>{{ props.previousPeriodValue | KpiBan:props.metricType }}</strong>
+        </span>
+      </div>
+
+      <div class="kpi-comparison__change-section">
         <ng-container *ngIf="hasChange; else noChangeBlock">
-          <div class="d-flex flex-column align-items-center">
-            <i class="fa-duotone fa-regular fa-6x" [class.fa-caret-large-up]="isPositiveChange"
-              [class.fa-caret-large-down]="!isPositiveChange" [class.change-indicator--favorable]="isFavorableChange"
-              [class.change-indicator--unfavorable]="!isFavorableChange">
-            </i>
-            <span class="mb-3" style="line-height: 0; font-size: 0.8rem;" [class.text-success]="isFavorableChange"
-              [class.text-danger]="!isFavorableChange">
-              <ng-container *ngIf="percentageChange > 0">+</ng-container>
-              {{ percentageChange | number : '1.1-1' }}%
-            </span>
-          </div>
+          <i class="kpi-comparison__icon fa-sharp-duotone fa-solid fa-2x"
+             [ngClass]="iconClass"
+             [class.kpi-comparison__icon--favorable]="isFavorableChange"
+             [class.kpi-comparison__icon--unfavorable]="!isFavorableChange"
+             [style.transform]="useRotation && !isPositiveChange ? 'rotate(90deg)' : ''">
+          </i>
+          <span class="kpi-comparison__percent"
+                [class.kpi-comparison__percent--favorable]="isFavorableChange"
+                [class.kpi-comparison__percent--unfavorable]="!isFavorableChange">
+            <ng-container *ngIf="percentageChange > 0">+</ng-container>
+            {{ percentageChange | number:'1.1-1' }}%
+          </span>
         </ng-container>
-        <ng-template #noChangeBlock>&mdash;</ng-template>
+        <ng-template #noChangeBlock>
+          <span class="kpi-comparison__no-change">&mdash;</span>
+        </ng-template>
       </div>
     </div>
   </div>

@@ -16,7 +16,7 @@ import {
   ChartDimensions,
   DEFAULT_CHART_DIMENSIONS,
   DEFAULT_MARGINS,
-} from '../../../../models/chart-dimensions.model';
+} from '../../../models/chart-dimensions.model';
 
 export interface HeatmapDataPoint {
   row: string;

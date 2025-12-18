@@ -1,4 +1,4 @@
-<div class="progress-card">
+<div class="progress-card" [class.progress-card--dark]="theme === 'dark'">
   <div class="progress-card__header">
     <span class="progress-card__label">{{ label }}</span>
     @if (showPercentage) {

@@ -1,4 +1,4 @@
-<div class="stat-card">
+<div class="stat-card" [class.stat-card--dark]="theme === 'dark'">
   <div class="stat-card__label">{{ label }}</div>
   <div class="stat-card__value">{{ value }}</div>
   @if (change !== undefined) {

@@ -1,65 +1,58 @@
-<div class="goal-tracker">
+<div class="goal-tracker" [class.goal-tracker--dark]="theme === 'dark'">
   <div class="goal-tracker__header">
     <h3 class="goal-tracker__title">{{ title }}</h3>
     <span class="goal-tracker__status" [class]="'goal-tracker__status--' + status">
-      {{ statusLabel }}
+      <i [class]="statusIcon"></i> {{ statusLabel }}
     </span>
   </div>
 
   <div class="goal-tracker__progress-section">
     <div class="goal-tracker__values">
-      <span class="goal-tracker__current">
-        {{ formattedCurrent }}<span class="goal-tracker__unit" *ngIf="unit"> {{ unit }}</span>
-      </span>
-      <span class="goal-tracker__separator">/</span>
-      <span class="goal-tracker__goal">
-        {{ formattedGoal }}<span class="goal-tracker__unit" *ngIf="unit"> {{ unit }}</span>
-      </span>
-    </div>
-
-    <div class="goal-tracker__bar-container">
-      <div class="goal-tracker__bar">
-        <div
-          class="goal-tracker__fill"
-          [class]="'goal-tracker__fill--' + status"
-          [style.width.%]="percentage">
+      <div class="goal-tracker__value-col">
+        <span class="goal-tracker__value-label">Current</span>
+        <span class="goal-tracker__current">
+          {{ formattedCurrent }}<span class="goal-tracker__unit" *ngIf="unit"> {{ unit }}</span>
+        </span>
+      </div>
+      <div class="goal-tracker__value-col goal-tracker__value-col--right">
+        <div class="goal-tracker__target-row">
+          <span class="goal-tracker__target-label">Goal</span>
+          <span class="goal-tracker__target-value">{{ formattedGoal }}</span>
+        </div>
+        <div class="goal-tracker__target-row goal-tracker__target-row--pace" *ngIf="paceValue != null">
+          <span class="goal-tracker__target-label">{{ paceLabel }}</span>
+          <span class="goal-tracker__target-value">{{ formattedPace }}</span>
+        </div>
+        <div class="goal-tracker__target-row goal-tracker__target-row--proj" *ngIf="pacePercentage != null">
+          <span class="goal-tracker__target-label">Proj.</span>
+          <span class="goal-tracker__projected-pct" [class]="'goal-tracker__projected-pct--' + paceStatus">{{ pacePercentage }}%</span>
         </div>
       </div>
-
-      @if (milestones && milestones.length > 0) {
-        <div class="goal-tracker__milestones">
-          @for (milestone of milestones; track milestone.value) {
-            <div
-              class="goal-tracker__milestone"
-              [class.goal-tracker__milestone--reached]="isMilestoneReached(milestone)"
-              [style.left.%]="getMilestonePosition(milestone)"
-              [title]="milestone.label + ': ' + milestone.value">
-              <div class="goal-tracker__milestone-marker"></div>
-              <span class="goal-tracker__milestone-label">{{ milestone.label }}</span>
-            </div>
-          }
-        </div>
-      }
     </div>
 
-    <div class="goal-tracker__percentage">{{ percentage }}% complete</div>
-  </div>
+    <div class="goal-tracker__chart-container" #progressChart></div>
 
-  <div class="goal-tracker__footer">
-    <div class="goal-tracker__remaining">
-      <span class="goal-tracker__remaining-value">{{ formattedRemaining }}</span>
-      <span class="goal-tracker__remaining-label"> remaining to goal</span>
-    </div>
-
-    @if (startDate || endDate) {
+    <div class="goal-tracker__footer">
+      <div class="goal-tracker__remaining">
+        <span class="goal-tracker__remaining-value">{{ formattedRemaining }}</span>
+        <span class="goal-tracker__remaining-label">Remaining</span>
+      </div>
+      @if (startDate || endDate) {
       <div class="goal-tracker__dates">
         @if (startDate) {
-          <span class="goal-tracker__date">Start: {{ startDate }}</span>
+        <div class="goal-tracker__date-col">
+          <span class="goal-tracker__date-value">{{ startDate }}</span>
+          <span class="goal-tracker__date-label">Start</span>
+        </div>
         }
         @if (endDate) {
-          <span class="goal-tracker__date">End: {{ endDate }}</span>
+        <div class="goal-tracker__date-col">
+          <span class="goal-tracker__date-value">{{ endDate }}</span>
+          <span class="goal-tracker__date-label">End</span>
+        </div>
         }
       </div>
-    }
+      }
+    </div>
   </div>
 </div>

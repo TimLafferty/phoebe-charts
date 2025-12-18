@@ -50,10 +50,31 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'tables/mqy-table',
+        loadComponent: () =>
+          import('./pages/tables/mqy-table/mqy-table.component').then(
+            (m) => m.MqyTableComponent
+          ),
+      },
+      {
+        path: 'tables/mqytd-table',
+        loadComponent: () =>
+          import('./pages/tables/mqytd-table/mqytd-table.component').then(
+            (m) => m.MqytdTableComponent
+          ),
+      },
+      {
         path: 'kpi-cards',
         loadComponent: () =>
           import('./pages/kpi-cards/kpi-component-gallery.component').then(
             (m) => m.KpiComponentGalleryComponent
+          ),
+      },
+      {
+        path: 'theme-config',
+        loadComponent: () =>
+          import('./pages/theme-config/theme-config.component').then(
+            (m) => m.ThemeConfigComponent
           ),
       },
     ],

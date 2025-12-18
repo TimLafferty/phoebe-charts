@@ -43,6 +43,8 @@ export class LayoutComponent {
       icon: 'table',
       children: [
         { label: 'Heatmap', path: '/tables/heatmap', status: 'beta' },
+        { label: 'MQY Table', path: '/tables/mqy-table', status: 'beta' },
+        { label: 'MQYTD Table', path: '/tables/mqytd-table', status: 'beta' },
       ],
     },
     {
@@ -53,9 +55,17 @@ export class LayoutComponent {
         { label: 'Gallery', path: '/kpi-cards', status: 'beta' },
       ],
     },
+    {
+      label: 'Theme',
+      path: '/theme-config',
+      icon: 'palette',
+      children: [
+        { label: 'Configuration', path: '/theme-config', status: 'beta' },
+      ],
+    },
   ];
 
-  expandedGroups = new Set<string>(['Charts', 'Tables', 'KPI Cards']);
+  expandedGroups = new Set<string>(['Charts', 'Tables', 'KPI Cards', 'Theme']);
 
   toggleGroup(label: string): void {
     if (this.expandedGroups.has(label)) {

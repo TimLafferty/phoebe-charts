@@ -1,0 +1,158 @@
+// =============================================================================
+// MQY Table Template Styles
+// Period-over-period comparison table styling
+// =============================================================================
+
+@use '../../../styles/variables' as *;
+@use '../../../styles/table_templates' as table;
+// -----------------------------------------------------------------------------
+// Table Wrapper
+// -----------------------------------------------------------------------------
+.mqy-table-wrapper {
+  @include table.table-wrapper;
+}
+
+// -----------------------------------------------------------------------------
+// Main Table
+// -----------------------------------------------------------------------------
+.mqy-table {
+  @include table.table-base;
+}
+
+// -----------------------------------------------------------------------------
+// Table Header
+// -----------------------------------------------------------------------------
+thead {
+  @include table.table-header;
+
+  .period-headers {
+    @include table.table-header-row;
+
+    th {
+      @include table.table-header-cell;
+    }
+
+    .th-rank {
+      @include table.table-header-cell-centered;
+      width: 50px;
+    }
+
+    .th-metric {
+      @include table.table-header-cell-left;
+    }
+
+    .th-current,
+    .th-delta {
+      @include table.table-header-cell-centered;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Table Body
+// -----------------------------------------------------------------------------
+tbody {
+  // Group Header
+  .group-header {
+    @include table.table-group-header;
+
+    .group-icon {
+      @include table.table-group-icon;
+    }
+  }
+
+  // Metric Rows
+  .metric-row {
+    @include table.table-metric-row;
+  }
+
+  // Rank Column
+  .td-rank {
+    @include table.table-cell-rank;
+  }
+
+  // Metric Label Column
+  .td-metric {
+    @include table.table-cell-metric;
+  }
+
+  // Current Value Column
+  .td-current {
+    @include table.table-cell-current;
+
+    .current-value {
+      @include table.table-current-value;
+    }
+  }
+
+  // Delta Columns (MoM, QoQ, YoY)
+  .td-delta {
+    @include table.table-cell-delta;
+
+    .delta-cell {
+      @include table.table-delta-cell;
+    }
+
+    .delta-icon {
+      @include table.table-delta-icon;
+    }
+
+    .delta-values {
+      @include table.table-delta-values;
+    }
+
+    .delta-percentage {
+      @include table.table-delta-percentage;
+    }
+
+    .delta-previous {
+      @include table.table-delta-previous;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Table Footer
+// -----------------------------------------------------------------------------
+tfoot {
+  @include table.table-footer;
+
+  .footer-summary {
+    @include table.table-footer-summary;
+  }
+
+  .period-footers {
+    @include table.table-footer-row;
+
+    .footer-label {
+      @include table.table-footer-label;
+    }
+
+    .footer-date {
+      @include table.table-footer-date;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Responsive Adjustments
+// -----------------------------------------------------------------------------
+@media (max-width: 768px) {
+  .mqy-table {
+    @include table.table-responsive-small;
+  }
+
+
+  tbody {
+    .td-current .current-value {
+      font-size: $font-size-sm;
+    }
+
+    .td-delta {
+      .delta-icon {
+        @include table.table-delta-icon-small;
+      }
+
+    }
+  }
+}

@@ -1,51 +1,105 @@
+@use "../../../styles/kpi_cards" as kpi;
 @use "../../../styles/variables" as *;
 
-$color-success: #198754;
-$color-danger: #dc3545;
+.kpi-comparison {
+  @include kpi.kpi-card-base;
+  @include kpi.kpi-card-large;
 
-.kpi-card__header {
-  background-color: $bg-light;
-  width: 100%;
-  border-bottom: 1px solid $border-color;
-  box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  &--dark {
+    @include kpi.kpi-card-dark-theme;
+
+    .kpi-comparison__metric,
+    .kpi-comparison__value {
+      @include kpi.kpi-card-dark-text-primary;
+    }
+
+    .kpi-comparison__timeframe,
+    .kpi-comparison__period,
+    .kpi-comparison__previous {
+      @include kpi.kpi-card-dark-text-muted;
+    }
+
+    .kpi-comparison__no-change {
+      @include kpi.kpi-card-dark-text-secondary;
+    }
+  }
 }
 
-.kpi-card__metric {
-  font-size: $font-size-md;
-  font-weight: $font-weight-extrabold;
-  color: $text-primary;
-  letter-spacing: $letter-spacing-widest;
-  text-transform: uppercase;
+.kpi-comparison__accent {
+  @include kpi.kpi-card-accent;
 }
 
-.kpi-card__timeframe {
-  font-size: $font-size-sm;
-  font-weight: $font-weight-light;
-  color: $text-muted-light;
-  text-transform: lowercase;
+.kpi-comparison__content {
+  @include kpi.kpi-card-content;
+  gap: $spacing-md;
 }
 
-.kpi-card__period {
-  font-size: $font-size-base;
-  font-weight: $font-weight-light;
-  color: $text-muted-light;
+.kpi-comparison__header {
+  @include kpi.kpi-card-header;
+  @include kpi.kpi-card-header-spread;
 }
 
-.change-indicator--favorable {
-  --fa-primary-color: #{$color-success};
-  --fa-secondary-color: #{$color-success};
-  --fa-secondary-opacity: 0.4;
+.kpi-comparison__header-left {
+  @include kpi.kpi-card-header;
 }
 
-.change-indicator--unfavorable {
-  --fa-primary-color: #{$color-danger};
-  --fa-secondary-color: #{$color-danger};
-  --fa-secondary-opacity: 0.4;
+.kpi-comparison__timeframe {
+  @include kpi.kpi-card-timeframe;
+}
+
+.kpi-comparison__metric {
+  @include kpi.kpi-card-metric;
+}
+
+.kpi-comparison__period {
+  @include kpi.kpi-card-period;
+}
+
+.kpi-comparison__body {
+  @include kpi.kpi-card-body;
+}
+
+.kpi-comparison__value-section {
+  @include kpi.kpi-card-value-section;
+}
+
+.kpi-comparison__value {
+  @include kpi.kpi-card-value;
+  @include kpi.kpi-card-value-medium;
+}
+
+.kpi-comparison__previous {
+  @include kpi.kpi-card-previous;
+}
+
+.kpi-comparison__change-section {
+  @include kpi.kpi-card-change-section;
+}
+
+.kpi-comparison__icon {
+  @include kpi.kpi-card-change-icon;
+
+  &--favorable {
+    @include kpi.kpi-card-change-icon-favorable;
+  }
+
+  &--unfavorable {
+    @include kpi.kpi-card-change-icon-unfavorable;
+  }
+}
+
+.kpi-comparison__percent {
+  @include kpi.kpi-card-percent;
+
+  &--favorable {
+    @include kpi.kpi-card-percent-favorable;
+  }
+
+  &--unfavorable {
+    @include kpi.kpi-card-percent-unfavorable;
+  }
+}
+
+.kpi-comparison__no-change {
+  @include kpi.kpi-card-no-change;
 }

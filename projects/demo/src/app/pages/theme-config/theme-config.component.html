@@ -1,0 +1,236 @@
+<div class="page">
+  <div class="page-header">
+    <div class="header-content">
+      <h1>Theme Configuration</h1>
+      <p class="subtitle">Configure fonts and colors for your Phoebe Charts theme. Preview changes in real-time.</p>
+    </div>
+    <button class="btn-apply" [style.backgroundColor]="colors.primary" (click)="applyThemeGlobally()"
+      [class.applied]="themeApplied">
+      {{ themeApplied ? 'Theme Applied!' : 'Apply Theme' }}
+    </button>
+  </div>
+
+  <!-- Live Preview -->
+  <section class="preview-section">
+    <h2 class="section-title">Live Preview</h2>
+    <div class="preview-card">
+      <div class="preview-header" [style.fontFamily]="fonts.display.family" [style.fontWeight]="fonts.display.weight"
+        [style.textTransform]="fonts.display.uppercase ? 'uppercase' : 'none'">
+        Dashboard Overview
+      </div>
+      <h3 class="preview-subheader" [style.fontFamily]="fonts.headers.family" [style.fontWeight]="fonts.headers.weight"
+        [style.textTransform]="fonts.headers.uppercase ? 'uppercase' : 'none'">
+        Monthly Performance</h3>
+      <p class="preview-body" [style.fontFamily]="fonts.base.family" [style.fontWeight]="fonts.base.weight"
+        [style.textTransform]="fonts.base.uppercase ? 'uppercase' : 'none'">
+        Your metrics are looking great this month. Revenue is up 12% compared to last month,
+        and customer satisfaction scores have reached an all-time high.
+      </p>
+      <div class="preview-buttons">
+        <button class="btn-primary" [style.backgroundColor]="colors.primary">Primary Action</button>
+        <button class="btn-secondary" [style.backgroundColor]="colors.secondary">Secondary</button>
+        <span class="badge-highlight" [style.backgroundColor]="colors.highlight">New</span>
+      </div>
+      <div class="preview-color-bar">
+        <div class="color-segment" [style.backgroundColor]="colors.primary"></div>
+        <div class="color-segment" [style.backgroundColor]="colors.secondary"></div>
+        <div class="color-segment" [style.backgroundColor]="colors.highlight"></div>
+      </div>
+      <div class="preview-greyscale-bar">
+        <div class="greyscale-segment" *ngFor="let color of greyscale.scale" [style.backgroundColor]="color"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="config-grid">
+    <!-- Font Configuration -->
+    <section class="config-section">
+      <h2 class="section-title">Font Families</h2>
+
+      <div class="config-group">
+        <label class="config-label">Base Font</label>
+        <p class="config-description">Used for body text and general content</p>
+        <div class="font-controls">
+          <select [(ngModel)]="fonts.base.family" (ngModelChange)="applyTheme()" class="font-select">
+            <option *ngFor="let font of fontOptions" [value]="font.value">{{ font.name }}</option>
+          </select>
+          <select [(ngModel)]="fonts.base.weight" (ngModelChange)="applyTheme()" class="weight-select">
+            <option *ngFor="let weight of fontWeights" [ngValue]="weight">{{ weight }}</option>
+          </select>
+          <label class="uppercase-toggle">
+            <input type="checkbox" [(ngModel)]="fonts.base.uppercase" (ngModelChange)="applyTheme()">
+            <span class="toggle-label">ABC</span>
+          </label>
+        </div>
+        <div class="font-preview" [style.fontFamily]="fonts.base.family" [style.fontWeight]="fonts.base.weight"
+          [style.textTransform]="fonts.base.uppercase ? 'uppercase' : 'none'">
+          The quick brown fox jumps over the lazy dog. 0123456789
+        </div>
+      </div>
+
+      <div class="config-group">
+        <label class="config-label">Header Font</label>
+        <p class="config-description">Used for section headers and titles</p>
+        <div class="font-controls">
+          <select [(ngModel)]="fonts.headers.family" (ngModelChange)="applyTheme()" class="font-select">
+            <option *ngFor="let font of fontOptions" [value]="font.value">{{ font.name }}</option>
+          </select>
+          <select [(ngModel)]="fonts.headers.weight" (ngModelChange)="applyTheme()" class="weight-select">
+            <option *ngFor="let weight of fontWeights" [ngValue]="weight">{{ weight }}</option>
+          </select>
+          <label class="uppercase-toggle">
+            <input type="checkbox" [(ngModel)]="fonts.headers.uppercase" (ngModelChange)="applyTheme()">
+            <span class="toggle-label">ABC</span>
+          </label>
+        </div>
+        <div class="font-preview header-preview" [style.fontFamily]="fonts.headers.family"
+          [style.fontWeight]="fonts.headers.weight"
+          [style.textTransform]="fonts.headers.uppercase ? 'uppercase' : 'none'">
+          Section Header Preview
+        </div>
+      </div>
+
+      <div class="config-group">
+        <label class="config-label">Display Font</label>
+        <p class="config-description">Used for large display text and hero sections</p>
+        <div class="font-controls">
+          <select [(ngModel)]="fonts.display.family" (ngModelChange)="applyTheme()" class="font-select">
+            <option *ngFor="let font of fontOptions" [value]="font.value">{{ font.name }}</option>
+          </select>
+          <select [(ngModel)]="fonts.display.weight" (ngModelChange)="applyTheme()" class="weight-select">
+            <option *ngFor="let weight of fontWeights" [ngValue]="weight">{{ weight }}</option>
+          </select>
+          <label class="uppercase-toggle">
+            <input type="checkbox" [(ngModel)]="fonts.display.uppercase" (ngModelChange)="applyTheme()">
+            <span class="toggle-label">ABC</span>
+          </label>
+        </div>
+        <div class="font-preview display-preview" [style.fontFamily]="fonts.display.family"
+          [style.fontWeight]="fonts.display.weight"
+          [style.textTransform]="fonts.display.uppercase ? 'uppercase' : 'none'">
+          Display Text
+        </div>
+      </div>
+    </section>
+
+    <!-- Color Configuration -->
+    <section class="config-section">
+      <h2 class="section-title">Colors</h2>
+
+      <div class="color-presets">
+        <span class="presets-label">Presets:</span>
+        <button *ngFor="let preset of colorPresets" class="preset-btn" (click)="applyPreset(preset)"
+          [title]="preset.name">
+          <span class="preset-swatch"
+            [style.background]="'linear-gradient(135deg, ' + preset.primary + ' 0%, ' + preset.secondary + ' 50%, ' + preset.highlight + ' 100%)'"></span>
+          {{ preset.name }}
+        </button>
+      </div>
+
+      <div class="config-group shade-amount-group">
+        <label class="config-label">Shade Intensity</label>
+        <p class="config-description">Percentage for light/dark shade variations</p>
+        <div class="shade-amount-controls">
+          <input type="range" [(ngModel)]="shadeAmount" min="10" max="80" step="10" class="shade-slider">
+          <span class="shade-amount-value">{{ shadeAmount }}%</span>
+        </div>
+      </div>
+
+      <div class="config-group">
+        <label class="config-label">Primary Color</label>
+        <p class="config-description">Main brand color used for buttons and key UI elements</p>
+        <div class="color-input-group">
+          <input type="color" [(ngModel)]="colors.primary" (ngModelChange)="applyTheme()" class="color-picker">
+          <input type="text" [(ngModel)]="colors.primary" (ngModelChange)="applyTheme()" class="color-text">
+        </div>
+        <div class="color-shades">
+          <div class="shade" [style.backgroundColor]="lightenColor(colors.primary, shadeAmount)">
+            <span class="shade-label">Light</span>
+          </div>
+          <div class="shade main" [style.backgroundColor]="colors.primary">
+            <span class="shade-label">Base</span>
+          </div>
+          <div class="shade" [style.backgroundColor]="darkenColor(colors.primary, shadeAmount)">
+            <span class="shade-label">Dark</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="config-group">
+        <label class="config-label">Secondary Color</label>
+        <p class="config-description">Supporting color for secondary actions and accents</p>
+        <div class="color-input-group">
+          <input type="color" [(ngModel)]="colors.secondary" (ngModelChange)="applyTheme()" class="color-picker">
+          <input type="text" [(ngModel)]="colors.secondary" (ngModelChange)="applyTheme()" class="color-text">
+        </div>
+        <div class="color-shades">
+          <div class="shade" [style.backgroundColor]="lightenColor(colors.secondary, shadeAmount)">
+            <span class="shade-label">Light</span>
+          </div>
+          <div class="shade main" [style.backgroundColor]="colors.secondary">
+            <span class="shade-label">Base</span>
+          </div>
+          <div class="shade" [style.backgroundColor]="darkenColor(colors.secondary, shadeAmount)">
+            <span class="shade-label">Dark</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="config-group">
+        <label class="config-label">Highlight Color</label>
+        <p class="config-description">Used for alerts, badges, and emphasis</p>
+        <div class="color-input-group">
+          <input type="color" [(ngModel)]="colors.highlight" (ngModelChange)="applyTheme()" class="color-picker">
+          <input type="text" [(ngModel)]="colors.highlight" (ngModelChange)="applyTheme()" class="color-text">
+        </div>
+        <div class="color-shades">
+          <div class="shade" [style.backgroundColor]="lightenColor(colors.highlight, shadeAmount)">
+            <span class="shade-label">Light</span>
+          </div>
+          <div class="shade main" [style.backgroundColor]="colors.highlight">
+            <span class="shade-label">Base</span>
+          </div>
+          <div class="shade" [style.backgroundColor]="darkenColor(colors.highlight, shadeAmount)">
+            <span class="shade-label">Dark</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Greyscale Configuration -->
+  <section class="config-section greyscale-section">
+    <h2 class="section-title">Greyscale</h2>
+
+    <div class="color-presets">
+      <span class="presets-label">Presets:</span>
+      <button *ngFor="let preset of greyscalePresets" class="preset-btn" (click)="applyGreyscalePreset(preset)"
+        [title]="preset.name">
+        <span class="preset-swatch greyscale-swatch">
+          <span *ngFor="let color of preset.scale; let i = index" class="greyscale-stripe"
+            [style.backgroundColor]="color" [style.width.%]="10"></span>
+        </span>
+        {{ preset.name }}
+      </button>
+    </div>
+
+    <div class="greyscale-grid">
+      <div class="greyscale-item" *ngFor="let color of greyscale.scale; let i = index">
+        <div class="greyscale-swatch-large" [style.backgroundColor]="color">
+          <input type="color" [(ngModel)]="greyscale.scale[i]" (ngModelChange)="applyTheme()" class="greyscale-picker">
+        </div>
+        <span class="greyscale-label">{{ getGreyscaleLabel(i) }}</span>
+        <span class="greyscale-hex">{{ color }}</span>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Actions -->
+  <div class="actions">
+    <button class="btn-outline" (click)="resetTheme()">Reset to Defaults</button>
+    <button class="btn-primary" [style.backgroundColor]="colors.primary" (click)="copyConfig()">Copy
+      Configuration</button>
+  </div>
+</div>

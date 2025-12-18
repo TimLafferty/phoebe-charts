@@ -1,0 +1,255 @@
+// =============================================================================
+// MQYTD Table Template Styles
+// Period-to-date comparison table styling (MTD, QTD, YTD)
+// =============================================================================
+
+@use '../../../styles/variables' as *;
+@use '../../../styles/table_templates' as table;
+
+// -----------------------------------------------------------------------------
+// Custom Font Sizes
+// -----------------------------------------------------------------------------
+.fs-0-60 { font-size: 0.60rem; }
+.fs-0-70 { font-size: 0.70rem; }
+.fs-0-75 { font-size: 0.75rem; }
+.fs-0-80 { font-size: 0.80rem; }
+.fs-0-90 { font-size: 0.90rem; }
+
+// -----------------------------------------------------------------------------
+// Semantic Colors
+// -----------------------------------------------------------------------------
+.text-success { @include table.table-text-success; }
+.text-danger { @include table.table-text-danger; }
+.text-muted { @include table.table-text-muted; }
+
+// -----------------------------------------------------------------------------
+// Table Wrapper
+// -----------------------------------------------------------------------------
+.mqytd-table-wrapper {
+  @include table.table-wrapper;
+}
+
+// -----------------------------------------------------------------------------
+// Main Table
+// -----------------------------------------------------------------------------
+.mqytd-table {
+  @include table.table-base;
+}
+
+// -----------------------------------------------------------------------------
+// Table Header - Two Row Structure
+// -----------------------------------------------------------------------------
+thead {
+  background: $gray-50;
+
+  // First row: Period names
+  .period-headers {
+    border-bottom: 1px solid $border-color;
+
+    .th-metric {
+      @include table.table-header-cell-left;
+      @include table.table-header-cell;
+      border-right: 1px solid $border-color;
+    }
+
+    .th-period {
+      @include table.table-header-period;
+    }
+  }
+
+  // Second row: Subheaders (Delta % | Current/Previous)
+  .period-subheaders {
+    border-bottom: 1px solid $border-color;
+
+    th {
+      @include table.table-header-subheader;
+    }
+
+    .th-delta {
+      @include table.table-header-cell-centered;
+      @include table.table-cell-delta-primary;
+    }
+
+    .th-values {
+      @include table.table-header-cell-centered;
+      border-left: 1px solid $border-color-light;
+
+      .values-header {
+        @include table.table-values-header;
+
+        .current-label {
+          @include table.table-values-header-current;
+        }
+
+        .previous-label {
+          @include table.table-values-header-previous;
+        }
+      }
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Table Body
+// -----------------------------------------------------------------------------
+tbody {
+  // Group Header
+  .group-header {
+    @include table.table-group-header;
+
+    .group-icon {
+      @include table.table-group-icon;
+    }
+
+    strong {
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  // Metric Rows
+  .metric-row {
+    @include table.table-metric-row;
+  }
+
+  // Metric Label Column
+  .td-metric {
+    @include table.table-cell-metric;
+    @include table.table-cell-metric-bordered;
+  }
+
+  // Delta Columns
+  .td-delta {
+    @include table.table-cell-delta;
+    @include table.table-cell-delta-primary;
+
+    .delta-cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+
+      i {
+        font-size: 0.875rem;
+      }
+
+      .delta-value {
+        font-weight: $font-weight-bold;
+        font-size: 0.80rem;
+      }
+    }
+  }
+
+  // Values Columns (Current / Previous)
+  .td-values {
+    @include table.table-cell-values;
+
+    .current-value {
+      @include table.table-values-current;
+    }
+
+    .previous-value {
+      @include table.table-values-previous;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Table Footer
+// -----------------------------------------------------------------------------
+tfoot {
+  @include table.table-footer;
+  font-size: 0.70rem;
+
+  .footer-summary {
+    @include table.table-footer-summary;
+  }
+
+  .period-footers {
+    line-height: 1.3;
+
+    td {
+      color: $text-muted;
+      padding: 0.5rem;
+    }
+
+    .footer-label {
+      @include table.table-footer-label;
+      @include table.table-footer-label-bordered;
+    }
+
+    .footer-dates {
+      @include table.table-footer-dates;
+
+      .current-dates {
+        @include table.table-footer-dates-current;
+      }
+
+      .previous-dates {
+        @include table.table-footer-dates-previous;
+      }
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Responsive Adjustments
+// -----------------------------------------------------------------------------
+@media (max-width: 992px) {
+  .mqytd-table {
+    @include table.table-responsive-medium;
+  }
+
+  thead {
+    .period-headers .th-period {
+      font-size: $font-size-xs;
+    }
+
+    .period-subheaders th {
+      font-size: 0.55rem;
+    }
+  }
+
+  tbody {
+    .td-metric {
+      font-size: 0.60rem;
+    }
+
+    .td-delta .delta-cell {
+      i {
+        font-size: 0.75rem;
+      }
+
+      .delta-value {
+        font-size: 0.70rem;
+      }
+    }
+
+    .td-values {
+      .current-value {
+        font-size: $font-size-xs;
+      }
+
+      .previous-value {
+        font-size: 0.60rem;
+      }
+    }
+  }
+
+  tfoot {
+    font-size: 0.60rem;
+
+    .period-footers .footer-dates .previous-dates {
+      font-size: 0.55rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .mqytd-table-wrapper {
+    @include table.table-wrapper-scrollable;
+  }
+
+  .mqytd-table {
+    @include table.table-min-width(700px);
+  }
+}

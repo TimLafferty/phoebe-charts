@@ -18,7 +18,16 @@
       "Bash(cat:*)",
       "Bash(npx ng build:*)",
       "Bash(npm view:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill:*)",
+      "Bash(source ~/.nvm/nvm.sh)",
+      "Bash(grep:*)",
+      "Bash(npm run build:lib:*)",
+      "Bash(npm run build:demo:*)",
+      "Bash(timeout 30 npm start)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)"
     ],
     "deny": [],
     "ask": []

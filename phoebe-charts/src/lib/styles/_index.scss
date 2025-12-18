@@ -30,6 +30,8 @@
 // Forward chart-specific styles
 @forward 'charts';
 @forward 'kpi_cards';
+@forward 'table_templates';
+@forward 'demo';
 
 // Note: Theme (_theme.scss) is NOT auto-included because it generates CSS.
 // Consumers should explicitly import it if they want CSS custom properties:

@@ -1,0 +1,16 @@
+<div class="kpi-ban" [class.kpi-ban--dark]="theme === 'dark'">
+  <div class="kpi-ban__accent" [style.backgroundColor]="accentStyle"></div>
+  <div class="kpi-ban__content">
+    <div class="kpi-ban__header">
+      <span class="kpi-ban__timeframe" *ngIf="props.timeframe">{{ props.timeframe }}</span>
+      <span class="kpi-ban__metric">{{ props.metric }}</span>
+    </div>
+    <div class="kpi-ban__value-container">
+      <i *ngIf="hasIcon" class="kpi-ban__icon" [ngClass]="iconClass" [style.color]="accentStyle"></i>
+      <span class="kpi-ban__value">
+        {{ props.value | KpiBan:props.metricType }}
+      </span>
+    </div>
+    <span class="kpi-ban__label" *ngIf="props.label">{{ props.label }}</span>
+  </div>
+</div>

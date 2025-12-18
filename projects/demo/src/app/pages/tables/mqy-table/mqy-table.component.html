@@ -1,0 +1,140 @@
+<div class="page">
+  <header class="page-header">
+    <div class="header-content">
+      <h1>MQY Table Template</h1>
+      <span class="badge beta">Beta</span>
+    </div>
+    <p>Period-over-period comparison table displaying Month-over-Month, Quarter-over-Quarter, and Year-over-Year metrics.</p>
+  </header>
+
+  <div class="content-grid">
+    <!-- Table Area -->
+    <div class="chart-section">
+      <div class="chart-card">
+        <phoebe-mqy-table-template
+          [groups]="benchmarkGroups"
+          [footerDates]="footerDates"
+          [showContextRank]="showContextRank"
+          [neutralThreshold]="neutralThreshold"
+          [rowLabel]="rowLabel"
+          [currentLabel]="currentLabel"
+          [footerLabel]="footerLabel"
+          footerSummary="Data as of November 2024">
+        </phoebe-mqy-table-template>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="actions-card">
+        <div class="btn-group">
+          <button class="btn primary" (click)="loadSampleData()">Full Sample</button>
+          <button class="btn outline" (click)="loadMinimalData()">Minimal</button>
+          <button class="btn outline" (click)="loadNeutralData()">Neutral Changes</button>
+          <button class="btn outline" (click)="toggleRank()">
+            {{ showContextRank ? 'Hide Rank' : 'Show Rank' }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls Panel -->
+    <aside class="controls-section">
+      <div class="controls-card">
+        <h3>Configuration</h3>
+
+        <!-- Neutral Threshold -->
+        <div class="control-group">
+          <label>Neutral Threshold: {{ neutralThreshold }}%</label>
+          <input type="range" min="0" max="10" step="0.5" [(ngModel)]="neutralThreshold">
+          <p class="hint">Changes below this threshold show as neutral (gray)</p>
+        </div>
+
+        <!-- Labels -->
+        <div class="control-group">
+          <label>Row Label</label>
+          <input type="text" [(ngModel)]="rowLabel" placeholder="Metric">
+        </div>
+
+        <div class="control-group">
+          <label>Current Label</label>
+          <input type="text" [(ngModel)]="currentLabel" placeholder="Current">
+        </div>
+
+        <!-- Toggles -->
+        <div class="control-group">
+          <label>Display Options</label>
+          <div class="toggle-row">
+            <input type="checkbox" id="showRank" [(ngModel)]="showContextRank">
+            <label for="showRank">Show Rank Column</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Info -->
+      <div class="info-card">
+        <h3>Data Info</h3>
+        <ul>
+          <li><strong>Groups:</strong> {{ totalGroups }}</li>
+          <li><strong>Total Rows:</strong> {{ totalRows }}</li>
+          <li><strong>Anchor Month:</strong> {{ anchorMonth }}</li>
+        </ul>
+      </div>
+
+      <!-- Features -->
+      <div class="info-card">
+        <h3>Features</h3>
+        <ul>
+          <li><strong>OnPush:</strong> Optimized change detection</li>
+          <li><strong>TrackBy:</strong> Efficient list rendering</li>
+          <li><strong>Responsive:</strong> Mobile-friendly layout</li>
+          <li><strong>Themeable:</strong> Uses SCSS variables</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Code Example -->
+  <section class="code-section">
+    <h2>Usage Example</h2>
+    <div class="code-card">
+      <pre><code>&lt;phoebe-mqy-table-template
+  [groups]="benchmarkGroups"
+  [footerDates]="footerDates"
+  [showContextRank]="true"
+  [neutralThreshold]="2"
+  rowLabel="Metric"
+  currentLabel="Current"
+  footerLabel="Period Comparisons"
+  footerSummary="Data as of November 2024"&gt;
+&lt;/phoebe-mqy-table-template&gt;
+
+// Component usage:
+import &#123; MqyTableTemplateComponent, MqyTableTemplateService &#125; from 'phoebe-charts';
+
+export class MyComponent &#123;
+  private mqyService = inject(MqyTableTemplateService);
+
+  benchmarkGroups = this.mqyService.createGroups([
+    &#123;
+      id: 'metrics',
+      label: 'Key Metrics',
+      icon: 'fa-solid fa-chart-line',
+      rows: [
+        &#123;
+          id: 'revenue',
+          label: 'Revenue',
+          current: 150000,
+          momPrevious: 140000,
+          momPercentage: 7.14,
+          qoqPrevious: 120000,
+          qoqPercentage: 25.0,
+          yoyPrevious: 100000,
+          yoyPercentage: 50.0,
+          isMonetary: true
+        &#125;
+      ]
+    &#125;
+  ]);
+&#125;</code></pre>
+    </div>
+  </section>
+</div>

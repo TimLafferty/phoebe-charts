@@ -1,0 +1,494 @@
+// =============================================================================
+// Demo Page Styles
+// Phoebe Charts - Shared Demo/Gallery Page Styles
+// =============================================================================
+
+@use "variables" as *;
+@use "colors" as *;
+
+// -----------------------------------------------------------------------------
+// Page Layout
+// -----------------------------------------------------------------------------
+@mixin demo-page {
+  padding: $spacing-xl;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@mixin demo-page-wide {
+  max-width: 1400px;
+}
+
+// -----------------------------------------------------------------------------
+// Page Header
+// -----------------------------------------------------------------------------
+@mixin demo-page-header {
+  margin-bottom: $spacing-xl;
+}
+
+@mixin demo-header-content {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-xs;
+}
+
+@mixin demo-header-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $spacing-lg;
+}
+
+@mixin demo-page-title {
+  font-size: $font-size-2xl;
+  font-weight: 600;
+  color: $text-primary;
+  margin: 0;
+}
+
+@mixin demo-page-description {
+  font-size: $font-size-base;
+  color: $text-secondary;
+  margin: 0;
+}
+
+// -----------------------------------------------------------------------------
+// Theme Toggle
+// -----------------------------------------------------------------------------
+@mixin demo-theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+@mixin demo-theme-toggle-label {
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: $text-secondary;
+  margin-right: $spacing-xs;
+}
+
+@mixin demo-theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  border: 1px solid $border-color;
+  background: $white;
+  color: $text-secondary;
+  font-size: $font-size-sm;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: $bg-secondary;
+  }
+}
+
+@mixin demo-theme-toggle-btn-first {
+  border-radius: $border-radius-sm 0 0 $border-radius-sm;
+  border-right: none;
+}
+
+@mixin demo-theme-toggle-btn-last {
+  border-radius: 0 $border-radius-sm $border-radius-sm 0;
+}
+
+@mixin demo-theme-toggle-btn-active {
+  background: $primary;
+  border-color: $primary;
+  color: $white;
+
+  &:hover {
+    background: darken($primary, 5%);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Badges
+// -----------------------------------------------------------------------------
+@mixin demo-badge {
+  font-size: $font-size-xs;
+  padding: 3px 8px;
+  border-radius: $border-radius-sm;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+@mixin demo-badge-planned {
+  background: rgba($warning, 0.1);
+  color: $warning;
+}
+
+@mixin demo-badge-beta {
+  background: rgba($info, 0.1);
+  color: $info;
+}
+
+// -----------------------------------------------------------------------------
+// Component Sections
+// -----------------------------------------------------------------------------
+@mixin demo-component-section {
+  margin-bottom: $spacing-2xl;
+}
+
+@mixin demo-section-title {
+  font-size: $font-size-xl;
+  font-weight: 600;
+  color: $text-primary;
+  margin: 0 0 $spacing-xs 0;
+}
+
+@mixin demo-section-description {
+  font-size: $font-size-base;
+  color: $text-secondary;
+  margin: 0;
+}
+
+@mixin demo-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: $spacing-lg;
+  margin-bottom: $spacing-lg;
+}
+
+@mixin demo-section-header-left {
+  flex: 1;
+}
+
+@mixin demo-section-header-right {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  flex-shrink: 0;
+}
+
+// -----------------------------------------------------------------------------
+// Card Grids
+// -----------------------------------------------------------------------------
+@mixin demo-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: $spacing-lg;
+}
+
+@mixin demo-content-grid {
+  display: grid;
+  gap: $spacing-lg;
+  margin-bottom: $spacing-xl;
+}
+
+@mixin demo-content-grid-sidebar {
+  grid-template-columns: 1fr 300px;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Form Controls
+// -----------------------------------------------------------------------------
+@mixin demo-icon-set-label {
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: $text-secondary;
+  white-space: nowrap;
+}
+
+@mixin demo-icon-set-select {
+  padding: $spacing-xs $spacing-sm;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-sm;
+  color: $text-primary;
+  background: $white;
+  cursor: pointer;
+  min-width: 150px;
+
+  &:hover {
+    border-color: $border-color-dark;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $primary;
+    box-shadow: 0 0 0 2px rgba($primary, 0.1);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Cards
+// -----------------------------------------------------------------------------
+@mixin demo-chart-card {
+  background: $white;
+  border-radius: $border-radius;
+  padding: $spacing-lg;
+  box-shadow: $shadow;
+}
+
+@mixin demo-chart-card-scrollable {
+  overflow-x: auto;
+}
+
+@mixin demo-actions-card {
+  background: $white;
+  border-radius: $border-radius;
+  padding: $spacing-md;
+  box-shadow: $shadow;
+}
+
+@mixin demo-controls-card {
+  background: $white;
+  border-radius: $border-radius;
+  padding: $spacing-md;
+  box-shadow: $shadow;
+}
+
+@mixin demo-card-title {
+  font-size: $font-size-base;
+  font-weight: 600;
+  color: $text-primary;
+  margin: 0 0 $spacing-md 0;
+}
+
+// -----------------------------------------------------------------------------
+// Buttons
+// -----------------------------------------------------------------------------
+@mixin demo-btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+}
+
+@mixin demo-btn {
+  padding: $spacing-sm $spacing-md;
+  font-size: $font-size-base;
+  font-weight: 500;
+  border-radius: $border-radius-sm;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all $transition-fast;
+}
+
+@mixin demo-btn-primary {
+  background: $primary;
+  color: white;
+  border-color: $primary;
+
+  &:hover {
+    background: darken($primary, 10%);
+  }
+}
+
+@mixin demo-btn-outline {
+  background: transparent;
+  color: $text-secondary;
+  border-color: $border-color;
+
+  &:hover {
+    border-color: $primary;
+    color: $primary;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Control Groups
+// -----------------------------------------------------------------------------
+@mixin demo-control-group {
+  margin-bottom: $spacing-md;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@mixin demo-control-label {
+  display: block;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: $text-secondary;
+  margin-bottom: $spacing-xs;
+}
+
+@mixin demo-control-input {
+  width: 100%;
+  padding: $spacing-sm;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-base;
+  background: $white;
+
+  &:focus {
+    outline: none;
+    border-color: $primary;
+  }
+}
+
+@mixin demo-control-select {
+  width: 100%;
+  padding: $spacing-sm;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-base;
+  background: $white;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border-color: $primary;
+  }
+}
+
+@mixin demo-control-hint {
+  font-size: $font-size-xs;
+  color: $text-muted;
+  margin: $spacing-xs 0 0 0;
+  line-height: 1.4;
+}
+
+@mixin demo-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-xs 0;
+}
+
+@mixin demo-toggle-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+@mixin demo-toggle-label {
+  font-size: $font-size-base;
+  color: $text-primary;
+  cursor: pointer;
+}
+
+// -----------------------------------------------------------------------------
+// Info Cards
+// -----------------------------------------------------------------------------
+@mixin demo-info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@mixin demo-info-list-item {
+  padding: $spacing-xs 0;
+  font-size: $font-size-sm;
+  color: $text-secondary;
+
+  strong {
+    color: $text-primary;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Code Blocks
+// -----------------------------------------------------------------------------
+@mixin demo-code-section-title {
+  font-size: $font-size-lg;
+  font-weight: 600;
+  color: $text-primary;
+  margin: 0 0 $spacing-md 0;
+}
+
+@mixin demo-code-card {
+  background: $gray-900;
+  border-radius: $border-radius;
+  overflow: hidden;
+}
+
+@mixin demo-code-pre {
+  margin: 0;
+  padding: $spacing-md;
+  overflow-x: auto;
+}
+
+@mixin demo-code-content {
+  color: $text-light;
+  font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: $font-size-sm;
+  line-height: 1.6;
+}
+
+// -----------------------------------------------------------------------------
+// Placeholder Cards
+// -----------------------------------------------------------------------------
+@mixin demo-placeholder-section {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin demo-placeholder-card {
+  background: $bg-primary;
+  border-radius: $border-radius;
+  padding: $spacing-2xl;
+  box-shadow: $shadow;
+  text-align: center;
+  max-width: 600px;
+}
+
+@mixin demo-placeholder-icon {
+  color: $text-muted;
+  margin-bottom: $spacing-lg;
+}
+
+@mixin demo-placeholder-title {
+  font-size: $font-size-xl;
+  font-weight: 600;
+  color: $text-primary;
+  margin: 0 0 $spacing-sm 0;
+}
+
+@mixin demo-placeholder-description {
+  font-size: $font-size-base;
+  color: $text-secondary;
+  margin: 0 0 $spacing-lg 0;
+}
+
+// -----------------------------------------------------------------------------
+// Feature Lists
+// -----------------------------------------------------------------------------
+@mixin demo-feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+@mixin demo-feature-list-item {
+  padding: $spacing-sm 0;
+  font-size: $font-size-base;
+  color: $text-secondary;
+  border-bottom: 1px solid $border-color;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &::before {
+    content: "\2192"; // Right arrow
+    margin-right: $spacing-sm;
+    color: $primary;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Layout Sections
+// -----------------------------------------------------------------------------
+@mixin demo-chart-section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+@mixin demo-controls-section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}

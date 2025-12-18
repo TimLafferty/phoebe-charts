@@ -1,199 +1,169 @@
 @use '../../../styles/variables' as *;
+@use '../../../styles/kpi_cards' as kpi;
 
 .goal-tracker {
-  background: $white;
-  border-radius: $border-radius;
-  padding: $spacing-lg;
-  box-shadow: $shadow;
+  @include kpi.kpi-card-base;
+  @include kpi.kpi-card-content-no-accent;
+
+  &--dark {
+    @include kpi.kpi-card-dark-theme;
+
+    .goal-tracker__title,
+    .goal-tracker__current,
+    .goal-tracker__remaining-value {
+      @include kpi.kpi-card-dark-text-primary;
+    }
+
+    .goal-tracker__unit,
+    .goal-tracker__value-label,
+    .goal-tracker__target-label,
+    .goal-tracker__remaining-label,
+    .goal-tracker__date-label {
+      @include kpi.kpi-card-dark-text-muted;
+    }
+
+    .goal-tracker__date-value,
+    .goal-tracker__target-value {
+      @include kpi.kpi-card-dark-text-secondary;
+    }
+
+    .goal-tracker__footer {
+      @include kpi.kpi-card-dark-border;
+    }
+
+    .goal-tracker__target-row--pace {
+      @include kpi.kpi-card-dark-border;
+    }
+  }
 
   &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include kpi.kpi-card-header;
+    @include kpi.kpi-card-header-spread;
+    @include kpi.kpi-card-header-center;
     margin-bottom: $spacing-md;
   }
 
   &__title {
-    font-size: $font-size-base;
-    font-weight: 600;
-    color: $text-primary;
-    margin: 0;
+    @include kpi.kpi-card-title;
   }
 
   &__status {
-    font-size: $font-size-xs;
-    font-weight: 600;
-    padding: $spacing-xs $spacing-sm;
-    border-radius: $border-radius-sm;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    @include kpi.kpi-card-status-badge;
 
     &--achieved {
-      background: rgba($success, 0.1);
-      color: $success;
+      @include kpi.kpi-card-status-achieved;
     }
 
     &--on-track {
-      background: rgba($success, 0.1);
-      color: $success;
+      @include kpi.kpi-card-status-on-track;
     }
 
     &--at-risk {
-      background: rgba($warning, 0.1);
-      color: $warning;
+      @include kpi.kpi-card-status-at-risk;
     }
 
     &--behind {
-      background: rgba($danger, 0.1);
-      color: $danger;
+      @include kpi.kpi-card-status-behind;
     }
-  }
-
-  &__progress-section {
-    margin-bottom: $spacing-md;
   }
 
   &__values {
-    display: flex;
-    align-items: baseline;
-    gap: $spacing-xs;
-    margin-bottom: $spacing-sm;
+    @include kpi.kpi-card-values-row;
+  }
+
+  &__value-col {
+    @include kpi.kpi-card-value-col;
+
+    &--right {
+      @include kpi.kpi-card-value-col-right;
+      line-height: $line-height-snug;
+    }
+  }
+
+  &__value-label {
+    @include kpi.kpi-card-label-upper;
   }
 
   &__current {
-    font-size: $font-size-2xl;
-    font-weight: 700;
-    color: $text-primary;
+    @include kpi.kpi-card-value-small;
   }
 
-  &__separator {
-    font-size: $font-size-lg;
-    color: $text-muted;
-  }
+  &__target-row {
+    @include kpi.kpi-card-target-row;
 
-  &__goal {
-    font-size: $font-size-lg;
-    font-weight: 500;
-    color: $text-secondary;
-  }
-
-  &__unit {
-    font-size: $font-size-sm;
-    font-weight: 400;
-    color: $text-muted;
-  }
-
-  &__bar-container {
-    position: relative;
-    margin-bottom: $spacing-sm;
-  }
-
-  &__bar {
-    height: 12px;
-    background: $gray-200;
-    border-radius: $border-radius-sm;
-    overflow: hidden;
-  }
-
-  &__fill {
-    height: 100%;
-    border-radius: $border-radius-sm;
-    transition: width 0.3s ease;
-
-    &--achieved {
-      background: linear-gradient(90deg, $success, lighten($success, 10%));
+    &--pace {
+      padding-bottom: $spacing-xs;
+      margin-bottom: $spacing-xs;
+      border-bottom: 1px solid $border-color;
     }
 
+    &--proj {
+      padding-top: 0;
+    }
+  }
+
+  &__target-label {
+    @include kpi.kpi-card-target-label;
+  }
+
+  &__target-value {
+    @include kpi.kpi-card-target-value;
+  }
+
+  &__projected-pct {
+    @include kpi.kpi-card-projected-pct;
+
+    &--achieved,
     &--on-track {
-      background: linear-gradient(90deg, $success, lighten($success, 10%));
+      @include kpi.kpi-card-percent-favorable;
     }
 
     &--at-risk {
-      background: linear-gradient(90deg, $warning, lighten($warning, 10%));
+      color: kpi.$kpi-color-warning;
     }
 
     &--behind {
-      background: linear-gradient(90deg, $danger, lighten($danger, 10%));
+      @include kpi.kpi-card-percent-unfavorable;
     }
   }
 
-  &__milestones {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 12px;
-    pointer-events: none;
+  &__unit {
+    @include kpi.kpi-card-unit;
   }
 
-  &__milestone {
-    position: absolute;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    &-marker {
-      width: 4px;
-      height: 16px;
-      background: $gray-400;
-      border-radius: 2px;
-      margin-top: -2px;
-    }
-
-    &-label {
-      font-size: $font-size-xs;
-      color: $text-muted;
-      margin-top: $spacing-xs;
-      white-space: nowrap;
-    }
-
-    &--reached {
-      .goal-tracker__milestone-marker {
-        background: $success;
-      }
-
-      .goal-tracker__milestone-label {
-        color: $success;
-        font-weight: 500;
-      }
-    }
-  }
-
-  &__percentage {
-    font-size: $font-size-sm;
-    color: $text-muted;
-    text-align: right;
+  &__chart-container {
+    @include kpi.kpi-card-chart-container;
   }
 
   &__footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: $spacing-md;
-    border-top: 1px solid $border-color;
+    @include kpi.kpi-card-footer;
   }
 
   &__remaining {
-    font-size: $font-size-sm;
+    @include kpi.kpi-card-remaining;
 
     &-value {
-      font-weight: 600;
-      color: $text-primary;
+      @include kpi.kpi-card-remaining-value;
     }
 
     &-label {
-      color: $text-muted;
+      @include kpi.kpi-card-remaining-label;
     }
   }
 
   &__dates {
-    display: flex;
-    gap: $spacing-md;
+    @include kpi.kpi-card-dates;
   }
 
-  &__date {
-    font-size: $font-size-xs;
-    color: $text-muted;
+  &__date-col {
+    @include kpi.kpi-card-date-col;
+  }
+
+  &__date-value {
+    @include kpi.kpi-card-date-value;
+  }
+
+  &__date-label {
+    @include kpi.kpi-card-date-label;
   }
 }

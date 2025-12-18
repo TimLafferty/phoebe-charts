@@ -1,0 +1,491 @@
+// =============================================================================
+// KPI Cards
+// Phoebe Charts - Shared KPI Card Styles
+// =============================================================================
+
+@use "variables" as *;
+@use "colors" as *;
+
+// -----------------------------------------------------------------------------
+// Color Variables - Using design system colors
+// -----------------------------------------------------------------------------
+$kpi-color-success: map-get($chart-colors, "green") !default; // #22c55e
+$kpi-color-danger: map-get($chart-colors, "red") !default;    // #ef4444
+$kpi-color-warning: $warning !default;                         // #ea580c
+$kpi-color-primary: $primary !default;                         // #1a5f9c
+
+// Dark theme colors - Using slate scale
+$kpi-dark-bg: $slate-800 !default;             // #1e293b
+$kpi-dark-text-primary: $slate-50 !default;    // #f8fafc
+$kpi-dark-text-secondary: $slate-300 !default; // #cbd5e1
+$kpi-dark-text-muted: $slate-400 !default;     // #94a3b8
+$kpi-dark-border: rgba($white, 0.1) !default;
+
+// -----------------------------------------------------------------------------
+// Mixins for Base Card Styles
+// -----------------------------------------------------------------------------
+@mixin kpi-card-base {
+  position: relative;
+  border-radius: $border-radius-xs;
+  box-shadow: $shadow;
+  overflow: hidden;
+  background-color: $white;
+}
+
+@mixin kpi-card-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+}
+
+@mixin kpi-card-content {
+  padding: $spacing-lg;
+  padding-left: calc($spacing-lg + 4px);
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+@mixin kpi-card-content-no-accent {
+  padding: $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+// -----------------------------------------------------------------------------
+// Header Mixins
+// -----------------------------------------------------------------------------
+@mixin kpi-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+}
+
+@mixin kpi-card-header-spread {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+@mixin kpi-card-header-center {
+  align-items: center;
+}
+
+@mixin kpi-card-timeframe {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-light;
+  color: $text-muted;
+  text-transform: lowercase;
+}
+
+@mixin kpi-card-metric {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  color: $text-primary;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wide;
+}
+
+@mixin kpi-card-title {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  margin: 0;
+}
+
+@mixin kpi-card-period {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-normal;
+  color: $text-muted;
+}
+
+// -----------------------------------------------------------------------------
+// Value Mixins
+// -----------------------------------------------------------------------------
+@mixin kpi-card-value-container {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin: $spacing-xs 0;
+}
+
+@mixin kpi-card-value {
+  font-size: $font-size-4xl;
+  font-weight: $font-weight-extrabold;
+  line-height: $line-height-tight;
+  font-family: $font-family-display;
+  color: $text-primary;
+}
+
+@mixin kpi-card-value-large {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-snug;
+  color: $text-primary;
+}
+
+@mixin kpi-card-value-medium {
+  font-size: $font-size-3xl;
+}
+
+@mixin kpi-card-value-small {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  color: $text-primary;
+}
+
+@mixin kpi-card-icon {
+  font-size: $font-size-3xl;
+  opacity: 0.8;
+  margin-right: $spacing-sm;
+}
+
+@mixin kpi-card-label {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-normal;
+  color: $text-muted;
+}
+
+@mixin kpi-card-label-upper {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wide;
+}
+
+@mixin kpi-card-label-small {
+  font-size: 9px;
+  font-weight: $font-weight-normal;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wide;
+}
+
+@mixin kpi-card-previous {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-light;
+  color: $text-muted;
+
+  strong {
+    font-weight: $font-weight-semibold;
+    color: $text-secondary;
+  }
+}
+
+@mixin kpi-card-unit {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-normal;
+  color: $text-muted;
+}
+
+// -----------------------------------------------------------------------------
+// Body Layout Mixins
+// -----------------------------------------------------------------------------
+@mixin kpi-card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+@mixin kpi-card-value-section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+@mixin kpi-card-values-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: $spacing-lg;
+}
+
+@mixin kpi-card-value-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+@mixin kpi-card-value-col-right {
+  align-items: flex-end;
+}
+
+// -----------------------------------------------------------------------------
+// Change Indicator Mixins
+// -----------------------------------------------------------------------------
+@mixin kpi-card-change-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-xs;
+  min-width: 60px;
+}
+
+@mixin kpi-card-change-icon {
+  opacity: 0.9;
+}
+
+@mixin kpi-card-change-icon-favorable {
+  --fa-primary-color: #{$kpi-color-success};
+  --fa-secondary-color: #{$kpi-color-success};
+  --fa-secondary-opacity: 0.3;
+}
+
+@mixin kpi-card-change-icon-unfavorable {
+  --fa-primary-color: #{$kpi-color-danger};
+  --fa-secondary-color: #{$kpi-color-danger};
+  --fa-secondary-opacity: 0.3;
+}
+
+@mixin kpi-card-percent {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+}
+
+@mixin kpi-card-percent-favorable {
+  color: $kpi-color-success;
+}
+
+@mixin kpi-card-percent-unfavorable {
+  color: $kpi-color-danger;
+}
+
+@mixin kpi-card-no-change {
+  font-size: $font-size-xl;
+  color: $text-muted;
+}
+
+// -----------------------------------------------------------------------------
+// Status Badge Mixins
+// -----------------------------------------------------------------------------
+@mixin kpi-card-status-badge {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-sm;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wide;
+}
+
+@mixin kpi-card-status-achieved {
+  background: rgba($kpi-color-success, 0.1);
+  color: $kpi-color-success;
+}
+
+@mixin kpi-card-status-on-track {
+  background: rgba($kpi-color-success, 0.1);
+  color: $kpi-color-success;
+}
+
+@mixin kpi-card-status-at-risk {
+  background: rgba($kpi-color-warning, 0.1);
+  color: $kpi-color-warning;
+}
+
+@mixin kpi-card-status-behind {
+  background: rgba($kpi-color-danger, 0.1);
+  color: $kpi-color-danger;
+}
+
+// -----------------------------------------------------------------------------
+// Target/Goal Row Mixins
+// -----------------------------------------------------------------------------
+@mixin kpi-card-target-row {
+  display: flex;
+  gap: $spacing-sm;
+  align-items: baseline;
+  justify-content: flex-end;
+}
+
+@mixin kpi-card-target-label {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-normal;
+  color: $text-muted;
+  min-width: 32px;
+  text-align: right;
+}
+
+@mixin kpi-card-target-value {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $text-secondary;
+  min-width: 40px;
+  text-align: right;
+}
+
+@mixin kpi-card-projected-pct {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  min-width: 40px;
+  text-align: right;
+}
+
+// -----------------------------------------------------------------------------
+// Progress Bar Mixins
+// -----------------------------------------------------------------------------
+@mixin kpi-card-progress-bar {
+  height: 8px;
+  background: $gray-200;
+  border-radius: $border-radius-sm;
+  overflow: hidden;
+}
+
+@mixin kpi-card-progress-fill {
+  height: 100%;
+  background: $kpi-color-primary;
+  border-radius: $border-radius-sm;
+}
+
+@mixin kpi-card-chart-container {
+  width: 100%;
+  min-height: 48px;
+}
+
+// -----------------------------------------------------------------------------
+// Footer Mixins
+// -----------------------------------------------------------------------------
+@mixin kpi-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: $spacing-sm;
+}
+
+@mixin kpi-card-footer-bordered {
+  border-top: 1px solid $border-color;
+}
+
+@mixin kpi-card-remaining {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin kpi-card-remaining-value {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+}
+
+@mixin kpi-card-remaining-label {
+  font-size: 9px;
+  font-weight: $font-weight-normal;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wide;
+}
+
+@mixin kpi-card-dates {
+  display: flex;
+  gap: $spacing-lg;
+}
+
+@mixin kpi-card-date-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+@mixin kpi-card-date-value {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  color: $text-secondary;
+}
+
+@mixin kpi-card-date-label {
+  font-size: 9px;
+  font-weight: $font-weight-normal;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wide;
+}
+
+// -----------------------------------------------------------------------------
+// Size Variant Mixins
+// -----------------------------------------------------------------------------
+@mixin kpi-card-small {
+  min-width: 180px;
+  max-width: 250px;
+}
+
+@mixin kpi-card-medium {
+  min-width: 200px;
+  max-width: 300px;
+}
+
+@mixin kpi-card-large {
+  min-width: 280px;
+  max-width: 350px;
+}
+
+@mixin kpi-card-full-width {
+  width: 100%;
+  max-width: none;
+}
+
+// -----------------------------------------------------------------------------
+// Dark Theme Mixins
+// -----------------------------------------------------------------------------
+@mixin kpi-card-dark-theme {
+  background-color: $kpi-dark-bg;
+  box-shadow: $shadow-md;
+}
+
+@mixin kpi-card-dark-text-primary {
+  color: $kpi-dark-text-primary;
+}
+
+@mixin kpi-card-dark-text-secondary {
+  color: $kpi-dark-text-secondary;
+}
+
+@mixin kpi-card-dark-text-muted {
+  color: $kpi-dark-text-muted;
+}
+
+@mixin kpi-card-dark-border {
+  border-color: $kpi-dark-border;
+}
+
+@mixin kpi-card-dark-progress-bar {
+  background: rgba($white, 0.1);
+}
+
+// -----------------------------------------------------------------------------
+// Trend Indicator Mixins
+// -----------------------------------------------------------------------------
+@mixin kpi-card-trend {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: $font-size-sm;
+}
+
+@mixin kpi-card-trend-up {
+  color: $kpi-color-success;
+}
+
+@mixin kpi-card-trend-down {
+  color: $kpi-color-danger;
+}
+
+@mixin kpi-card-trend-neutral {
+  color: $text-muted;
+}
+
+@mixin kpi-card-trend-icon {
+  font-size: $font-size-xs;
+}
+
+@mixin kpi-card-trend-value {
+  font-weight: $font-weight-semibold;
+}
+
+@mixin kpi-card-comparison {
+  color: $text-muted;
+}

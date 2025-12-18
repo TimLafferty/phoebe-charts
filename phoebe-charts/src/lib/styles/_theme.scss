@@ -7,6 +7,8 @@
 @use 'typography' as *;
 @use 'spacing' as *;
 @use 'layout' as *;
+@use 'mixins' as *;
+
 
 // -----------------------------------------------------------------------------
 // CSS Custom Properties Root
@@ -17,7 +19,6 @@
   // Brand colors
   --phoebe-primary: #{$primary};
   --phoebe-primary-hover: #{$primary-hover};
-  --phoebe-primary-light: #{$primary-light};
   --phoebe-secondary: #{$secondary};
   --phoebe-accent: #{$accent};
 

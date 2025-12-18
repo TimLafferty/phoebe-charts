@@ -1,0 +1,57 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/kpi_cards" as kpi;
+
+.kpi-ban {
+  @include kpi.kpi-card-base;
+  @include kpi.kpi-card-medium;
+
+  &--dark {
+    @include kpi.kpi-card-dark-theme;
+
+    .kpi-ban__metric,
+    .kpi-ban__value {
+      @include kpi.kpi-card-dark-text-primary;
+    }
+
+    .kpi-ban__timeframe,
+    .kpi-ban__label {
+      @include kpi.kpi-card-dark-text-muted;
+    }
+  }
+}
+
+.kpi-ban__accent {
+  @include kpi.kpi-card-accent;
+}
+
+.kpi-ban__content {
+  @include kpi.kpi-card-content;
+}
+
+.kpi-ban__header {
+  @include kpi.kpi-card-header;
+}
+
+.kpi-ban__timeframe {
+  @include kpi.kpi-card-timeframe;
+}
+
+.kpi-ban__metric {
+  @include kpi.kpi-card-metric;
+}
+
+.kpi-ban__value-container {
+  @include kpi.kpi-card-value-container;
+}
+
+.kpi-ban__icon {
+  @include kpi.kpi-card-icon;
+}
+
+.kpi-ban__value {
+  @include kpi.kpi-card-value;
+}
+
+.kpi-ban__label {
+  @include kpi.kpi-card-label;
+}

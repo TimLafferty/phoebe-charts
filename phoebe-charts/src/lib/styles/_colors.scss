@@ -3,22 +3,68 @@
 // Phoebe Charts - Color System
 // =============================================================================
 
+@use "mixins" as *;
+
 // -----------------------------------------------------------------------------
 // Brand Colors
 // -----------------------------------------------------------------------------
-$primary: #1a5f9c;
-$primary-hover: #154d7d;
-$primary-light: #dbeafe;
-$secondary: #5da9e9;
-$accent: #ff6b6b;
+// Base color
+$blue: #0073f7;
+
+$blue-lightest: mix(white, $blue, 75%);
+$blue-lighter: mix(white, $blue, 50%);
+$blue-light: mix(white, $blue, 25%);
+$blue-dark: mix(black, $blue, 75%);
+$blue-darker: mix(black, $blue, 50%);
+$blue-darkest: mix(black, $blue, 25%);
+
+$red: #ff4252;
+$red-lightest: mix(white, $red, 75%);
+$red-lighter: mix(white, $red, 50%);
+$red-light: mix(white, $red, 25%);
+$red-dark: mix(black, $red, 75%);
+$red-darker: mix(black, $red, 50%);
+$red-darkest: mix(black, $red, 25%);
+
+$green: #02d673;
+$green-lightest: mix(white, $green, 75%);
+$green-lighter: mix(white, $green, 50%);
+$green-light: mix(white, $green, 25%);
+$green-dark: mix(black, $green, 75%);
+$green-darker: mix(black, $green, 50%);
+$green-darkest: mix(black, $green, 25%);
+
+$purple: #6330f0;
+$purple-lightest: mix(white, $purple, 75%);
+$purple-lighter: mix(white, $purple, 50%);
+$purple-light: mix(white, $purple, 25%);
+$purple-dark: mix(black, $purple, 75%);
+$purple-darker: mix(black, $purple, 50%);
+$purple-darkest: mix(black, $purple, 25%);
+
+$cyan: #19d9ff;
+$cyan-lightest: mix(white, $cyan, 75%);
+$cyan-lighter: mix(white, $cyan, 50%);
+$cyan-light: mix(white, $cyan, 25%);
+$cyan-dark: mix(black, $cyan, 75%);
+$cyan-darker: mix(black, $cyan, 50%);
+$cyan-darkest: mix(black, $cyan, 25%);
+
+// ## TODO: FIX
+$pink: $red-lighter;
 
 // -----------------------------------------------------------------------------
 // Semantic Colors
 // -----------------------------------------------------------------------------
-$success: #16a34a;
-$info: #4a8bc5;
-$warning: #ea580c;
-$danger: #ff6b6b;
+$primary: $blue;
+$primary-hover: $blue-darker;
+$primary-light: $blue-light;
+$success: $green;
+$secondary: $purple;
+$accent: $pink;
+$info: $cyan;
+$danger: $red;
+$warning: $purple-light;
 
 // -----------------------------------------------------------------------------
 // Base Colors
@@ -90,17 +136,12 @@ $sidebar-hover: $gray-700;
 // Chart Colors (data visualization palette)
 // -----------------------------------------------------------------------------
 $chart-colors: (
-  "blue": #3b82f6,
-  "green": #22c55e,
-  "yellow": #eab308,
-  "red": #ef4444,
-  "purple": #a855f7,
-  "orange": #f97316,
-  "teal": #14b8a6,
-  "pink": #ec4899,
-  "indigo": #6366f1,
-  "cyan": #06b6d4
+  "blue": $primary,
+  "green": $accent,
+  "red": $danger,
+  "purple": $secondary,
+  "cyan": $info
 );
 
 // Chart color list for easy iteration
-$chart-color-list: #3b82f6, #22c55e, #eab308, #ef4444, #a855f7, #f97316, #14b8a6, #ec4899, #6366f1, #06b6d4;
+$chart-color-list: $blue, $green, $red, $purple, $cyan;

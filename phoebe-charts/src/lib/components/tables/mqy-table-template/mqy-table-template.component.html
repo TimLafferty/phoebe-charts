@@ -1,0 +1,129 @@
+<div class="mqy-table-wrapper">
+  <table class="mqy-table">
+    <!-- Column Width Definitions -->
+    <colgroup>
+      <col *ngIf="showContextRank" class="col-rank">
+      <col [style.width]="columnWidths.metric" class="col-metric">
+      <col [style.width]="columnWidths.current" class="col-current">
+      <col *ngFor="let period of periodHeaders" [style.width]="columnWidths.delta" class="col-delta">
+    </colgroup>
+
+    <!-- Header Row -->
+    <thead>
+      <tr class="period-headers">
+        <th *ngIf="showContextRank" class="th-rank">#</th>
+        <th class="th-metric">{{ rowLabel }}</th>
+        <th class="th-current fw-bold">
+          {{ currentLabel }}
+          <div class="fw-light fs-0-60 text-muted pt-1" style="font-size: 0.60rem;"
+            *ngIf="footerDates?.mom?.current?.start">
+            {{ footerDates!.mom.current.start | date:'MMM y' }}
+          </div>
+        </th>
+        <th *ngFor="let period of periodHeaders; trackBy: trackByPeriodId" class="th-delta fw-bold">
+          {{ period.label }}
+          <div class="fw-light fs-0-60 text-muted pt-1" style="font-size: 0.60rem;"
+            *ngIf="getPreviousStartDate(period.id)">
+            {{ getPreviousStartDate(period.id) | date:'MMM y' }}
+          </div>
+        </th>
+      </tr>
+    </thead>
+
+    <!-- Data Groups -->
+    <tbody *ngFor="let group of groups; trackBy: trackByGroupId">
+      <!-- Group Header (optional) -->
+      <tr *ngIf="group.label" class="group-header">
+        <td [attr.colspan]="totalColumns">
+          <i *ngIf="group.icon" [ngClass]="group.icon" class="group-icon"></i>
+          {{ group.label }}
+        </td>
+      </tr>
+
+      <!-- Metric Rows -->
+      <tr *ngFor="let row of group.rows; trackBy: trackByRowId" class="metric-row" [attr.title]="row.tooltip || null">
+
+        <!-- Optional Rank Column -->
+        <td *ngIf="showContextRank" class="td-rank">
+          {{ row.rank }}
+        </td>
+
+        <!-- Metric Label -->
+        <td class="td-metric">
+          {{ row.label }}
+        </td>
+
+        <!-- Current Value -->
+        <td class="td-current border-start">
+          <div class="current-value">
+            {{ formatValue(row.current, row.isMonetary) }}
+          </div>
+        </td>
+
+        <!-- MoM Comparison -->
+        <td class="td-delta">
+          <div class="delta-cell d-flex flex-row w-100 justify-content-center align-items-center">
+            <div class="w-50">
+              <i class="fa-3x text-end my-auto pe-2" [ngClass]="[getPercentageIcon(row.momComparison.percentage),
+                           getPercentageClass(row.momComparison.percentage)]"></i>
+            </div>
+            <div class="delta-values w-50 text-center lh-sm">
+              <div class="fw-bold fs-0-80">
+                {{ formatPercentage(row.momComparison.percentage) }}
+              </div>
+              <div class="fw-light text-muted fs-0-60">
+                {{ formatValue(row.momComparison.value, row.isMonetary) }}
+              </div>
+            </div>
+          </div>
+        </td>
+
+        <!-- QoQ Comparison -->
+        <td class="td-delta">
+          <div class="delta-cell">
+            <div class="w-50">
+              <i class="fa-3x text-end my-auto pe-2" [ngClass]="[getPercentageIcon(row.qoqComparison.percentage),
+                           getPercentageClass(row.qoqComparison.percentage)]"></i>
+            </div>
+            <div class="delta-values w-50 text-center lh-sm">
+              <div class="fw-bold fs-0-80">
+                {{ formatPercentage(row.qoqComparison.percentage) }}
+              </div>
+              <div class="fw-light text-muted fs-0-60">
+                {{ formatValue(row.qoqComparison.value, row.isMonetary) }}
+              </div>
+            </div>
+          </div>
+        </td>
+
+        <!-- YoY Comparison -->
+        <td class="td-delta">
+          <div class="delta-cell d-flex flex-row w-100 justify-content-center align-items-center">
+            <div class="w-50">
+              <i class="fa-3x text-end my-auto pe-2" [ngClass]="[getPercentageIcon(row.yoyComparison.percentage),
+                           getPercentageClass(row.yoyComparison.percentage)]"></i>
+            </div>
+            <div class="delta-values w-50 text-center lh-sm">
+              <div class="fw-bold fs-0-80">
+                {{ formatPercentage(row.yoyComparison.percentage) }}
+              </div>
+              <div class="fw-light text-muted fs-0-60">
+                {{ formatValue(row.yoyComparison.value, row.isMonetary) }}
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+
+    <!-- Footer with Date Ranges -->
+    <tfoot *ngIf="footerDates">
+      <!-- Summary Row -->
+      <tr *ngIf="footerSummary" class="footer-summary">
+        <td [attr.colspan]="totalColumns">
+          <strong>{{ footerSummary }}</strong>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

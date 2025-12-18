@@ -4,18 +4,109 @@
       <h1>KPI Cards</h1>
       <span class="badge beta">Beta</span>
     </div>
-    <p>Key Performance Indicator cards for displaying metrics, stats, and data summaries.</p>
+    <div class="header-controls">
+      <p>Key Performance Indicator cards for displaying metrics, stats, and data summaries.</p>
+      <div class="theme-toggle">
+        <label class="theme-toggle__label">Theme:</label>
+        <button class="theme-toggle__btn" [class.theme-toggle__btn--active]="selectedTheme === 'light'"
+          (click)="selectedTheme = 'light'">
+          <i class="fa-solid fa-sun"></i> Light
+        </button>
+        <button class="theme-toggle__btn" [class.theme-toggle__btn--active]="selectedTheme === 'dark'"
+          (click)="selectedTheme = 'dark'">
+          <i class="fa-solid fa-moon"></i> Dark
+        </button>
+      </div>
+    </div>
   </header>
 
   <!-- KPI Basic Comparison Section -->
   <section class="component-section">
-    <h2>KPI Basic Comparison</h2>
-    <p class="section-description">Simple metric display with value, label, and optional subtitle.</p>
+    <div class="section-header">
+      <div class="section-header__left">
+        <h2>KPI Basic Comparison</h2>
+        <p class="section-description">Simple metric display with value, label, and optional subtitle.</p>
+      </div>
+      <div class="section-header__right">
+        <label class="icon-set-label">Icon Set:</label>
+        <select class="icon-set-select" [(ngModel)]="selectedIconSet">
+          @for (iconSet of iconSetOptions; track iconSet) {
+          <option [value]="iconSet">{{ iconSet }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
     <div class="card-grid">
       @for (card of kpiBasicComparisonCards; track card.metric) {
-        <phoebe-kpi-basic-comparison
-          [props]="card">
-        </phoebe-kpi-basic-comparison>
+      <phoebe-kpi-basic-comparison [props]="getCardWithIconSet(card)" [theme]="selectedTheme">
+      </phoebe-kpi-basic-comparison>
+      }
+    </div>
+  </section>
+
+  <!-- KPI Basic BAN Section -->
+  <section class="component-section">
+    <div class="section-header">
+      <div class="section-header__left">
+        <h2>KPI Basic BAN</h2>
+        <p class="section-description">Big Ass Number display - a simple, prominent single-metric card.</p>
+      </div>
+      <div class="section-header__right">
+        <label class="icon-set-label">Icon Group:</label>
+        <select class="icon-set-select" [(ngModel)]="selectedBanIconGroup" (ngModelChange)="onIconGroupChange()">
+          @for (group of banIconGroupOptions; track group) {
+          <option [value]="group">{{ group }}</option>
+          }
+        </select>
+        <label class="icon-set-label">Variant:</label>
+        <select class="icon-set-select" [(ngModel)]="selectedBanIconVariant">
+          @for (variant of banIconVariantOptions; track variant) {
+          <option [value]="variant">{{ banIconGroups[selectedBanIconGroup][variant].label }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      @for (card of kpiBasicBanCards; track card.metric) {
+      <phoebe-kpi-basic-ban [props]="getBanCardWithIcon(card)" [theme]="selectedTheme"></phoebe-kpi-basic-ban>
+      }
+    </div>
+  </section>
+
+  <!-- KPI Goal Tracker Section -->
+  <section class="component-section">
+    <div class="section-header">
+      <div class="section-header__left">
+        <h2>KPI Goal Tracker</h2>
+        <p class="section-description">Track progress toward goals with visual progress bars and milestones.</p>
+      </div>
+      <div class="section-header__right">
+        <label class="icon-set-label">Display Mode:</label>
+        <select class="icon-set-select" [(ngModel)]="selectedGoalTrackerMode">
+          @for (mode of goalTrackerDisplayModes; track mode.value) {
+          <option [value]="mode.value">{{ mode.label }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      @for (card of kpiGoalTrackerCards; track card.title) {
+        <phoebe-kpi-goal-tracker
+          [title]="card.title"
+          [currentValue]="card.currentValue"
+          [goalValue]="card.goalValue"
+          [paceValue]="showPace ? card.paceValue : undefined"
+          [paceLabel]="card.paceLabel"
+          [benchmarkValue]="showBenchmark ? card.benchmarkValue : undefined"
+          [benchmarkLabel]="card.benchmarkLabel"
+          [unit]="card.unit"
+          [startDate]="card.startDate"
+          [endDate]="card.endDate"
+          [theme]="selectedTheme">
+        </phoebe-kpi-goal-tracker>
       }
     </div>
   </section>

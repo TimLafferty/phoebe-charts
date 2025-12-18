@@ -14,6 +14,7 @@ export class ProgressCardComponent {
   @Input() target: number = 100;
   @Input() unit?: string;
   @Input() showPercentage: boolean = true;
+  @Input() theme: 'light' | 'dark' = 'light';
 
   get percentage(): number {
     if (this.target === 0) return 0;
